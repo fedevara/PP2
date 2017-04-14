@@ -69,7 +69,9 @@ public class CacheSingleton<K, T> {
     }
 
     public void put(K key, T value) {
-        CacheMap.put(key, (T) new ObjetoCache(value));
+        synchronized (CacheMap) {
+            CacheMap.put(key, (T) new ObjetoCache(value));
+        }
     }
 
     public void remove(K key) {
