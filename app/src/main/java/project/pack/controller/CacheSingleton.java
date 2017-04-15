@@ -58,10 +58,11 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public T get(K key) {
+    public T get(Integer key) {
         // Evita deadlock
         synchronized (CacheMap) {
             ObjetoCache c = (ObjetoCache) CacheMap.get(key);
+           // return CacheMap.entrySet().toArray().getValue().getValue;
 
             if (c == null)
                 return null;
@@ -80,13 +81,13 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public void remove(K key) {
+    public void remove(Integer key) {
         synchronized (CacheMap) {
             CacheMap.remove(key);
         }
     }
 
-    public int size() {
+    public Integer size() {
         synchronized (CacheMap) {
             return CacheMap.size();
         }
@@ -112,11 +113,12 @@ public class CacheSingleton<K, T> {
     }
 
     public void limpiarCache() {
+        id = 0;
         CacheMap = new HashMap();
     }
 
     private void limpiarCache(boolean forzarLimpiar) {
-
+        id = 0;
         CacheMap = new HashMap();
 
        /* long now = System.currentTimeMillis();

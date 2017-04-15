@@ -1,4 +1,4 @@
-﻿package project.pack.controller;
+package project.pack.controller;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -38,12 +38,13 @@ public class CacheSingletonTest {
 
         Facade facade = new Facade();
 
-        facade.crearIncidente(1,"Robo de auto","En Moron",new Date(),null,null);
-        facade.crearIncidente(2,"Robo de celular","En Hurlingham",new Date(),null,null);
+        facade.crearIncidente(1, "Robo de auto", "En Moron", new Date(), null, null);
+        facade.crearIncidente(2, "Robo de celular", "En Hurlingham", new Date(), null, null);
+        facade.crearEstablecimiento("Colegio Aleman", null, null);
 
-        int size =facade.obtenerListaIncidentes().size();
+        int size = facade.obtenerListaIncidentes().size();
 
-        Assert.assertEquals(2,size);
+        Assert.assertEquals(2, size);
 
     }
 
@@ -59,11 +60,11 @@ public class CacheSingletonTest {
 
         Facade facade = new Facade();
 
-        facade.crearIncidente(1,"Robo de celular","En Hurlingham",new Date(),null,null);
-        facade.crearIncidente(2,"Robo de auto","En Moron",new Date(),null,null);
+        facade.crearIncidente(1, "Robo de celular", "En Hurlingham", new Date(), null, null);
+        facade.crearIncidente(2, "Robo de auto", "En Moron", new Date(), null, null);
 
-        Incidente incidente = (Incidente) cacheSingleton.get(2);
-        assertEquals(2,incidente.getId());
+        Incidente incidente = (Incidente) cacheSingleton.get(1);
+        assertEquals(1, incidente.getId());
     }
 
     @Test
@@ -73,41 +74,42 @@ public class CacheSingletonTest {
 
         Facade facade = new Facade();
 
-        facade.crearIncidente(1,"Robo de celular","En Hurlingham",new Date(),null,null);
-        facade.crearIncidente(2,"Robo de auto","En Moron",new Date(),null,null);
+        facade.crearIncidente(1, "Robo de celular", "En Hurlingham", new Date(), null, null);
+        facade.crearIncidente(2, "Robo de auto", "En Moron", new Date(), null, null);
 
         int cantidadElementos = cache.size();
 
         assertEquals(2, cantidadElementos);
     }
-/*
-    @Test
-    public void remove() throws Exception {
-        // Creo una memoria cache.
-        // tiempo de vida de un cache = 200 segundos
-        // Tiempo Intervalo de actualizacion  = 60 segundos
-        CacheSingleton cache = CacheSingleton.getInstance();
-        // Agrego items del cualquier tipo
-        cache.put("Portal", 123);
-        cache.put("P1", "Hola mundo");
-        cache.put("Pizza", "Muzza");
-        cache.put("zapato", "azul");
-        cache.put("Animal", "Perro");
-        cache.put("Cofre", "Moneda");
-        cache.put(123, "Dying Light");
-        assertEquals(7, cache.size());
 
-        // Pruebo remover un item
-        cache.remove("zapato");
-        cache.remove("Cofre");
-        // Deben quedar 5 Cache objects
-        assertEquals(5, cache.size());
+    /*
+        @Test
+        public void remove() throws Exception {
+            // Creo una memoria cache.
+            // tiempo de vida de un cache = 200 segundos
+            // Tiempo Intervalo de actualizacion  = 60 segundos
+            CacheSingleton cache = CacheSingleton.getInstance();
+            // Agrego items del cualquier tipo
+            cache.put("Portal", 123);
+            cache.put("P1", "Hola mundo");
+            cache.put("Pizza", "Muzza");
+            cache.put("zapato", "azul");
+            cache.put("Animal", "Perro");
+            cache.put("Cofre", "Moneda");
+            cache.put(123, "Dying Light");
+            assertEquals(7, cache.size());
 
-        // Al intentar obtenerlos debe dar null
-        assertNull(cache.get("zapato"));
-        assertNull(cache.get("Cofre"));
-    }
-*/
+            // Pruebo remover un item
+            cache.remove("zapato");
+            cache.remove("Cofre");
+            // Deben quedar 5 Cache objects
+            assertEquals(5, cache.size());
+
+            // Al intentar obtenerlos debe dar null
+            assertNull(cache.get("zapato"));
+            assertNull(cache.get("Cofre"));
+        }
+    */
     @Test
     public void size() throws Exception {
         // Agrego 3 elementos a la cache, y la longitud de la misma debe ser 3.
@@ -121,7 +123,7 @@ public class CacheSingletonTest {
         cache.put(incidente);
         cache.put(numero);
 
-        assertEquals(3,cache.size());
+        assertEquals(new Integer(3), cache.size());
     }
 
     @Test
@@ -138,7 +140,7 @@ public class CacheSingletonTest {
         cache.put(numero);
 
         cache.limpiarCache();
-        assertEquals(0,cache.size());
+        assertEquals(new Integer(0), cache.size());
     }
 
 }
