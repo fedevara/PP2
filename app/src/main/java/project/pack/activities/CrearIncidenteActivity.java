@@ -37,7 +37,9 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = new Facade();
-                facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
+
+                // se agrega x default 1 , cambiar en future.
+                facade.crearIncidente(1,titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
                 startActivity(mostrarIncidente);
             }
         });
