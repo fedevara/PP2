@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
 
 import static org.junit.Assert.*;
@@ -20,19 +21,19 @@ public class CacheSingletonTest {
     public void setUp() throws Exception {
         // Instancio y borro la cache.
         CacheSingleton cacheSingleton = CacheSingleton.getInstance();
-        cacheSingleton.LimpiarCache();
+        cacheSingleton.limpiarCache();
     }
 
     @After
     public void tearDown() throws Exception {
         // Instancio y borro la cache.
         CacheSingleton cacheSingleton = CacheSingleton.getInstance();
-        cacheSingleton.LimpiarCache();
+        cacheSingleton.limpiarCache();
     }
 
     @Test
     public void obtenerListaIncidentes() throws Exception {
-
+        // guardo 2 elementos en la cache, la lista debe ser de longitud 2.
         CacheSingleton cacheSingleton = CacheSingleton.getInstance();
 
         Facade facade = new Facade();
@@ -50,31 +51,36 @@ public class CacheSingletonTest {
     public void getInstance() throws Exception {
 
     }
-/*
+
     @Test
     public void get() throws Exception {
-        // Creo una memoria cache.
-        // tiempo de vida de un cache = 200 segundos
-        // Tiempo Intervalo de actualizacion  = 60 segundos
+        //Guardo dos elementos en la cache, recupero el elemento nº 2, y comparo su id con el nº 2.
+        CacheSingleton cacheSingleton = CacheSingleton.getInstance();
 
-        CacheSingleton cache = CacheSingleton.getInstance();
+        Facade facade = new Facade();
 
-        // Agrego item
-        cache.put("Pizza", "Muzza");
-        assertEquals("Muzza", cache.get("Pizza"));
+        facade.crearIncidente(1,"Robo de celular","En Hurlingham",new Date(),null,null);
+        facade.crearIncidente(2,"Robo de auto","En Moron",new Date(),null,null);
+
+        Incidente incidente = (Incidente) cacheSingleton.get(2);
+        assertEquals(2,incidente.getId());
     }
-/*
+
     @Test
     public void put() throws Exception {
-        // Creo una memoria cache.
-        // tiempo de vida de un cache = 200 segundos
-        // Tiempo Intervalo de actualizacion  = 60 segundos
+        // Agrego dos elementos a la cache, si se agregaron correctamente, la longitud debe ser 2
         CacheSingleton cache = CacheSingleton.getInstance();
-        // Agrego item
-        cache.put("Pizza", "Muzza");
-        assertEquals("Muzza", cache.get("Pizza"));
-    }
 
+        Facade facade = new Facade();
+
+        facade.crearIncidente(1,"Robo de celular","En Hurlingham",new Date(),null,null);
+        facade.crearIncidente(2,"Robo de auto","En Moron",new Date(),null,null);
+
+        int cantidadElementos = cache.size();
+
+        assertEquals(2, cantidadElementos);
+    }
+/*
     @Test
     public void remove() throws Exception {
         // Creo una memoria cache.
@@ -101,40 +107,38 @@ public class CacheSingletonTest {
         assertNull(cache.get("zapato"));
         assertNull(cache.get("Cofre"));
     }
-
+*/
     @Test
     public void size() throws Exception {
-        // Creo una memoria cache.
-        // tiempo de vida de un cache = 200 segundos
-        // Tiempo Intervalo de actualizacion  = 60 segundos
+        // Agrego 3 elementos a la cache, y la longitud de la misma debe ser 3.
         CacheSingleton cache = CacheSingleton.getInstance();
-        // Agrego 5 items del cualquier tipo
-        cache.put("Portal", 123);
-        cache.put("P1", "Hola mundo");
-        cache.put("Pizza", "Muzza");
-        cache.put("zapato", "azul");
-        cache.put("Animal", "Perro");
-        // Espero tener un tamaño de 5 items
-        assertEquals(5,cache.size());
+
+        String saludo = "hola";
+        Incidente incidente = new Incidente();
+        Integer numero = 4;
+
+        cache.put(saludo);
+        cache.put(incidente);
+        cache.put(numero);
+
+        assertEquals(3,cache.size());
     }
 
     @Test
     public void limpiarCache() throws Exception {
-        // Creo una memoria cache.
-        // tiempo de vida = 1 segundos
-        // Tiempo Intervalo de actualizacion  = 1 segundos
+        // Agrego elementos a la cache, luego la limpio y finalmente el tamñano debe ser 0 .
         CacheSingleton cache = CacheSingleton.getInstance();
-        // Agrego 5 items cada medio segundo
-        int size = 6;
-        for (int i = 0; i < size; i++) {
-            String value = "Cache de prueba "+i;
-            cache.put(value, value);
-            Thread.sleep(500);
-        }
 
-        // Limpiar del cache de todos los objetos (forzado), no espera hasta que expiren
-        cache.LimpiarCache();
+        String saludo = "hola";
+        Incidente incidente = new Incidente();
+        Integer numero = 4;
+
+        cache.put(saludo);
+        cache.put(incidente);
+        cache.put(numero);
+
+        cache.limpiarCache();
         assertEquals(0,cache.size());
     }
-*/
+
 }
