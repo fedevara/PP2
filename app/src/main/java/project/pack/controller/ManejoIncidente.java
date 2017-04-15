@@ -50,4 +50,8 @@ public class ManejoIncidente {
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         return  listaIncidentes;
     }
+
+    public void eliminarCache(){
+        CacheSingleton.getInstance().limpiarCache();
+    }
 }

@@ -11,11 +11,30 @@
     tools:context="project.pack.activities.MainActivity">
 
     <TextView
-        android:id="@+id/textHola"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:id="@+id/tvSaludo"
+        android:text="¡Bienvenido a Seguridad Ciudadana!"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"/>
+
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Nuevo Incidente"
+        android:id="@+id/btnAgragarIncidente"
+        android:layout_below="@+id/tvSaludo"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eliminar Cache"
+        android:id="@+id/btnEliminarCache"
+        android:layout_below="@+id/btnAgragarIncidente"
+        />
+  <!--  <Button
         android:text="Agregar Incidente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,5 +43,5 @@
         android:layout_alignParentStart="true"
         android:id="@+id/Boton1"
         android:layout_alignParentEnd="true" />
-
+-->
 </RelativeLayout>

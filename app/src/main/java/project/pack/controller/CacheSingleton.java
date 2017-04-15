@@ -48,7 +48,7 @@ public class CacheSingleton<K, T> {
                             Thread.sleep(IntervaloTiempo * 1000);
                         } catch (InterruptedException ex) {
                         }
-                        LimpiarCache(false);
+                        limpiarCache(false);
                     }
                 }
             });
@@ -111,11 +111,11 @@ public class CacheSingleton<K, T> {
         return lista;
     }
 
-    public void LimpiarCache() {
-        LimpiarCache(true);
+    public void limpiarCache() {
+        CacheMap = new HashMap();
     }
 
-    private void LimpiarCache(boolean forzarLimpiar) {
+    private void limpiarCache(boolean forzarLimpiar) {
 
         CacheMap = new HashMap();
 
