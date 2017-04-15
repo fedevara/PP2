@@ -21,14 +21,9 @@ import project.pack.facade.Facade;
 
 public class VerIncidenteActivity extends AppCompatActivity {
 
-    @Bind(R.id.txtTitulo)
-    TextView titulo;
 
-    @Bind(R.id.txtDescripcion)
-    TextView descripcion;
-
-    @Bind(R.id.button5)
-    Button volver;
+    @Bind(R.id.btnVolver)
+    Button btnVolver;
 
     @Bind(R.id.lvResultado)
     ListView lvResultado;
@@ -41,13 +36,13 @@ public class VerIncidenteActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        volver.setOnClickListener(new View.OnClickListener() {
+        btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
-        recogerExtras();
+//        recogerExtras();
         cargarListaIncidentes();
     }
 
@@ -58,18 +53,18 @@ public class VerIncidenteActivity extends AppCompatActivity {
 
         for (int i= 0 ; i<incidentes.size();i++){
             Incidente incidente = incidentes.get(i);
-            listaIncidentes.add(incidente.getTitulo()+"-"+incidente.getDescripcion());
+            listaIncidentes.add(incidente.getTitulo()+" - "+incidente.getDescripcion());
         }
 
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaIncidentes);
         lvResultado.setAdapter(adaptador);
     }
 
-
+/*
     public void recogerExtras() { //Aquí recogemos y tratamos los parámetros
         Facade facade = new Facade();
         Incidente incidente = facade.obtenerIncidente(1);
         titulo.setText(incidente.getTitulo());
         descripcion.setText(incidente.getDescripcion());
-    }
+    }*/
 }
