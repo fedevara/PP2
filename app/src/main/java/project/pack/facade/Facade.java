@@ -1,6 +1,7 @@
 package project.pack.facade;
 
 import java.util.Date;
+import java.util.List;
 
 import project.pack.controller.ManejoIncidente;
 import project.pack.domain.Categoria;
@@ -21,13 +22,20 @@ public class Facade {
 
     }
 
-    public Incidente crearIncidente(String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar){
-        Incidente incidente = manejoIncidente.crearIncidente(titulo, descripcion, fecha, categoria, lugar);
+    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar){
+        Integer idIncidente = id;
+        Incidente incidente = manejoIncidente.crearIncidente(idIncidente,titulo, descripcion, fecha, categoria, lugar);
         manejoIncidente.guardarIncidente(incidente);
         return incidente;
     }
 
-    public Incidente obtenerIncidente(String id1) {
+    public Incidente obtenerIncidente(Integer id1) {
         return manejoIncidente.getIncidente(id1);
     }
+
+    public List<Incidente> obtenerListaIncidentes(){
+        List<Incidente> listaIncidentes=manejoIncidente.getListaIncidentes();
+        return listaIncidentes;
+    }
+
 }

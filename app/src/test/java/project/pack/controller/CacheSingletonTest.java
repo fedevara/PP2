@@ -1,6 +1,13 @@
 package project.pack.controller;
 
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Date;
+
+import project.pack.facade.Facade;
 
 import static org.junit.Assert.*;
 
@@ -8,11 +15,42 @@ import static org.junit.Assert.*;
  * Created by Federico Vara on 14/4/2017.
  */
 public class CacheSingletonTest {
+
+    @Before
+    public void setUp() throws Exception {
+        // Instancio y borro la cache.
+        CacheSingleton cacheSingleton = CacheSingleton.getInstance();
+        cacheSingleton.LimpiarCache();
+    }
+
+    @After
+    public void tearDown() throws Exception {
+        // Instancio y borro la cache.
+        CacheSingleton cacheSingleton = CacheSingleton.getInstance();
+        cacheSingleton.LimpiarCache();
+    }
+
+    @Test
+    public void obtenerListaIncidentes() throws Exception {
+
+        CacheSingleton cacheSingleton = CacheSingleton.getInstance();
+
+        Facade facade = new Facade();
+
+        facade.crearIncidente(1,"Robo de auto","En Moron",new Date(),null,null);
+        facade.crearIncidente(2,"Robo de celular","En Hurlingham",new Date(),null,null);
+
+        int size =facade.obtenerListaIncidentes().size();
+
+        Assert.assertEquals(2,size);
+
+    }
+
     @Test
     public void getInstance() throws Exception {
 
     }
-
+/*
     @Test
     public void get() throws Exception {
         // Creo una memoria cache.
@@ -25,7 +63,7 @@ public class CacheSingletonTest {
         cache.put("Pizza", "Muzza");
         assertEquals("Muzza", cache.get("Pizza"));
     }
-
+/*
     @Test
     public void put() throws Exception {
         // Creo una memoria cache.
@@ -98,5 +136,5 @@ public class CacheSingletonTest {
         cache.LimpiarCache();
         assertEquals(0,cache.size());
     }
-
+*/
 }
