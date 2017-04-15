@@ -36,7 +36,7 @@ public class CacheSingletonTest {
         // guardo 2 elementos en la cache, la lista debe ser de longitud 2.
         CacheSingleton cacheSingleton = CacheSingleton.getInstance();
 
-        Facade facade = new Facade();
+        Facade facade = Facade.getInstance();
 
         facade.crearIncidente(1, "Robo de auto", "En Moron", new Date(), null, null);
         facade.crearIncidente(2, "Robo de celular", "En Hurlingham", new Date(), null, null);
@@ -58,7 +58,7 @@ public class CacheSingletonTest {
         //Guardo dos elementos en la cache, recupero el elemento nº 2, y comparo su id con el nº 2.
         CacheSingleton cacheSingleton = CacheSingleton.getInstance();
 
-        Facade facade = new Facade();
+        Facade facade = Facade.getInstance();
 
         facade.crearIncidente(1, "Robo de celular", "En Hurlingham", new Date(), null, null);
         facade.crearIncidente(2, "Robo de auto", "En Moron", new Date(), null, null);
@@ -72,7 +72,7 @@ public class CacheSingletonTest {
         // Agrego dos elementos a la cache, si se agregaron correctamente, la longitud debe ser 2
         CacheSingleton cache = CacheSingleton.getInstance();
 
-        Facade facade = new Facade();
+        Facade facade = Facade.getInstance();
 
         facade.crearIncidente(1, "Robo de celular", "En Hurlingham", new Date(), null, null);
         facade.crearIncidente(2, "Robo de auto", "En Moron", new Date(), null, null);
