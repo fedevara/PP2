@@ -70,6 +70,7 @@ public class CacheSingletonTest {
         // tiempo de vida de un cache = 200 segundos
         // Tiempo Intervalo de actualizacion  = 60 segundos
         CacheSingleton cache = CacheSingleton.getInstance();
+        cache.LimpiarCache();
         // Agrego 5 items del cualquier tipo
         cache.put("Portal", 123);
         cache.put("P1", "Hola mundo");
