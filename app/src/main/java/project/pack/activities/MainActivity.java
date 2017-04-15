@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnEliminarCache)
     Button btnEliminarCache;
 
-    Facade facade = new Facade();
+    Facade facade = Facade.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         facade.initProperties(this);
-
         ButterKnife.bind(this);
 
         btnAgragarIncidente.setOnClickListener(new View.OnClickListener() {

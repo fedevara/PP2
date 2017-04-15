@@ -43,7 +43,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
-                Facade facade = new Facade();
+                Facade facade = Facade.getInstance();
 
                 // se agrega x default 1 , cambiar en future.
                 facade.crearIncidente(1,titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
