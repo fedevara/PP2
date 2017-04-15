@@ -24,10 +24,10 @@ public class ManejoEstablecimiento {
     }
 
     public void guardarEstablecimiento(Establecimiento establecimiento){
-        CacheSingleton.getInstance().put( "ID1", establecimiento);
+        CacheSingleton.getInstance().put(establecimiento);
     }
 
-    public Establecimiento getEstablecimiento(String id1) {
-        return (Establecimiento) CacheSingleton.getInstance().get("ID1");
+    public Establecimiento getEstablecimiento(int id1) {
+        return (Establecimiento) CacheSingleton.getInstance().get(id1);
     }
 }
