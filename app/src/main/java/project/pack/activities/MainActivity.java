@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -14,7 +15,7 @@ import project.pack.facade.Facade;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Con ButterKnife Reemplazas      (Button) findViewById ->por     @Bind
+    // Con ButterKnife Reemplazas      (Button) findViewById ->por   @Bind
 
     @Bind(R.id.btnAgragarIncidente)
     Button btnAgragarIncidente;
@@ -22,10 +23,14 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnEliminarCache)
     Button btnEliminarCache;
 
+    Facade facade = new Facade();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        facade.initProperties(this);
 
         ButterKnife.bind(this);
 
@@ -41,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Elimino la cache.
-                Facade facade = new Facade();
                 facade.eliminarCache();
                 Toast.makeText(getApplicationContext(), "La cache se elimino correctamente", Toast.LENGTH_LONG).show();
             }
