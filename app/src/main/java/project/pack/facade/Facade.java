@@ -45,4 +45,8 @@ public class Facade {
         return listaIncidentes;
     }
 
+    public void eliminarCache(){
+        manejoIncidente.eliminarCache();
+    }
+
 }
