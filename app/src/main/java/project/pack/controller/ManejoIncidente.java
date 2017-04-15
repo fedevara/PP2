@@ -2,6 +2,7 @@ package project.pack.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
@@ -17,8 +18,9 @@ public class ManejoIncidente {
 
     }
 
-    public Incidente crearIncidente(String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar) {
+    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar) {
         Incidente incidente = new Incidente();
+        incidente.setId(id);
         incidente.setTitulo(titulo);
         incidente.setDescripcion(descripcion);
         if(fecha == null){
@@ -33,10 +35,19 @@ public class ManejoIncidente {
     }
 
     public void guardarIncidente(Incidente incidente){
-        CacheSingleton.getInstance().put( "ID1", incidente);
+        System.out.print("guardar incidente");
+
+        CacheSingleton.getInstance().put(incidente);
+        Integer size = CacheSingleton.getInstance().size();
     }
 
-    public Incidente getIncidente(String id1) {
-        return (Incidente) CacheSingleton.getInstance().get("ID1");
+    public Incidente getIncidente(Integer id1) {
+        return (Incidente) CacheSingleton.getInstance().get(id1);
+    }
+
+    public List<Incidente> getListaIncidentes(){
+
+        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+        return  listaIncidentes;
     }
 }
