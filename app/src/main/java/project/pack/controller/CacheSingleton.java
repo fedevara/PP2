@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import project.pack.domain.Incidente;
 import project.pack.domain.ObjetoCache;
 
 /**
@@ -17,6 +18,7 @@ public class CacheSingleton<K, T> {
     // (con mismo modificador de acceso que la definición de la clase)
     private CacheSingleton() {
         CacheMap = new HashMap();
+        id=0;
     }
 
     public static CacheSingleton getInstance() {
@@ -27,14 +29,15 @@ public class CacheSingleton<K, T> {
 
 
     private long tiempoDeVida;
-    private Map<K, T> CacheMap;
+    private Map<Integer, T> CacheMap;
+    private static Integer id;
 
     // Constructor
     private CacheSingleton(long TiempoDeVida, final long IntervaloTiempo) {
         this.tiempoDeVida = TiempoDeVida * 1000;
 
         CacheMap = new HashMap();
-
+        id=0;
         if (tiempoDeVida > 0 && IntervaloTiempo > 0) {
 
             Thread t = new Thread(new Runnable() {
@@ -44,7 +47,7 @@ public class CacheSingleton<K, T> {
                             Thread.sleep(IntervaloTiempo * 1000);
                         } catch (InterruptedException ex) {
                         }
-                        LimpiarCache(false);
+                        limpiarCache(false);
                     }
                 }
             });
@@ -54,10 +57,11 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public T get(K key) {
+    public T get(Integer key) {
         // Evita deadlock
         synchronized (CacheMap) {
             ObjetoCache c = (ObjetoCache) CacheMap.get(key);
+           // return CacheMap.entrySet().toArray().getValue().getValue;
 
             if (c == null)
                 return null;
@@ -68,42 +72,66 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public void put(K key, T value) {
+    public void put(T value) {
         synchronized (CacheMap) {
-            CacheMap.put(key, (T) new ObjetoCache(value));
+            id++;
+            CacheMap.put(id, (T) new ObjetoCache(value));
+
         }
     }
 
-    public void remove(K key) {
+    public void remove(Integer key) {
         synchronized (CacheMap) {
             CacheMap.remove(key);
         }
     }
 
-    public int size() {
+    public Integer size() {
         synchronized (CacheMap) {
             return CacheMap.size();
         }
     }
 
-    public void LimpiarCache() {
-        LimpiarCache(true);
+    /**
+     * Metodo que se encarga de recorrer la cache y si un elemento es un incidente, lo agrego a mi lista.
+     *
+     * @return lista de incidentes
+     */
+    public ArrayList<Incidente> obtenerListaIncidentes(){
+
+        ArrayList<Incidente> lista = new ArrayList<Incidente>();
+
+        for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
+
+            if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Incidente){
+                Incidente incidente =(Incidente) ((ObjetoCache) eMap.getValue()).getValue();
+                lista.add(incidente);
+            }
+        }
+        return lista;
     }
 
-    private void LimpiarCache(boolean forzarLimpiar) {
+    public void limpiarCache() {
+        id = 0;
+        CacheMap = new HashMap();
+    }
 
-        long now = System.currentTimeMillis();
+    private void limpiarCache(boolean forzarLimpiar) {
+        id = 0;
+        CacheMap = new HashMap();
+
+       /* long now = System.currentTimeMillis();
         ArrayList<K> deleteKey = null;
 
         synchronized (CacheMap) {
             deleteKey = new ArrayList<K>((CacheMap.size() / 2) + 1);
             K key = null;
-            ObjetoCache co = null;
+            ObjetoCache cacheObject = null;
 
-            for (Map.Entry<K, T> eMap : CacheMap.entrySet()) {
+            for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
 
-                co = (ObjetoCache) eMap.getValue();
-                if ((co != null && (now > (tiempoDeVida + co.UltimoUso()))) || forzarLimpiar) {
+                cacheObject = (ObjetoCache) eMap.getValue();
+                if ((cacheObject != null && (now > (tiempoDeVida + cacheObject.UltimoUso()))) || forzarLimpiar) {
                     deleteKey.add(eMap.getKey());
                 }
             }
@@ -115,7 +143,7 @@ public class CacheSingleton<K, T> {
             }
             //es para que le cedas el procesador a otro hilo
             Thread.yield();
-        }
+        }*/
 
     }
 

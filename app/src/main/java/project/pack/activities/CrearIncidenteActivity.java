@@ -22,8 +22,15 @@ public class CrearIncidenteActivity extends AppCompatActivity {
     @Bind(R.id.txtDescripcion)
     TextView descripcion;
 
-    @Bind(R.id.crearIncidente)
-    Button crearIncidente;
+    @Bind(R.id.btnCrearIncidente)
+    Button btnCrearIncidente;
+
+    @Bind(R.id.btnLimpiarForm)
+    Button btnLimpiarForm;
+
+    @Bind(R.id.btnVolver)
+    Button btnVolver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +39,32 @@ public class CrearIncidenteActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        crearIncidente.setOnClickListener(new View.OnClickListener() {
+        btnCrearIncidente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
-                Facade facade = new Facade();
-                facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
+                Facade facade = Facade.getInstance();
+
+                // se agrega x default 1 , cambiar en future.
+                facade.crearIncidente(1,titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
                 startActivity(mostrarIncidente);
+            }
+        });
+
+
+        btnLimpiarForm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                titulo.setText("");
+                descripcion.setText("");
+            }
+        });
+
+
+        btnVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }
