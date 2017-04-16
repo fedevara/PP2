@@ -91,4 +91,9 @@ public class Facade {
     public Properties getProperties(String property) {
         return properties.get(property);
     }
+
+    public List<Establecimiento> obtenerListaEstablecimientos() {
+        List<Establecimiento> listaEstablecimientos = manejoEstablecimiento.getListaEstablecimientos();
+        return listaEstablecimientos;
+    }
 }

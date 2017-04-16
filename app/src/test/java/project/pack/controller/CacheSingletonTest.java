@@ -49,6 +49,23 @@ public class CacheSingletonTest {
     }
 
     @Test
+    public void obtenerListaEstablecimientos() throws Exception {
+        // guardo 2 elementos en la cache, la lista debe ser de longitud 2.
+        CacheSingleton cacheSingleton = CacheSingleton.getInstance();
+
+        Facade facade = Facade.getInstance();
+
+        facade.crearIncidente(1, "Robo de auto", "En Moron", new Date(), null, null);
+        facade.crearEstablecimiento("Hospital de Hurlingham", null, null);
+        facade.crearEstablecimiento("Colegio Aleman", null, null);
+
+        int size = facade.obtenerListaEstablecimientos().size();
+
+        Assert.assertEquals(2, size);
+
+    }
+
+    @Test
     public void getInstance() throws Exception {
 
     }
