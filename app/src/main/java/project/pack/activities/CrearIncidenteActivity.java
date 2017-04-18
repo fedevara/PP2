@@ -14,12 +14,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import project.pack.R;
 import project.pack.domain.Categoria;
+import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
 
 public class CrearIncidenteActivity extends AppCompatActivity {
@@ -46,6 +49,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
     Button btnVolver;
 
     Facade facade = Facade.getInstance();
+    Map<String, ArrayList<Categoria>> subCategorias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +65,16 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = Facade.getInstance();
-
-                // se agrega x default 1 , cambiar en future.
-                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), null, null);
+                int numero = (int) (Math.random() * 3) + 1;
+                List lista;
+                if (numero == 0) {
+                    lista = subCategorias.get("Robo");
+                } else if (numero == 1) {
+                    lista = subCategorias.get("Transito");
+                } else {
+                    lista = subCategorias.get("Reclamo");
+                }
+                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), (Categoria) lista.get(0), new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
                 startActivity(mostrarIncidente);
             }
         });
@@ -86,7 +97,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
 
     private void initSpinnerCategorias() {
         ArrayList<Categoria> categorias = facade.getCategorias();
-        Map<String, ArrayList<Categoria>> hola = facade.getSubCategorias();
+        subCategorias = facade.getSubCategorias();
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categorias);
         spnCategorias.setAdapter(spinner_adapter);

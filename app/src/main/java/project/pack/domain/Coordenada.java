@@ -9,22 +9,31 @@ import java.math.BigDecimal;
 
 public class Coordenada implements Serializable {
 
-    private BigDecimal latitud;
-    private BigDecimal longitud;
+    private Double latitud;
+    private Double longitud;
 
-    public BigDecimal getLongitud() {
+    public Coordenada(){
+
+    }
+
+    public Coordenada(Double a, Double b){
+        setLatitud(a);
+        setLongitud(b);
+    }
+
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(BigDecimal longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
-    public BigDecimal getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(BigDecimal latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 }
