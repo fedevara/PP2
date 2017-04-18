@@ -2,9 +2,9 @@ package project.pack.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
+import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
 import project.pack.domain.ObjetoCache;
 
@@ -58,10 +58,11 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public T get(K key) {
+    public T get(Integer key) {
         // Evita deadlock
         synchronized (CacheMap) {
             ObjetoCache c = (ObjetoCache) CacheMap.get(key);
+           // return CacheMap.entrySet().toArray().getValue().getValue;
 
             if (c == null)
                 return null;
@@ -80,13 +81,13 @@ public class CacheSingleton<K, T> {
         }
     }
 
-    public void remove(K key) {
+    public void remove(Integer key) {
         synchronized (CacheMap) {
             CacheMap.remove(key);
         }
     }
 
-    public int size() {
+    public Integer size() {
         synchronized (CacheMap) {
             return CacheMap.size();
         }
@@ -111,12 +112,32 @@ public class CacheSingleton<K, T> {
         return lista;
     }
 
+    /**
+     * Metodo que se encarga de recorrer la cache y si un elemento es un Establecimiento, lo agrego a mi lista.
+     *
+     * @return lista de Establecimiento
+     */
+    public ArrayList<Establecimiento> obtenerListaEstablecimientos(){
+
+        ArrayList<Establecimiento> lista = new ArrayList<Establecimiento>();
+
+        for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
+
+            if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Establecimiento){
+                Establecimiento establecimiento =(Establecimiento) ((ObjetoCache) eMap.getValue()).getValue();
+                lista.add(establecimiento);
+            }
+        }
+        return lista;
+    }
+
     public void limpiarCache() {
+        id = 0;
         CacheMap = new HashMap();
     }
 
     private void limpiarCache(boolean forzarLimpiar) {
-
+        id = 0;
         CacheMap = new HashMap();
 
        /* long now = System.currentTimeMillis();
