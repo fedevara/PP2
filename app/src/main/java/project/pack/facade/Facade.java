@@ -76,4 +76,9 @@ public class Facade {
     public void initProperties(Context context) {
         manejoProperties.initProperties(context);
     }
+
+    public List<Establecimiento> obtenerListaEstablecimientos() {
+        List<Establecimiento> listaEstablecimientos = manejoEstablecimiento.getListaEstablecimientos();
+        return listaEstablecimientos;
+    }
 }

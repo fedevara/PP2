@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
 import project.pack.domain.ObjetoCache;
 
@@ -106,6 +107,25 @@ public class CacheSingleton<K, T> {
             if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Incidente){
                 Incidente incidente =(Incidente) ((ObjetoCache) eMap.getValue()).getValue();
                 lista.add(incidente);
+            }
+        }
+        return lista;
+    }
+
+    /**
+     * Metodo que se encarga de recorrer la cache y si un elemento es un Establecimiento, lo agrego a mi lista.
+     *
+     * @return lista de Establecimiento
+     */
+    public ArrayList<Establecimiento> obtenerListaEstablecimientos(){
+
+        ArrayList<Establecimiento> lista = new ArrayList<Establecimiento>();
+
+        for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
+
+            if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Establecimiento){
+                Establecimiento establecimiento =(Establecimiento) ((ObjetoCache) eMap.getValue()).getValue();
+                lista.add(establecimiento);
             }
         }
         return lista;
