@@ -12,6 +12,15 @@ public class Coordenada implements Serializable {
     private Double latitud;
     private Double longitud;
 
+    public Coordenada(){
+
+    }
+
+    public Coordenada(Double a, Double b){
+        setLatitud(a);
+        setLongitud(b);
+    }
+
     public Double getLongitud() {
         return longitud;
     }
