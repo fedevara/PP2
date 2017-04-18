@@ -69,11 +69,6 @@ public class Facade {
         manejoIncidente.eliminarCache();
     }
 
-    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
-        Establecimiento establecimiento = manejoEstablecimiento.crearEstacimiento(nombre, categoria, lugar);
-        manejoEstablecimiento.guardarEstablecimiento(establecimiento);
-    }
-    
     public void initProperties(Context context) {
 
         // Ejemplo de uso de properties
