@@ -1,7 +1,6 @@
 package project.pack.domain;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by Federico Vara on 9/4/2017.
@@ -12,6 +11,7 @@ public class Coordenada implements Serializable {
     private Double latitud;
     private Double longitud;
 
+
     public Coordenada(){
 
     }
@@ -20,6 +20,7 @@ public class Coordenada implements Serializable {
         setLatitud(a);
         setLongitud(b);
     }
+
 
     public Double getLongitud() {
         return longitud;
@@ -59,4 +60,5 @@ public class Coordenada implements Serializable {
         result = 31 * result + (longitud != null ? longitud.hashCode() : 0);
         return result;
     }
+
 }
