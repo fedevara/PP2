@@ -65,17 +65,18 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = Facade.getInstance();
-                int numero = (int) (Math.random() * 3) + 1;
-                List lista;
-                if (numero == 0) {
-                    lista = subCategorias.get("Robo");
-                } else if (numero == 1) {
-                    lista = subCategorias.get("Transito");
-                } else {
-                    lista = subCategorias.get("Reclamo");
+
+                if(validarCampos()){
+                    // Armo la Categoria con los ComboBoxs
+                    String nombreCategoria = spnCategorias.getSelectedItem().toString();
+                    String nombreSubCategoria = spnSubCategorias.getSelectedItem().toString();
+                    Categoria categoria = new Categoria(1, nombreCategoria,nombreSubCategoria,"1", "2");
+
+                    facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), categoria, new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
+                    startActivity(mostrarIncidente);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
                 }
-                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), (Categoria) lista.get(0), new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
-                startActivity(mostrarIncidente);
             }
         });
 
@@ -131,5 +132,20 @@ public class CrearIncidenteActivity extends AppCompatActivity {
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
         spnSubCategorias.setAdapter(spinner_adapter);
+    }
+
+    public boolean validarCampos(){
+        if(titulo.getText().toString()!= null && descripcion.getText().toString()!=null){
+            String tituloSinEspacios = titulo.getText().toString().trim();
+            String descripcionSinEspacios = descripcion.getText().toString().trim();
+
+            if(!tituloSinEspacios.equals("") && !descripcionSinEspacios.equals("")){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
 }

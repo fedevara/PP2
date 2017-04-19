@@ -87,8 +87,8 @@ public class ManejoProperties {
                 Categoria aux = new Categoria(null, null, null);
                 String[] separatedAux = ((String) entry.getValue()).split("\\.");
                 aux.setId(index);
-                aux.setNombre("Transito");
-                aux.setSubCategoria(separatedAux[0]);
+                aux.setNombre(separatedAux[0]);
+                aux.setSubCategoria("Transito");
                 aux.setPropertyCode((String) entry.getKey());
                 aux.setRiesgo(separatedAux[1]);
                 transito.add(aux);
@@ -97,8 +97,8 @@ public class ManejoProperties {
                 Categoria aux = new Categoria(null, null, null);
                 String[] separatedAux = ((String) entry.getValue()).split("\\.");
                 aux.setId(index);
-                aux.setNombre("Robo");
-                aux.setSubCategoria(separatedAux[0]);
+                aux.setNombre(separatedAux[0]);
+                aux.setSubCategoria("Robo");
                 aux.setPropertyCode((String) entry.getKey());
                 aux.setRiesgo(separatedAux[1]);
                 robo.add(aux);
@@ -107,8 +107,8 @@ public class ManejoProperties {
                 Categoria aux = new Categoria(null, null, null);
                 String[] separatedAux = ((String) entry.getValue()).split("\\.");
                 aux.setId(index);
-                aux.setNombre("Reclamo");
-                aux.setSubCategoria(separatedAux[0]);
+                aux.setNombre(separatedAux[0]);
+                aux.setSubCategoria("Reclamo");
                 aux.setPropertyCode((String) entry.getKey());
                 aux.setRiesgo(separatedAux[1]);
                 reclamo.add(aux);
