@@ -141,6 +141,7 @@ public class CacheSingletonTest {
         cache.put(numero);
 
         assertEquals(new Integer(3), cache.size());
+
     }
 
     @Test
