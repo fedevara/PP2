@@ -90,7 +90,7 @@ public class Incidente implements Parcelable {
             return false;
         if (categoria != null ? !categoria.equals(incidente.categoria) : incidente.categoria != null)
             return false;
-        return lugar != null ? lugar.equals(incidente.lugar) : incidente.lugar == null;
+        return coordenada != null ? coordenada.equals(incidente.coordenada) : incidente.coordenada == null;
 
     }
 
@@ -102,7 +102,7 @@ public class Incidente implements Parcelable {
         result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
         result = 31 * result + (fechaCreacion != null ? fechaCreacion.hashCode() : 0);
         result = 31 * result + (categoria != null ? categoria.hashCode() : 0);
-        result = 31 * result + (lugar != null ? lugar.hashCode() : 0);
+        result = 31 * result + (coordenada != null ? coordenada.hashCode() : 0);
         return result;
     }
 

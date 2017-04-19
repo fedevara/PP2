@@ -17,9 +17,9 @@ public class RiesgoBuilder {
         this.IRiesgoStrategy = IRiesgoStrategy;
     }
 
-    public void getRiesgo(Object object)
+    public String getRiesgo(Object object)
     {
-        IRiesgoStrategy.getRiesgo(object);
+        return IRiesgoStrategy.getRiesgo(object);
     }
 
 }

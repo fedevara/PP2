@@ -57,14 +57,25 @@ public class Facade {
         manejoEstablecimiento.guardarEstablecimiento(establecimiento);
     }
 
+    public Establecimiento obtenerEstablecimiento(Integer id1){
+        return manejoEstablecimiento.getEstablecimiento(id1);
+    }
+
+
+
     public List<Incidente> obtenerListaIncidentes() {
         List<Incidente> listaIncidentes = manejoIncidente.getListaIncidentes();
         return listaIncidentes;
     }
 
+    public List<Incidente> getListaIncidentesCercanos(Coordenada coordenada){
+        return manejoIncidente.getListaIncidentesConCoordenada(coordenada);
+    }
+
     public void eliminarCache() {
         manejoIncidente.eliminarCache();
     }
+
 
     public ArrayList<Categoria> getCategorias(){
         return manejoProperties.getCategorias();
@@ -76,6 +87,10 @@ public class Facade {
 
     public void initProperties(Context context) {
         manejoProperties.initProperties(context);
+    }
+
+    public int getDiasMaximo(){
+        return manejoProperties.getDiasmax();
     }
 
     public List<Establecimiento> obtenerListaEstablecimientos() {
