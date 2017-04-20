@@ -11,7 +11,6 @@ public class Coordenada implements Serializable {
     private Double latitud;
     private Double longitud;
 
-
     public Coordenada() {
 
     }
@@ -59,5 +58,4 @@ public class Coordenada implements Serializable {
         result = 31 * result + (longitud != null ? longitud.hashCode() : 0);
         return result;
     }
-
 }

@@ -17,7 +17,7 @@ import project.pack.logic.RiesgoEstablecimientoStrategy;
 
 public class ManejoEstablecimiento {
 
-    public ManejoEstablecimiento(){
+    public ManejoEstablecimiento() {
 
     }
 
@@ -30,7 +30,7 @@ public class ManejoEstablecimiento {
         return establecimiento;
     }
 
-    public void guardarEstablecimiento(Establecimiento establecimiento){
+    public void guardarEstablecimiento(Establecimiento establecimiento) {
         CacheSingleton.getInstance().put(establecimiento);
     }
 
@@ -43,34 +43,36 @@ public class ManejoEstablecimiento {
 
     /**
      * Dada una coordenada, devuelvo los establecimientos que corresponden al rango de dicha coordenada.
+     *
      * @param coordenada que se le envia.
      * @return devuelvo lista que cumple el rango.
      */
-    public List<Establecimiento> getListaIncidentesConCoordenada(Coordenada coordenada){
+    public List<Establecimiento> getListaIncidentesConCoordenada(Coordenada coordenada) {
 
         List<Establecimiento> listaEstablecimientos = CacheSingleton.getInstance().obtenerListaEstablecimientos();
         List<Establecimiento> establecimientosAprobados = new ArrayList<Establecimiento>();
 
         Double distanciaMaxima = 10.5;
 
-        for (int i=0; i<listaEstablecimientos.size(); i++){
+        for (int i = 0; i < listaEstablecimientos.size(); i++) {
             //Obtengo la distancia entre las coordenadas del Incidente
             Double distanciaIncidente = listaEstablecimientos.get(i).getCoordenada().getDistancia(coordenada);
 
-            if ( distanciaIncidente<=distanciaMaxima){
+            if (distanciaIncidente <= distanciaMaxima) {
                 establecimientosAprobados.add(listaEstablecimientos.get(i));
             }
         }
-        return  establecimientosAprobados;
+        return establecimientosAprobados;
     }
 
     /**
      * Método que se encargar de devolver una lista de establecimientos.
+     *
      * @return Devuelve una lista de establecimientos.
      */
-    public List<Establecimiento> getListaEstablecimientos(){
+    public List<Establecimiento> getListaEstablecimientos() {
         List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerListaEstablecimientos();
-        return  Establecimiento;
+        return Establecimiento;
     }
 
     public void calcularRiesgo(Establecimiento establecimiento){
