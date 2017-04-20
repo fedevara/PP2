@@ -19,7 +19,7 @@ public class CacheSingleton<K, T> {
     // (con mismo modificador de acceso que la definición de la clase)
     private CacheSingleton() {
         CacheMap = new HashMap();
-        id=0;
+        id = 0;
     }
 
     public static CacheSingleton getInstance() {
@@ -38,7 +38,7 @@ public class CacheSingleton<K, T> {
         this.tiempoDeVida = TiempoDeVida * 1000;
 
         CacheMap = new HashMap();
-        id=0;
+        id = 0;
         if (tiempoDeVida > 0 && IntervaloTiempo > 0) {
 
             Thread t = new Thread(new Runnable() {
@@ -62,7 +62,7 @@ public class CacheSingleton<K, T> {
         // Evita deadlock
         synchronized (CacheMap) {
             ObjetoCache c = (ObjetoCache) CacheMap.get(key);
-           // return CacheMap.entrySet().toArray().getValue().getValue;
+            // return CacheMap.entrySet().toArray().getValue().getValue;
 
             if (c == null)
                 return null;
@@ -98,14 +98,14 @@ public class CacheSingleton<K, T> {
      *
      * @return lista de incidentes
      */
-    public ArrayList<Incidente> obtenerListaIncidentes(){
+    public ArrayList<Incidente> obtenerListaIncidentes() {
 
         ArrayList<Incidente> lista = new ArrayList<Incidente>();
 
         for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
 
-            if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Incidente){
-                Incidente incidente =(Incidente) ((ObjetoCache) eMap.getValue()).getValue();
+            if (((ObjetoCache) eMap.getValue()).getValue() instanceof Incidente) {
+                Incidente incidente = (Incidente) ((ObjetoCache) eMap.getValue()).getValue();
                 lista.add(incidente);
             }
         }
@@ -117,14 +117,14 @@ public class CacheSingleton<K, T> {
      *
      * @return lista de Establecimiento
      */
-    public ArrayList<Establecimiento> obtenerListaEstablecimientos(){
+    public ArrayList<Establecimiento> obtenerListaEstablecimientos() {
 
         ArrayList<Establecimiento> lista = new ArrayList<Establecimiento>();
 
         for (Map.Entry<Integer, T> eMap : CacheMap.entrySet()) {
 
-            if ( ( (ObjetoCache) eMap.getValue() ).getValue() instanceof Establecimiento){
-                Establecimiento establecimiento =(Establecimiento) ((ObjetoCache) eMap.getValue()).getValue();
+            if (((ObjetoCache) eMap.getValue()).getValue() instanceof Establecimiento) {
+                Establecimiento establecimiento = (Establecimiento) ((ObjetoCache) eMap.getValue()).getValue();
                 lista.add(establecimiento);
             }
         }

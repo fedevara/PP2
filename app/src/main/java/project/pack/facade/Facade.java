@@ -66,11 +66,11 @@ public class Facade {
         manejoIncidente.eliminarCache();
     }
 
-    public ArrayList<Categoria> getCategorias(){
+    public ArrayList<Categoria> getCategorias() {
         return manejoProperties.getCategorias();
     }
 
-    public Map<String, ArrayList<Categoria>> getSubCategorias(){
+    public Map<String, ArrayList<Categoria>> getSubCategorias() {
         return manejoProperties.getSubCategorias();
     }
 

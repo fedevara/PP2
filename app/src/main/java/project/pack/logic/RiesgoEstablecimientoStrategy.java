@@ -23,22 +23,17 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
     public String getRiesgo(Object object) {
         Double riesgo = calcularRiesgo(object);
 
-        if (riesgo <= 0.25){
+        if (riesgo <= 0.25) {
             return "MUY BAJO";
-        }
-        else if(riesgo > 0.25 && riesgo <= 0.60){
+        } else if (riesgo > 0.25 && riesgo <= 0.60) {
             return "BAJO";
-        }
-        else if(riesgo > 0.60 && riesgo <= 1.00){
+        } else if (riesgo > 0.60 && riesgo <= 1.00) {
             return "MEDIO";
-        }
-        else if(riesgo > 1.00 && riesgo <= 2.00){
+        } else if (riesgo > 1.00 && riesgo <= 2.00) {
             return "ALTO";
-        }
-        else if(riesgo > 2.00){
+        } else if (riesgo > 2.00) {
             return "MUY ALTO";
-        }
-        else{
+        } else {
             return "";
         }
 
@@ -50,31 +45,31 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
 
         Double cantidadRiesgos = this.incidentesRiesgoAlto + this.incidentesRiesgoMedio + this.incidentesRiesgoBajo;
 
-        Double porcentajeDeRiesgo = ((this.incidentesRiesgoAlto) *100 + (this.incidentesRiesgoMedio)*10 + (this.incidentesRiesgoBajo) *5 + (cantidadRiesgos) * 1 +  (this.establecimientsRiesgoAlto) * 10 + (this.establecimientosRiesgoMedio) * 5) /100;
+        Double porcentajeDeRiesgo = ((this.incidentesRiesgoAlto) * 100 + (this.incidentesRiesgoMedio) * 10 + (this.incidentesRiesgoBajo) * 5 + (cantidadRiesgos) * 1 + (this.establecimientsRiesgoAlto) * 10 + (this.establecimientosRiesgoMedio) * 5) / 100;
 
         return porcentajeDeRiesgo;
 
     }
 
-    public void categorizarIncidentes(){
+    public void categorizarIncidentes() {
 
         ArrayList<Incidente> incidentes = (ArrayList<Incidente>) Facade.getInstance().obtenerListaIncidentes();
 
-        for (int i = 0; i < incidentes.size() ; i++) {
+        for (int i = 0; i < incidentes.size(); i++) {
             Incidente incidenteActual = incidentes.get(i);
 
-            if( DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFechaCreacion()) <= 30){ //Acá los días se sacan del properties
+            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFechaCreacion()) <= 30) { //Acá los días se sacan del properties
                 categorizarIncidente(incidenteActual);
             }
         }
 
     }
 
-    public void categorizarEstablecimientos(){
+    public void categorizarEstablecimientos() {
 
         ArrayList<Incidente> establecimientos = (ArrayList<Incidente>) Facade.getInstance().obtenerListaIncidentes(); //Deberian ser establecimientos
 
-        for (int i = 0; i < establecimientos.size() ; i++) {
+        for (int i = 0; i < establecimientos.size(); i++) {
 
             Incidente establecimientoActual = establecimientos.get(i); //TODO tienen que ser establecimientos
 
@@ -105,16 +100,18 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
         }
     }
 
-    public void categorizarEstablecimiento(Establecimiento establecimiento){
+    public void categorizarEstablecimiento(Establecimiento establecimiento) {
 
         String riesgoEstablecimiento = "ALTA"; //Hardcodeado momentaneamente
 
         //String riesgoCategoria = incidente.getCategoria().getRiesgo() //Lo implementa Fede
 
         switch (riesgoEstablecimiento) {
-            case "MUY ALTA":  this.establecimientsRiesgoAlto += 1;
+            case "MUY ALTA":
+                this.establecimientsRiesgoAlto += 1;
                 break;
-            case "ALTA":  this.establecimientosRiesgoMedio += 1;
+            case "ALTA":
+                this.establecimientosRiesgoMedio += 1;
                 break;
             default:
                 break;
@@ -122,10 +119,6 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
         }
 
     }
-
-
-
-
 
 
 }

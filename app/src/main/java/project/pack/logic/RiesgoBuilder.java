@@ -8,8 +8,7 @@ public class RiesgoBuilder {
 
     IRiesgoStrategy IRiesgoStrategy;
 
-    public RiesgoBuilder( IRiesgoStrategy IRiesgoStrategy)
-    {
+    public RiesgoBuilder(IRiesgoStrategy IRiesgoStrategy) {
         this.IRiesgoStrategy = IRiesgoStrategy;
     }
 
@@ -17,8 +16,7 @@ public class RiesgoBuilder {
         this.IRiesgoStrategy = IRiesgoStrategy;
     }
 
-    public void getRiesgo(Object object)
-    {
+    public void getRiesgo(Object object) {
         IRiesgoStrategy.getRiesgo(object);
     }
 

@@ -74,7 +74,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 } else {
                     lista = subCategorias.get("Reclamo");
                 }
-                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), (Categoria) lista.get(0), new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
+                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), (Categoria) lista.get(0), new Coordenada((Math.random() * 3) + 1, (Math.random() * 3) + 1));
                 startActivity(mostrarIncidente);
             }
         });

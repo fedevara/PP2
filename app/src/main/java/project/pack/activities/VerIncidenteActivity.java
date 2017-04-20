@@ -51,12 +51,12 @@ public class VerIncidenteActivity extends AppCompatActivity {
         List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         ArrayList<String> listaIncidentes = new ArrayList<String>();
 
-        for (int i= 0 ; i<incidentes.size();i++){
+        for (int i = 0; i < incidentes.size(); i++) {
             Incidente incidente = incidentes.get(i);
-            listaIncidentes.add(incidente.getTitulo()+" - "+incidente.getDescripcion());
+            listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
         }
 
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaIncidentes);
+        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
         lvResultado.setAdapter(adaptador);
     }
 
