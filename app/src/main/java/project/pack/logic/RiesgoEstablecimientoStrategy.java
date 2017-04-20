@@ -17,8 +17,6 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
     Double incidentesRiesgoAlto = 0.0;
     Double incidentesRiesgoMedio = 0.0;
     Double incidentesRiesgoBajo= 0.0;
-    Double establecimientosRiesgoAlto= 0.0;
-    Double establecimientosRiesgoMedio= 0.0;
     Coordenada coordenada;
 
     @Override
@@ -59,7 +57,7 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
 
         Double cantidadRiesgos = this.incidentesRiesgoAlto + this.incidentesRiesgoMedio + this.incidentesRiesgoBajo;
 
-        Double porcentajeDeRiesgo = ((this.incidentesRiesgoAlto) *100 + (this.incidentesRiesgoMedio)*10 + (this.incidentesRiesgoBajo) *5 + (cantidadRiesgos) * 1 +  (this.establecimientosRiesgoAlto) * 10 + (this.establecimientosRiesgoMedio) * 5) /100;
+        Double porcentajeDeRiesgo = ((this.incidentesRiesgoAlto) *100 + (this.incidentesRiesgoMedio)*10 + (this.incidentesRiesgoBajo) *5 + (cantidadRiesgos) * 1) /100;
 
         System.out.println(porcentajeDeRiesgo);
 
@@ -83,20 +81,6 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
 
     }
 
-    public void categorizarEstablecimientos(){
-
-        ArrayList<Establecimiento> establecimientos = (ArrayList<Establecimiento>) Facade.getInstance().obtenerListaEstablecimientos(); //Deberian ser establecimientos
-
-        for (int i = 0; i < establecimientos.size() ; i++) {
-
-            Establecimiento establecimientoActual = establecimientos.get(i); //TODO tienen que ser establecimientos
-
-            categorizarEstablecimiento(establecimientoActual);
-
-        }
-
-    }
-
 
     public void categorizarIncidente(Incidente incidente) {
 
@@ -113,26 +97,5 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
         }
 
     }
-
-    public void categorizarEstablecimiento(Establecimiento establecimiento){
-
-        String riesgoEstablecimiento = establecimiento.getCategoria().getRiesgo();
-
-        switch (riesgoEstablecimiento) {
-            case "MUY ALTA":  this.establecimientosRiesgoAlto += 1;
-                break;
-            case "ALTA":  this.establecimientosRiesgoMedio += 1;
-                break;
-            default:
-                break;
-
-        }
-
-    }
-
-
-
-
-
 
 }
