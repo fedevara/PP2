@@ -12,15 +12,14 @@ public class Coordenada implements Serializable {
     private Double longitud;
 
 
-    public Coordenada(){
+    public Coordenada() {
 
     }
 
-    public Coordenada(Double a, Double b){
+    public Coordenada(Double a, Double b) {
         setLatitud(a);
         setLongitud(b);
     }
-
 
     public Double getLongitud() {
         return longitud;
@@ -38,8 +37,8 @@ public class Coordenada implements Serializable {
         this.latitud = latitud;
     }
 
-    public Double getDistancia(Coordenada coordenada){
-        return Math.hypot(coordenada.latitud - this.latitud , coordenada.longitud - this.longitud);
+    public Double getDistancia(Coordenada coordenada) {
+        return Math.hypot(coordenada.latitud - this.latitud, coordenada.longitud - this.longitud);
     }
 
     @Override
