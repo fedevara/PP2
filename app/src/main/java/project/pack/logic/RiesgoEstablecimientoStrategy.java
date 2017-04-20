@@ -39,16 +39,12 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
         } else {
             return "ERROR";
         }
-
-
     }
 
     @Override
     public Double calcularRiesgo(Object object) {
 
         Establecimiento establecimiento = (Establecimiento) object;
-
-        //categorizarEstablecimientos();
 
         categorizarIncidentes(establecimiento.getCoordenada());
 
@@ -87,7 +83,6 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
         }
     }
 
-
     public void categorizarIncidente(Incidente incidente) {
 
         Double riesgoCategoria = Double.valueOf(incidente.getCategoria().getRiesgo()); //Hardcodeado momentaneamente
@@ -117,8 +112,5 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
                 break;
 
         }
-
     }
-
-
 }
