@@ -15,64 +15,87 @@
         android:layout_height="wrap_content"
         android:text="Incidente"
         android:id="@+id/twTitulo"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese Titulo *"
+        android:hint="Ingrese Titulo*"
         android:id="@+id/txtTitulo"
         android:layout_below="@+id/twTitulo"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese Descripción *"
+        android:hint="Ingrese Descripción*"
         android:id="@+id/txtDescripcion"
         android:layout_below="@+id/txtTitulo"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayoutCategoria"
-        android:layout_below="@+id/txtDescripcion">
+        android:layout_marginTop="11dp"
+        android:id="@+id/linearLayoutCoordenadas"
+        android:layout_below="@+id/linearLayoutSubCategoria"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Categoría:"
-            android:id="@+id/txtCategoria"
-            android:layout_weight="2"/>
+            android:text="Coordenadas*"
+            android:id="@+id/txtcoor"
+            android:layout_weight="3"
+            android:textSize="18sp" />
 
-        <Spinner
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spnCategorias"
-            android:layout_alignParentStart="true"
-            android:layout_weight="1"/>
+            android:inputType="number"
+            android:ems="10"
+            android:text=""
+            android:id="@+id/txtLatitud"
+            android:layout_weight="3"
+            android:hint="Latitud"
+            android:textSize="14sp"
+            android:textAlignment="textEnd" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:text=""
+            android:id="@+id/txtLongitud"
+            android:layout_weight="3"
+            android:hint="Longitud"
+            android:textSize="14sp"
+            android:textAlignment="textEnd" />
+
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayoutSubCategoria"
-        android:layout_below="@+id/linearLayoutCategoria">
+        android:id="@+id/linearLayoutBotones"
+        android:layout_below="@id/linearLayoutCoordenadas">
 
-        <TextView
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sub Categoría:"
-            android:id="@+id/txtSubCategoria"
-            android:layout_weight="2"/>
+            android:text="Crear Incidente"
+            android:id="@+id/btnCrearIncidente"
+            android:layout_weight="1"/>
 
-        <Spinner
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="11dp"
-            android:id="@+id/spnSubCategorias"
+            android:text="Limpiar"
+            android:id="@+id/btnLimpiarForm"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -90,23 +113,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayoutBotones"
-        android:layout_below="@id/linearLayoutSubCategoria">
+        android:layout_marginTop="11dp"
+        android:id="@+id/linearLayoutSubCategoria"
+        android:layout_below="@+id/linearLayoutCategoria"
+        android:layout_alignParentStart="true">
 
-        <Button
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Crear Incidente"
-            android:id="@+id/btnCrearIncidente"
+            android:text="Sub Categoría:"
+            android:id="@+id/txtSubCategoria"
+            android:layout_weight="2"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:id="@+id/spnSubCategorias"
             android:layout_weight="1"/>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Limpiar"
-            android:id="@+id/btnLimpiarForm"
-            android:layout_weight="1"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="11dp"
+        android:id="@+id/linearLayoutCategoria"
+        android:layout_below="@+id/txtDescripcion"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Categoría:"
+            android:id="@+id/txtCategoria"
+            android:layout_weight="2"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spnCategorias"
+            android:layout_alignParentStart="true"
+            android:layout_weight="1"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -38,7 +38,6 @@ public class ManejoIncidente {
 
     public void guardarIncidente(Incidente incidente) {
         System.out.print("guardar incidente");
-
         CacheSingleton.getInstance().put(incidente);
         Integer size = CacheSingleton.getInstance().size();
     }
