@@ -1,23 +1,29 @@
 package project.pack.controller;
 
+import android.content.Context;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Federico Vara on 14/4/2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ManejoEstablecimientoTest {
 
     @Before

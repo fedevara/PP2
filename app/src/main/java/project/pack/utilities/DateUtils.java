@@ -16,16 +16,16 @@ public class DateUtils {
     private DateUtils() {
     }
 
-    public long getDiferenciaPorDia(Date fechaAnterior, Date fechaPosterior){
+    public long getDiferenciaPorDia(Date fechaAnterior, Date fechaPosterior) {
         final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
-        long diferencia = ( fechaPosterior.getTime() - fechaAnterior.getTime() )/MILLSECS_PER_DAY;
+        long diferencia = (fechaPosterior.getTime() - fechaAnterior.getTime()) / MILLSECS_PER_DAY;
         return diferencia;
     }
 
-    public long getDiferenciaPorDiaFechaActual(Date fechaAnterior){
+    public long getDiferenciaPorDiaFechaActual(Date fechaAnterior) {
         Date fechaActual = new Date();
         final long MILLSECS_PER_DAY = 24 * 60 * 60 * 1000; //Milisegundos al día
-        long diferencia = ( fechaActual.getTime() - fechaAnterior.getTime() )/MILLSECS_PER_DAY;
+        long diferencia = (fechaActual.getTime() - fechaAnterior.getTime()) / MILLSECS_PER_DAY;
         return diferencia;
     }
 
