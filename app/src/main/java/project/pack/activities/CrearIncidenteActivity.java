@@ -69,10 +69,10 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 if(validarCampos()){
                     // Armo la Categoria con los ComboBoxs
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
-                    String nombreSubCategoria = spnSubCategorias.getSelectedItem().toString();
-                    Categoria categoria = new Categoria(1, nombreCategoria,nombreSubCategoria,"1", "2");
+                    Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
+                    nombreSubCategoria.setSubCategoria(nombreCategoria);
 
-                    facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), categoria, new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
+                    facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
                     startActivity(mostrarIncidente);
                 }else{
                     Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
