@@ -17,7 +17,7 @@ public class Incidente implements Parcelable {
     private Date fecha;
     private Date fechaCreacion;
     private Categoria categoria;
-    private Coordenada lugar;
+    private Coordenada coordenada;
 
     public Incidente(){
 
@@ -57,12 +57,12 @@ public class Incidente implements Parcelable {
         this.categoria = categoria;
     }
 
-    public Coordenada getLugar() {
-        return lugar;
+    public Coordenada getCoordenada() {
+        return coordenada;
     }
 
-    public void setLugar(Coordenada lugar) {
-        this.lugar = lugar;
+    public void setCoordenada(Coordenada coordenada) {
+        this.coordenada = coordenada;
     }
 
     public Date getFecha() {
@@ -73,6 +73,38 @@ public class Incidente implements Parcelable {
         this.fecha = fecha;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Incidente incidente = (Incidente) o;
+
+        if (id != incidente.id) return false;
+        if (titulo != null ? !titulo.equals(incidente.titulo) : incidente.titulo != null)
+            return false;
+        if (descripcion != null ? !descripcion.equals(incidente.descripcion) : incidente.descripcion != null)
+            return false;
+        if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null) return false;
+        if (fechaCreacion != null ? !fechaCreacion.equals(incidente.fechaCreacion) : incidente.fechaCreacion != null)
+            return false;
+        if (categoria != null ? !categoria.equals(incidente.categoria) : incidente.categoria != null)
+            return false;
+        return coordenada != null ? coordenada.equals(incidente.coordenada) : incidente.coordenada == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
+        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
+        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
+        result = 31 * result + (fechaCreacion != null ? fechaCreacion.hashCode() : 0);
+        result = 31 * result + (categoria != null ? categoria.hashCode() : 0);
+        result = 31 * result + (coordenada != null ? coordenada.hashCode() : 0);
+        return result;
+    }
 
     // SECCION QUE IMPLEMENTA METODOS NECESARIOS PARA EL ENVIO DE UN INCIDENTE DE UN ACTIVITY A OTRO
 
@@ -92,7 +124,7 @@ public class Incidente implements Parcelable {
         dest.writeLong(fecha.getTime());
         dest.writeLong(fechaCreacion.getTime());
         dest.writeSerializable(categoria);
-        dest.writeSerializable(lugar);
+        dest.writeSerializable(coordenada);
     }
 
     /**
@@ -106,7 +138,7 @@ public class Incidente implements Parcelable {
         fecha = new Date(in.readLong());
         fechaCreacion = new Date(in.readLong());
         categoria = (Categoria) in.readSerializable();
-        lugar = (Coordenada) in.readSerializable();
+        coordenada = (Coordenada) in.readSerializable();
     }
 
     public static final Creator<Incidente> CREATOR = new Creator<Incidente>() {
