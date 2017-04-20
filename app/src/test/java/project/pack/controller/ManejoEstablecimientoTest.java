@@ -1,23 +1,29 @@
 package project.pack.controller;
 
+import android.content.Context;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by Federico Vara on 14/4/2017.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ManejoEstablecimientoTest {
 
     @Before
@@ -42,10 +48,6 @@ public class ManejoEstablecimientoTest {
         Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
 
         Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(4);
-
-        Assert.assertEquals(establecimiento.getRiesgo(), "MUY BAJO");
-
-
 
         Assert.assertEquals(establecimiento.getRiesgo(), "BAJO");
     }
