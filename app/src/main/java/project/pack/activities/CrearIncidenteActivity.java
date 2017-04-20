@@ -77,8 +77,6 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
                 }
-                facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), (Categoria) lista.get(0), new Coordenada((Math.random() * 3) + 1, (Math.random() * 3) + 1));
-                startActivity(mostrarIncidente);
             }
         });
 
