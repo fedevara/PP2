@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,13 +52,16 @@ public class VerIncidenteActivity extends AppCompatActivity {
         List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         ArrayList<String> listaIncidentes = new ArrayList<String>();
 
-        for (int i= 0 ; i<incidentes.size();i++){
-            Incidente incidente = incidentes.get(i);
-            listaIncidentes.add(incidente.getTitulo()+" - "+incidente.getDescripcion());
-        }
+        if(incidentes!=null && incidentes.size()>0){
+            for (int i= 0 ; i<incidentes.size();i++){
+                Incidente incidente = incidentes.get(i);
+                listaIncidentes.add(incidente.getTitulo()+" - "+incidente.getDescripcion());
+            }
 
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaIncidentes);
-        lvResultado.setAdapter(adaptador);
+            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listaIncidentes);
+            lvResultado.setAdapter(adaptador);
+        }
+        Toast.makeText(getApplicationContext(), "Usted no Cargó ningún Incidente.", Toast.LENGTH_LONG).show();
     }
 
 /*

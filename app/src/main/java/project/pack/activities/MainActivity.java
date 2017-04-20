@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnAgragarIncidente)
     Button btnAgragarIncidente;
 
+    @Bind(R.id.btnVerListIncidentes)
+    Button btnVerListIncidentes;
+
     @Bind(R.id.btnEliminarCache)
     Button btnEliminarCache;
 
@@ -50,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnVerListIncidentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mostrarIncidente = new Intent(MainActivity.this, VerIncidenteActivity.class);
+                startActivity(mostrarIncidente);
+            }
+        });
     }
 
     @OnClick(R.id.btnAgragarIncidente)
