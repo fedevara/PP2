@@ -51,15 +51,22 @@ public class Facade {
         return manejoIncidente.getIncidente(id1);
     }
 
-
     public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
         Establecimiento establecimiento = manejoEstablecimiento.crearEstacimiento(nombre, categoria, lugar);
         manejoEstablecimiento.guardarEstablecimiento(establecimiento);
     }
 
+    public Establecimiento obtenerEstablecimiento(Integer id1){
+        return manejoEstablecimiento.getEstablecimiento(id1);
+    }
+
     public List<Incidente> obtenerListaIncidentes() {
         List<Incidente> listaIncidentes = manejoIncidente.getListaIncidentes();
         return listaIncidentes;
+    }
+
+    public List<Incidente> getListaIncidentesCercanos(Coordenada coordenada){
+        return manejoIncidente.getListaIncidentesConCoordenada(coordenada);
     }
 
     public void eliminarCache() {
@@ -76,6 +83,10 @@ public class Facade {
 
     public void initProperties(Context context) {
         manejoProperties.initProperties(context);
+    }
+
+    public int getDiasMaximo(){
+        return manejoProperties.getDiasmax();
     }
 
     public List<Establecimiento> obtenerListaEstablecimientos() {

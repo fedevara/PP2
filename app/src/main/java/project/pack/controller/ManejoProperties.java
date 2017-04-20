@@ -42,12 +42,14 @@ public class ManejoProperties {
         properties = new HashMap<String, Properties>();
 
         properties.put("Categoria", propertyReader.getMyProperties("categoriaProperties.properties"));
+        properties.put("Incidente", propertyReader.getMyProperties("incidenteProperties.properties"));
     }
 
     /**
      * Devuelve el conntenido del archivo de properties solicitado.
      * Las Key de las properties guardadas son:
      * -Categoria
+     * -Incidente
      *
      * @param property es el String por el cual busca las properties
      * @return El objeto {@link Properties} con los datos solicitados
@@ -119,5 +121,10 @@ public class ManejoProperties {
         subcategorias.put("Robo", robo);
         subcategorias.put("Reclamo", reclamo);
         return subcategorias;
+    }
+
+    public int getDiasmax(){
+        Properties properties = getProperties("Incidente");
+        return Integer.parseInt(properties.getProperty("incidentes.conf.dias.validos"));
     }
 }

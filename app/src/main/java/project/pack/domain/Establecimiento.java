@@ -9,6 +9,7 @@ public class Establecimiento {
     private String nombre;
     private Categoria categoria;
     private Coordenada coordenada;
+    private String riesgo;
 
     public String getNombre() {
         return nombre;
@@ -33,6 +34,12 @@ public class Establecimiento {
     public void setCoordenada(Coordenada coordenada) {
         this.coordenada = coordenada;
     }
+
+    public String getRiesgo() {return riesgo;}
+
+    public void setRiesgo(String riesgo) {this.riesgo = riesgo;}
+
+
 
     @Override
     public boolean equals(Object o) {

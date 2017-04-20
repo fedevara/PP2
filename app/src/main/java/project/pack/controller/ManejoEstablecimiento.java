@@ -7,6 +7,9 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
+import project.pack.logic.IRiesgoStrategy;
+import project.pack.logic.RiesgoBuilder;
+import project.pack.logic.RiesgoEstablecimientoStrategy;
 
 /**
  * Created by Familia Vara on 9/4/2017.
@@ -32,7 +35,10 @@ public class ManejoEstablecimiento {
     }
 
     public Establecimiento getEstablecimiento(int id1) {
-        return (Establecimiento) CacheSingleton.getInstance().get(id1);
+
+        Establecimiento establecimiento = (Establecimiento) CacheSingleton.getInstance().get(id1);
+        calcularRiesgo(establecimiento);
+        return establecimiento;
     }
 
     /**
@@ -68,4 +74,12 @@ public class ManejoEstablecimiento {
         List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerListaEstablecimientos();
         return Establecimiento;
     }
+
+    public void calcularRiesgo(Establecimiento establecimiento){
+        IRiesgoStrategy RiesgoStrategy = new RiesgoEstablecimientoStrategy();
+        RiesgoBuilder riesgoBuilder = new RiesgoBuilder(RiesgoStrategy);
+        String riesgo = riesgoBuilder.getRiesgo(establecimiento);
+        establecimiento.setRiesgo(riesgo);
+    }
+
 }
