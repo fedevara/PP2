@@ -73,6 +73,38 @@ public class Incidente implements Parcelable {
         this.fecha = fecha;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Incidente incidente = (Incidente) o;
+
+        if (id != incidente.id) return false;
+        if (titulo != null ? !titulo.equals(incidente.titulo) : incidente.titulo != null)
+            return false;
+        if (descripcion != null ? !descripcion.equals(incidente.descripcion) : incidente.descripcion != null)
+            return false;
+        if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null) return false;
+        if (fechaCreacion != null ? !fechaCreacion.equals(incidente.fechaCreacion) : incidente.fechaCreacion != null)
+            return false;
+        if (categoria != null ? !categoria.equals(incidente.categoria) : incidente.categoria != null)
+            return false;
+        return coordenada != null ? coordenada.equals(incidente.coordenada) : incidente.coordenada == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
+        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
+        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
+        result = 31 * result + (fechaCreacion != null ? fechaCreacion.hashCode() : 0);
+        result = 31 * result + (categoria != null ? categoria.hashCode() : 0);
+        result = 31 * result + (coordenada != null ? coordenada.hashCode() : 0);
+        return result;
+    }
 
     // SECCION QUE IMPLEMENTA METODOS NECESARIOS PARA EL ENVIO DE UN INCIDENTE DE UN ACTIVITY A OTRO
 

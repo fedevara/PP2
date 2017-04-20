@@ -11,6 +11,7 @@ public class Coordenada implements Serializable {
     private Double latitud;
     private Double longitud;
 
+
     public Coordenada() {
 
     }
@@ -39,4 +40,24 @@ public class Coordenada implements Serializable {
     public Double getDistancia(Coordenada coordenada) {
         return Math.hypot(coordenada.latitud - this.latitud, coordenada.longitud - this.longitud);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Coordenada that = (Coordenada) o;
+
+        if (latitud != null ? !latitud.equals(that.latitud) : that.latitud != null) return false;
+        return longitud != null ? longitud.equals(that.longitud) : that.longitud == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = latitud != null ? latitud.hashCode() : 0;
+        result = 31 * result + (longitud != null ? longitud.hashCode() : 0);
+        return result;
+    }
+
 }
