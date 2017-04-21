@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,9 @@ public class VerIncidenteActivity extends AppCompatActivity {
     @Bind(R.id.lvResultado)
     ListView lvResultado;
 
+    @Bind(R.id.twTitulo)
+    TextView twTitulo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +53,27 @@ public class VerIncidenteActivity extends AppCompatActivity {
     }
 
     private void cargarListaIncidentes() {
+        List<Incidente> incidentes;
+        try {
+            incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+            //List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+            ArrayList<String> listaIncidentes = new ArrayList<String>();
+            if(incidentes.size()>0) {
+                for (int i = 0; i < incidentes.size(); i++) {
+                    Incidente incidente = incidentes.get(i);
+                    listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
+                }
 
-        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        ArrayList<String> listaIncidentes = new ArrayList<String>();
-
-        for (int i = 0; i < incidentes.size(); i++) {
-            Incidente incidente = incidentes.get(i);
-            listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
+                ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
+                lvResultado.setAdapter(adaptador);
+            }
+            else {
+                twTitulo.setText("Aun no ha creado ningun incidente");
+            }
         }
-
-        ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
-        lvResultado.setAdapter(adaptador);
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "Error. No se logró cargar", Toast.LENGTH_LONG).show();
+        }
     }
 
 /*
