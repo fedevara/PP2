@@ -1,7 +1,6 @@
 package project.pack.domain;
 
 public class ObjetoCache<T> {
-    private long UltimoUso = System.currentTimeMillis();
     private T value;
 
     // Constructor
@@ -13,7 +12,4 @@ public class ObjetoCache<T> {
         return value;
     }
 
-    public long UltimoUso() {
-        return UltimoUso;
-    }
 }

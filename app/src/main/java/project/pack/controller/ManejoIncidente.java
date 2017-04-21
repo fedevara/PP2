@@ -37,24 +37,18 @@ public class ManejoIncidente {
     }
 
     public void guardarIncidente(Incidente incidente) {
-        System.out.print("guardar incidente");
-
+        System.out.println("ManejoIncidente.guardar incidente ID: "+ incidente.getId());
         CacheSingleton.getInstance().put(incidente);
-        Integer size = CacheSingleton.getInstance().size();
     }
 
-    public Incidente getIncidente(Integer id1) {
-        return (Incidente) CacheSingleton.getInstance().get(id1);
+    public Incidente getIncidente(Integer id) {
+        return (Incidente) CacheSingleton.getInstance().get(id);
     }
 
     public List<Incidente> getListaIncidentes() {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         return listaIncidentes;
-    }
-
-    public void eliminarCache() {
-        CacheSingleton.getInstance().limpiarCache();
     }
 
     /**
