@@ -104,26 +104,6 @@ public class CacheSingletonTest {
         assertEquals(2, cantidadElementos);
     }
 
-/*
-    @Test
-    public void VencimientoCache() throws Exception {
-        put();
-
-        Thread.sleep(500);
-        Facade.getInstance().crearIncidente(1, "Robo de auto", "En Hurlingham", new Date(), null, null);
-        int cantidadElementos = CacheSingleton.getInstance().size();
-        assertEquals(3, cantidadElementos);
-
-        // incidente 1 y 2 tienen 500ms de vida, incidente 3 0ms. Ninguno se tiene que vencer
-        // incidente 1 y 2 ahora tiene 1000ms (se tienen que vencer), incidente 3 500ms (no se tiene que vencer)
-        cantidadElementos = CacheSingleton.getInstance().size();
-        assertEquals(0, cantidadElementos);
-
-
-        cantidadElementos = CacheSingleton.getInstance().size();
-        assertEquals(0, cantidadElementos);
-    }
-*/
     @Test
     public void remove() throws Exception {
         CacheSingleton cache = CacheSingleton.getInstance();
@@ -182,5 +162,4 @@ public class CacheSingletonTest {
         cache.limpiarCache();
         assertEquals(new Integer(0), cache.size());
     }
-
 }

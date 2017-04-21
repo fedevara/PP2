@@ -63,7 +63,7 @@ public class Facade {
     }
 
     public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
-        Establecimiento establecimiento = manejoEstablecimiento.crearEstacimiento(nombre, categoria, lugar);
+        Establecimiento establecimiento = manejoEstablecimiento.crearEstablecimiento(nombre, categoria, lugar);
         manejoEstablecimiento.guardarEstablecimiento(establecimiento);
     }
 

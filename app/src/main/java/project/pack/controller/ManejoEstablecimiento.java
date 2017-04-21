@@ -20,7 +20,7 @@ public class ManejoEstablecimiento {
 
     }
 
-    public Establecimiento crearEstacimiento(String nombre, Categoria categoria, Coordenada lugar) {
+    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
         Establecimiento establecimiento = new Establecimiento();
         establecimiento.setNombre(nombre);
         establecimiento.setCategoria(categoria);

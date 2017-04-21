@@ -6,11 +6,16 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
+import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
+
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Federico Vara on 14/4/2017.
@@ -60,18 +65,35 @@ public class ManejoEstablecimientoTest {
     }
 
     @Test
-    public void crearEstacimiento() throws Exception {
+    public void crearEstablecimiento() throws Exception {
+        Establecimiento establecimiento = new Establecimiento();
 
+        establecimiento.setNombre("Establecimiento");
+        establecimiento.setCategoria(null);
+        establecimiento.setCoordenada(null);
+        establecimiento.setRiesgo("10");
+
+        assertNotNull(establecimiento);
     }
 
     @Test
     public void guardarEstablecimiento() throws Exception {
-
+        // Guardar
+        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        // obtengo el incidente guardado
+        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        // compruebo que lo que se guardo sea lo mismo que mande a guardar
+        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
     }
 
     @Test
     public void getEstablecimiento() throws Exception {
-
+        // Guardar
+        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        // obtengo el incidente guardado
+        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        // compruebo que lo que se guardo sea lo mismo que mande a guardar
+        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
     }
 
 }
