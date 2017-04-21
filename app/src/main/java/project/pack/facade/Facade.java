@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import project.pack.activities.MainActivity;
+import project.pack.controller.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
 import project.pack.controller.ManejoProperties;
@@ -70,7 +71,7 @@ public class Facade {
     }
 
     public void eliminarCache() {
-        manejoIncidente.eliminarCache();
+        CacheSingleton.getInstance().limpiarCache();
     }
 
     public ArrayList<Categoria> getCategorias() {

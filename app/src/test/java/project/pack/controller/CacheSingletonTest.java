@@ -150,34 +150,6 @@ public class CacheSingletonTest {
         assertNull(cache.get(2));
     }
 
-    /*
-        @Test
-        public void remove() throws Exception {
-            // Creo una memoria cache.
-            // tiempo de vida de un cache = 200 segundos
-            // Tiempo Intervalo de actualizacion  = 60 segundos
-            CacheSingleton cache = CacheSingleton.getInstance();
-            // Agrego items del cualquier tipo
-            cache.put("Portal", 123);
-            cache.put("P1", "Hola mundo");
-            cache.put("Pizza", "Muzza");
-            cache.put("zapato", "azul");
-            cache.put("Animal", "Perro");
-            cache.put("Cofre", "Moneda");
-            cache.put(123, "Dying Light");
-            assertEquals(7, cache.size());
-
-            // Pruebo remover un item
-            cache.remove("zapato");
-            cache.remove("Cofre");
-            // Deben quedar 5 Cache objects
-            assertEquals(5, cache.size());
-
-            // Al intentar obtenerlos debe dar null
-            assertNull(cache.get("zapato"));
-            assertNull(cache.get("Cofre"));
-        }
-    */
     @Test
     public void size() throws Exception {
         // Agrego 3 elementos a la cache, y la longitud de la misma debe ser 3.
