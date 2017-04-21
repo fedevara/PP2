@@ -39,8 +39,6 @@ public class Establecimiento {
 
     public void setRiesgo(String riesgo) {this.riesgo = riesgo;}
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,7 +50,6 @@ public class Establecimiento {
         if (categoria != null ? !categoria.equals(that.categoria) : that.categoria != null)
             return false;
         return coordenada != null ? coordenada.equals(that.coordenada) : that.coordenada == null;
-
     }
 
     @Override
