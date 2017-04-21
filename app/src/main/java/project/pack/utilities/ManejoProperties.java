@@ -1,4 +1,4 @@
-package project.pack.controller;
+package project.pack.utilities;
 
 import android.content.Context;
 
@@ -7,10 +7,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import project.pack.domain.Categoria;
-import project.pack.utilities.PropertyReader;
 
 /**
  * Created by Federico Vara on 16/4/2017.
