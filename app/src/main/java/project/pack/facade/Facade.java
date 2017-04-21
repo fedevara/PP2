@@ -40,6 +40,17 @@ public class Facade {
         manejoProperties = ManejoProperties.getInstance();
     }
 
+    /**
+     * Crea un incidente y lo guarda en la memoria cache
+     *
+     * @param id          Es el id con el que se va a guardar en la base de datos
+     * @param titulo      Titulo del incidente
+     * @param descripcion Descripcion del incidente
+     * @param fecha       Fecha en la que sucesio el incidente, puede ser distinta a la actual
+     * @param categoria   Categoria del incidente
+     * @param lugar       Lugar donde ocurrio el incidente
+     * @return Devuelve el objeto creado y guardado en la base
+     */
     public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar) {
         Integer idIncidente = id;
         Incidente incidente = manejoIncidente.crearIncidente(idIncidente, titulo, descripcion, fecha, categoria, lugar);
@@ -69,6 +80,10 @@ public class Facade {
         return manejoIncidente.getListaIncidentesConCoordenada(coordenada);
     }
 
+    public List<Establecimiento> getListaEstablecimientosCercanos(Coordenada coordenada) {
+        return manejoEstablecimiento.getListaEstablecimientosConCoordenada(coordenada);
+    }
+
     public void eliminarCache() {
         manejoIncidente.eliminarCache();
     }
@@ -93,4 +108,6 @@ public class Facade {
         List<Establecimiento> listaEstablecimientos = manejoEstablecimiento.getListaEstablecimientos();
         return listaEstablecimientos;
     }
+
+
 }
