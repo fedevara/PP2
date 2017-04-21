@@ -1,4 +1,4 @@
-﻿package project.pack.activities;
+package project.pack.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import project.pack.R;
 import project.pack.controller.CacheSingleton;
 import project.pack.domain.Incidente;
 
