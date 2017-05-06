@@ -13,10 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,7 +73,6 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                     // Armo la Categoria con los ComboBoxs
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
-                    nombreSubCategoria.setSubCategoria(nombreCategoria);
                     Coordenada coordenada = obtenerCoordenadas();
                     try {
                         facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
@@ -143,7 +139,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         } else if (categoria.getNombre().equals("Reclamo")) {
             subCategorias = categorias.get("Reclamo");
         } else {
-            subCategorias.add(new Categoria(0, "Error", "Error"));
+            subCategorias.add(new Categoria(0, "Error", ""));
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
