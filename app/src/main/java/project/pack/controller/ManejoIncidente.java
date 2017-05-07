@@ -9,8 +9,8 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 
-/**
- * Created by Familia Vara on 9/4/2017.
+/*
+ * Created by Federico Vara on 9/4/2017.
  */
 
 public class ManejoIncidente {
@@ -37,24 +37,18 @@ public class ManejoIncidente {
     }
 
     public void guardarIncidente(Incidente incidente) {
-        System.out.print("guardar incidente");
-
+        System.out.println("ManejoIncidente.guardar incidente ID: "+ incidente.getId());
         CacheSingleton.getInstance().put(incidente);
-        Integer size = CacheSingleton.getInstance().size();
     }
 
-    public Incidente getIncidente(Integer id1) {
-        return (Incidente) CacheSingleton.getInstance().get(id1);
+    public Incidente getIncidente(Integer id) {
+        return (Incidente) CacheSingleton.getInstance().get(id);
     }
 
     public List<Incidente> getListaIncidentes() {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         return listaIncidentes;
-    }
-
-    public void eliminarCache() {
-        CacheSingleton.getInstance().limpiarCache();
     }
 
     /**
@@ -66,7 +60,7 @@ public class ManejoIncidente {
     public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada) {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        List<Incidente> incidentesAprobados = new ArrayList<Incidente>();
+        List<Incidente> incidentesAprobados = new ArrayList<>();
 
         Double distanciaMaxima = 10.5;
 

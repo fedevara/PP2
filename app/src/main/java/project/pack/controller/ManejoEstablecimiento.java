@@ -6,13 +6,12 @@ import java.util.List;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
-import project.pack.domain.Incidente;
 import project.pack.logic.IRiesgoStrategy;
 import project.pack.logic.RiesgoBuilder;
 import project.pack.logic.RiesgoEstablecimientoStrategy;
 
-/**
- * Created by Familia Vara on 9/4/2017.
+/*
+ * Created by Federico Vara on 9/4/2017.
  */
 
 public class ManejoEstablecimiento {
@@ -21,7 +20,7 @@ public class ManejoEstablecimiento {
 
     }
 
-    public Establecimiento crearEstacimiento(String nombre, Categoria categoria, Coordenada lugar) {
+    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
         Establecimiento establecimiento = new Establecimiento();
         establecimiento.setNombre(nombre);
         establecimiento.setCategoria(categoria);
@@ -47,7 +46,7 @@ public class ManejoEstablecimiento {
      * @param coordenada que se le envia.
      * @return devuelvo lista que cumple el rango.
      */
-    public List<Establecimiento> getListaIncidentesConCoordenada(Coordenada coordenada) {
+    public List<Establecimiento> getListaEstablecimientosConCoordenada(Coordenada coordenada) {
 
         List<Establecimiento> listaEstablecimientos = CacheSingleton.getInstance().obtenerListaEstablecimientos();
         List<Establecimiento> establecimientosAprobados = new ArrayList<Establecimiento>();
@@ -55,10 +54,10 @@ public class ManejoEstablecimiento {
         Double distanciaMaxima = 10.5;
 
         for (int i = 0; i < listaEstablecimientos.size(); i++) {
-            //Obtengo la distancia entre las coordenadas del Incidente
-            Double distanciaIncidente = listaEstablecimientos.get(i).getCoordenada().getDistancia(coordenada);
+            //Obtengo la distancia entre las coordenadas del Establecimiento
+            Double distanciaEstablecimientos = listaEstablecimientos.get(i).getCoordenada().getDistancia(coordenada);
 
-            if (distanciaIncidente <= distanciaMaxima) {
+            if (distanciaEstablecimientos != 0.0 && distanciaEstablecimientos <= distanciaMaxima) {
                 establecimientosAprobados.add(listaEstablecimientos.get(i));
             }
         }
@@ -75,7 +74,7 @@ public class ManejoEstablecimiento {
         return Establecimiento;
     }
 
-    public void calcularRiesgo(Establecimiento establecimiento){
+    public void calcularRiesgo(Establecimiento establecimiento) {
         IRiesgoStrategy RiesgoStrategy = new RiesgoEstablecimientoStrategy();
         RiesgoBuilder riesgoBuilder = new RiesgoBuilder(RiesgoStrategy);
         String riesgo = riesgoBuilder.getRiesgo(establecimiento);

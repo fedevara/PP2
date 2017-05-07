@@ -13,10 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -38,6 +35,12 @@ public class CrearIncidenteActivity extends AppCompatActivity {
 
     @Bind(R.id.spnSubCategorias)
     Spinner spnSubCategorias;
+
+    @Bind(R.id.txtLongitud)
+    TextView txtLongitud;
+
+    @Bind(R.id.txtLatitud)
+    TextView txtLatitud;
 
     @Bind(R.id.btnCrearIncidente)
     Button btnCrearIncidente;
@@ -66,15 +69,18 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = Facade.getInstance();
 
-                if(validarCampos()){
+                if (validarCampos()) {
                     // Armo la Categoria con los ComboBoxs
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
-                    nombreSubCategoria.setSubCategoria(nombreCategoria);
-
-                    facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, new Coordenada((Math.random() * 3) + 1,(Math.random() * 3) + 1));
-                    startActivity(mostrarIncidente);
-                }else{
+                    Coordenada coordenada = obtenerCoordenadas();
+                    try {
+                        facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
+                        startActivity(mostrarIncidente);
+                    } catch (Exception e) {
+                        Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();
+                    }
+                } else {
                     Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
                 }
             }
@@ -85,6 +91,12 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             public void onClick(View v) {
                 titulo.setText("");
                 descripcion.setText("");
+                txtLongitud.setText("");
+                ;
+                txtLatitud.setText("");
+                ;
+                spnCategorias.setSelection(0);
+                spnSubCategorias.setSelection(0);
             }
         });
 
@@ -127,25 +139,64 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         } else if (categoria.getNombre().equals("Reclamo")) {
             subCategorias = categorias.get("Reclamo");
         } else {
-            subCategorias.add(new Categoria(0, "Error", "Error"));
+            subCategorias.add(new Categoria(0, "Error", ""));
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
         spnSubCategorias.setAdapter(spinner_adapter);
     }
 
-    public boolean validarCampos(){
-        if(titulo.getText().toString()!= null && descripcion.getText().toString()!=null){
+    private boolean validarCampos() {
+        System.out.println(new Coordenada((Math.random() * 3) + 1, (Math.random() * 3) + 1));
+        if (titulo.getText().toString() != null && descripcion.getText().toString() != null) {
             String tituloSinEspacios = titulo.getText().toString().trim();
             String descripcionSinEspacios = descripcion.getText().toString().trim();
 
-            if(!tituloSinEspacios.equals("") && !descripcionSinEspacios.equals("")){
+            if (!tituloSinEspacios.equals("") && !descripcionSinEspacios.equals("") && validarCoordenadas()) {
                 return true;
-            }else{
+            } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
+
+    private Coordenada obtenerCoordenadas() {
+        Coordenada coord = null;
+        // Si no es null y no esta vacio
+        if (txtLongitud.getText() != null && txtLatitud.getText() != null) {
+            if (!(txtLongitud.getText()).toString().isEmpty() && !(txtLatitud.getText()).toString().isEmpty()) {
+                String Longitud = txtLongitud.getText().toString();
+                String Latitud = txtLatitud.getText().toString();
+                coord = new Coordenada(Double.parseDouble(Latitud), Double.parseDouble(Longitud));
+            }
+        }
+        return coord;
+    }
+
+    private boolean validarCoordenadas() {
+        Coordenada coor = obtenerCoordenadas();
+        if (coor != null) {
+            // Coordenadas ingresadas
+            Double LatitudIN = coor.getLatitud();
+            Double LongitudIN = coor.getLongitud();
+
+            // LIMITES DEL PARTIDO
+            Double LatitudMin = 34.562054;     //Latitud maximo
+            Double LatitudMax = 34.631361;     //Latitud minimo
+            Double LongitudMax = 58.693561;    //Longitud maximo
+            Double LongitudMin = 58.617442;    //Longitud minimo
+
+            if (LatitudIN <= LatitudMax &&
+                    LatitudIN >= LatitudMin &&
+                    LongitudIN <= LongitudMax &&
+                    LongitudIN >= LongitudMin) {
+                // Entra si la coordenada esta dentro del limite
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

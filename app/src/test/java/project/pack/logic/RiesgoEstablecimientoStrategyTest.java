@@ -12,9 +12,7 @@ import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 
-import static org.junit.Assert.*;
-
-/**
+/*
  * Created by sgarcete on 4/20/17.
  */
 public class RiesgoEstablecimientoStrategyTest {
@@ -31,8 +29,8 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoBajoTest() throws Exception {
 
-        Categoria categoria = new Categoria(1, "categoria1", "subcategoria1", null, "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "subcategoria2", null, "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3");
+        Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.1, 10.1));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
@@ -51,8 +49,8 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoMuyBajoTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria1", "subcategoria1", null, "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "subcategoria2", null, "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3");
+        Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -70,7 +68,7 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoMedioTest() throws Exception{
 
-        Categoria categoria2 = new Categoria(2, "categoria2", "subcategoria2", null, "5");
+        Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -93,7 +91,7 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoAltoTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "subcategoria", null, "8");
+        Categoria categoria = new Categoria(1, "categoria", "8");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
@@ -110,7 +108,7 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoMuyAltoTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "subcategoria", null, "8");
+        Categoria categoria = new Categoria(1, "categoria", "8");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
@@ -133,7 +131,7 @@ public class RiesgoEstablecimientoStrategyTest {
     @Test
     public void calcularRiesgoAltoPorDistanciaTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "subcategoria", null, "8");
+        Categoria categoria = new Categoria(1, "categoria", "8");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));

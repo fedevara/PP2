@@ -15,9 +15,9 @@ public class Coordenada implements Serializable {
 
     }
 
-    public Coordenada(Double a, Double b) {
-        setLatitud(a);
-        setLongitud(b);
+    public Coordenada(Double latitud, Double longitud) {
+        setLatitud(latitud);
+        setLongitud(longitud);
     }
 
     public Double getLongitud() {
@@ -47,8 +47,8 @@ public class Coordenada implements Serializable {
 
         Coordenada that = (Coordenada) o;
 
-        if (latitud != null ? !latitud.equals(that.latitud) : that.latitud != null) return false;
-        return longitud != null ? longitud.equals(that.longitud) : that.longitud == null;
+        if (this.latitud != null ? !this.latitud.equals(that.latitud) : that.latitud != null) return false;
+        return this.longitud != null ? this.longitud.equals(that.longitud) : that.longitud == null;
 
     }
 
