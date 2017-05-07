@@ -15,7 +15,7 @@ import project.pack.domain.Incidente;
 
 public class ManejoIncidente {
 
-    public ManejoIncidente(){
+    public ManejoIncidente() {
 
     }
 
@@ -24,10 +24,11 @@ public class ManejoIncidente {
         incidente.setId(id);
         incidente.setTitulo(titulo);
         incidente.setDescripcion(descripcion);
-        if(fecha == null){
+        if (fecha == null) {
             incidente.setFecha(Calendar.getInstance().getTime());
-        }else{
-            incidente.setFecha(fecha);}
+        } else {
+            incidente.setFecha(fecha);
+        }
         incidente.setFechaCreacion(Calendar.getInstance().getTime());
         incidente.setCategoria(categoria);
         incidente.setCoordenada(lugar);
@@ -35,7 +36,7 @@ public class ManejoIncidente {
         return incidente;
     }
 
-    public void guardarIncidente(Incidente incidente){
+    public void guardarIncidente(Incidente incidente) {
         System.out.print("guardar incidente");
 
         CacheSingleton.getInstance().put(incidente);
@@ -46,36 +47,37 @@ public class ManejoIncidente {
         return (Incidente) CacheSingleton.getInstance().get(id1);
     }
 
-    public List<Incidente> getListaIncidentes(){
+    public List<Incidente> getListaIncidentes() {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        return  listaIncidentes;
+        return listaIncidentes;
     }
 
-    public void eliminarCache(){
+    public void eliminarCache() {
         CacheSingleton.getInstance().limpiarCache();
     }
 
     /**
      * Dada una coordenada, devuelvo los incidentes que corresponden al rango de dicha coordenada.
+     *
      * @param coordenada que se le envia.
      * @return devuelvo lista que cumple el rango.
      */
-    public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada){
+    public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada) {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
         List<Incidente> incidentesAprobados = new ArrayList<Incidente>();
 
         Double distanciaMaxima = 10.5;
 
-        for (int i=0; i<listaIncidentes.size(); i++){
+        for (int i = 0; i < listaIncidentes.size(); i++) {
             //Obtengo la distancia entre las coordenadas del Incidente
             Double distanciaIncidente = listaIncidentes.get(i).getCoordenada().getDistancia(coordenada);
 
-            if ( distanciaIncidente<=distanciaMaxima){
+            if (distanciaIncidente <= distanciaMaxima) {
                 incidentesAprobados.add(listaIncidentes.get(i));
             }
         }
-        return  incidentesAprobados;
+        return incidentesAprobados;
     }
 }
