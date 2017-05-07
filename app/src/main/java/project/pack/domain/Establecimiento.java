@@ -1,6 +1,6 @@
 package project.pack.domain;
 
-/**
+/*
  * Created by Federico Vara on 14/4/2017.
  */
 

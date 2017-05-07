@@ -10,8 +10,8 @@ import project.pack.logic.IRiesgoStrategy;
 import project.pack.logic.RiesgoBuilder;
 import project.pack.logic.RiesgoEstablecimientoStrategy;
 
-/**
- * Created by Familia Vara on 9/4/2017.
+/*
+ * Created by Federico Vara on 9/4/2017.
  */
 
 public class ManejoEstablecimiento {

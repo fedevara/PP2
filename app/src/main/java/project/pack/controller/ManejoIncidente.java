@@ -9,8 +9,8 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 
-/**
- * Created by Familia Vara on 9/4/2017.
+/*
+ * Created by Federico Vara on 9/4/2017.
  */
 
 public class ManejoIncidente {
@@ -60,7 +60,7 @@ public class ManejoIncidente {
     public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada) {
 
         List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        List<Incidente> incidentesAprobados = new ArrayList<Incidente>();
+        List<Incidente> incidentesAprobados = new ArrayList<>();
 
         Double distanciaMaxima = 10.5;
 
