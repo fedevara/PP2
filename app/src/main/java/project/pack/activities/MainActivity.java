@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        facade.initProperties(this);
         ButterKnife.bind(this);
 
         btnAgragarIncidente.setOnClickListener(new View.OnClickListener() {
