@@ -64,11 +64,8 @@ public class ManejoEstablecimientoTest {
 
     @Test
     public void crearEstablecimiento() throws Exception {
-        Establecimiento establecimiento = new Establecimiento();
+        Establecimiento establecimiento = new Establecimiento(null,"Establecimiento",null);
 
-        establecimiento.setNombre("Establecimiento");
-        establecimiento.setCategoria(null);
-        establecimiento.setCoordenada(null);
         establecimiento.setRiesgo("10");
 
         assertNotNull(establecimiento);
