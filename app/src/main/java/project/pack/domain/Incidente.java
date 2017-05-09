@@ -3,13 +3,14 @@ package project.pack.domain;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Calendar;
 import java.util.Date;
 
 /**
  * Created by Federico Vara on 9/4/2017.
  */
 
-public class Incidente implements Parcelable {
+public class Incidente extends AbstractUbicacion{
 
     private int id;
     private String titulo;
@@ -17,12 +18,24 @@ public class Incidente implements Parcelable {
     private Date fecha;
     private Date fechaCreacion;
     private Categoria categoria;
-    private Coordenada coordenada;
 
-    public Incidente() {
 
+    public Incidente(Coordenada coordenada, int id, String titulo, String descripcion, Date fecha, Date fechaCreacion, Categoria categoria) {
+        super(coordenada);
+        this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.categoria = categoria;
+
+        if (fecha == null) {
+            this.fecha = Calendar.getInstance().getTime();
+        } else {
+            this.fecha = fecha;
+        }
     }
-
+    
+    
     public int getId() {
         return id;
     }
@@ -63,14 +76,6 @@ public class Incidente implements Parcelable {
         this.categoria = categoria;
     }
 
-    public Coordenada getCoordenada() {
-        return coordenada;
-    }
-
-    public void setCoordenada(Coordenada coordenada) {
-        this.coordenada = coordenada;
-    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -79,10 +84,14 @@ public class Incidente implements Parcelable {
         this.fecha = fecha;
     }
 
+    public void setCoordenada(Coordenada coordenada){
+        super.setCoordenada(coordenada);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Incidente)) return false;
 
         Incidente incidente = (Incidente) o;
 
@@ -94,9 +103,7 @@ public class Incidente implements Parcelable {
         if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null) return false;
         if (fechaCreacion != null ? !fechaCreacion.equals(incidente.fechaCreacion) : incidente.fechaCreacion != null)
             return false;
-        if (categoria != null ? !categoria.equals(incidente.categoria) : incidente.categoria != null)
-            return false;
-        return coordenada != null ? coordenada.equals(incidente.coordenada) : incidente.coordenada == null;
+        return categoria != null ? categoria.equals(incidente.categoria) : incidente.categoria == null;
 
     }
 
@@ -108,56 +115,6 @@ public class Incidente implements Parcelable {
         result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
         result = 31 * result + (fechaCreacion != null ? fechaCreacion.hashCode() : 0);
         result = 31 * result + (categoria != null ? categoria.hashCode() : 0);
-        result = 31 * result + (coordenada != null ? coordenada.hashCode() : 0);
         return result;
-    }
-
-    // SECCION QUE IMPLEMENTA METODOS NECESARIOS PARA EL ENVIO DE UN INCIDENTE DE UN ACTIVITY A OTRO
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    /**
-     * Esta clase se usa para poder guardar el objeto cuando se envia de una activity a otra
-     */
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeSerializable(id);
-        dest.writeString(titulo);
-        dest.writeString(descripcion);
-        dest.writeLong(fecha.getTime());
-        dest.writeLong(fechaCreacion.getTime());
-        dest.writeSerializable(categoria);
-        dest.writeSerializable(coordenada);
-    }
-
-    /**
-     * Esta clase se usa para poder leer el objeto cuando se recibe de una activity
-     * Las asignaciones de variables tienen que estar en el mismo orden que en el write
-     */
-    private void readFromParcel(Parcel in) {
-        id = in.readInt();
-        titulo = in.readString();
-        descripcion = in.readString();
-        fecha = new Date(in.readLong());
-        fechaCreacion = new Date(in.readLong());
-        categoria = (Categoria) in.readSerializable();
-        coordenada = (Coordenada) in.readSerializable();
-    }
-
-    public static final Creator<Incidente> CREATOR = new Creator<Incidente>() {
-        public Incidente createFromParcel(Parcel in) {
-            return new Incidente(in);
-        }
-
-        public Incidente[] newArray(int size) {
-            return new Incidente[size];
-        }
-    };
-
-    public Incidente(Parcel in) {
-        readFromParcel(in);
     }
 }
