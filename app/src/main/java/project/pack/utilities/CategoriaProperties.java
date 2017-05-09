@@ -14,34 +14,37 @@ public class CategoriaProperties {
     public static final String[] CATEGORIAS = new String[]{"Transito", "Robo", "Reclamo"};
 
     /* INCIDENTES DE TRANSITO */
-    public final static Categoria CHOQUE = new Categoria(0, "Choque", "10");
-    public final static Categoria CORTE_CALLE = new Categoria(1, "Corte de Calle", "10");
-    public final static Categoria CALLE_ROTA = new Categoria(2, "Calle rota", "10");
+    public final static Categoria CHOQUE = new Categoria(0, "Choque", "10",null);
+
+    public final static Categoria CORTE_CALLE = new Categoria(1, "Corte de Calle", "10",null);
+
+    public final static Categoria CALLE_ROTA = new Categoria(2, "Calle rota", "10",null);
 
     /* INCIDENTES DE INSEGURIDAD */
-    public final static Categoria ROBO_ARMADO = new Categoria(0, "Robo a mano armada", "10");
-    public final static Categoria ARREBATO = new Categoria(1, "Arrebato", "10");
-    public final static Categoria ROBO_VEHICULO = new Categoria(2, "Robo de vehiculo", "10");
+    public static final ArrayList<String> PALABRAS_CLAVES = new ArrayList<String>(){};
+    public final static Categoria ROBO_ARMADO = new Categoria(0, "Robo a mano armada", "10",null);
+    public final static Categoria ARREBATO = new Categoria(1, "Arrebato", "10",null);
+    public final static Categoria ROBO_VEHICULO = new Categoria(2, "Robo de vehiculo", "10",null);
 
     /* INCIDENTES DE RECLAMOS */
-    public final static Categoria CORTE_LUZ = new Categoria(0, "Corte de luz", "10");
-    public final static Categoria ANEGAMIENTO = new Categoria(1, "Anegamientos", "10");
-    public final static Categoria POZO = new Categoria(2, "Pozo", "10");
-    public final static Categoria VEHICULO_ABANDONADO = new Categoria(3, "Vehiculo abandonado", "10");
-    public final static Categoria CAIDA_ARBOL = new Categoria(4, "Caida de arbol", "10");
+    public final static Categoria CORTE_LUZ = new Categoria(0, "Corte de luz", "10",null);
+    public final static Categoria ANEGAMIENTO = new Categoria(1, "Anegamientos", "10",null);
+    public final static Categoria POZO = new Categoria(2, "Pozo", "10",null);
+    public final static Categoria VEHICULO_ABANDONADO = new Categoria(3, "Vehiculo abandonado", "10",null);
+    public final static Categoria CAIDA_ARBOL = new Categoria(4, "Caida de arbol", "10",null);
 
     /* LISTAS DE TODOS LOS INCIDENTES DE CADA TIPO */
-    public final ArrayList<Categoria> LISTA_TRANSITO = obtenerTransito();
-    public final ArrayList<Categoria> LISTA_INSEGURIDAD = obtenerInseguridad();
-    public final ArrayList<Categoria> LISTA_RECLAMOS = obtenerReclamos();
+    public static final ArrayList<Categoria> LISTA_TRANSITO = obtenerTransito();
+    public static final ArrayList<Categoria> LISTA_INSEGURIDAD = obtenerInseguridad();
+    public static final ArrayList<Categoria> LISTA_RECLAMOS = obtenerReclamos();
 
     /* LISTA DE TODOS LOS INCIDENTES */
-    public final ArrayList<Categoria> LISTA_CATEGORIAS = obtenerCategorias();
+    public static final ArrayList<Categoria> LISTA_CATEGORIAS = obtenerCategorias();
 
 
     /* METODOS PRIVADOS */
 
-    private ArrayList<Categoria> obtenerTransito() {
+    private static ArrayList<Categoria> obtenerTransito() {
         ArrayList<Categoria> list = new ArrayList<>();
         list.add(CHOQUE);
         list.add(CORTE_CALLE);
@@ -49,7 +52,7 @@ public class CategoriaProperties {
         return list;
     }
 
-    private ArrayList<Categoria> obtenerInseguridad() {
+    private static ArrayList<Categoria> obtenerInseguridad() {
         ArrayList<Categoria> list = new ArrayList<>();
         list.add(ROBO_ARMADO);
         list.add(ARREBATO);
@@ -57,7 +60,7 @@ public class CategoriaProperties {
         return list;
     }
 
-    private ArrayList<Categoria> obtenerReclamos() {
+    private static ArrayList<Categoria> obtenerReclamos() {
         ArrayList<Categoria> list = new ArrayList<>();
         list.add(CORTE_LUZ);
         list.add(ANEGAMIENTO);
@@ -67,7 +70,7 @@ public class CategoriaProperties {
         return list;
     }
 
-    private ArrayList<Categoria> obtenerCategorias() {
+    private static ArrayList<Categoria> obtenerCategorias() {
         ArrayList<Categoria> list = new ArrayList<>();
         list.addAll(LISTA_TRANSITO);
         list.addAll(LISTA_INSEGURIDAD);
