@@ -8,7 +8,7 @@ import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.logic.IRiesgoStrategy;
 import project.pack.logic.RiesgoBuilder;
-import project.pack.logic.RiesgoEstablecimientoStrategy;
+import project.pack.logic.RiesgoUbicacionStrategy;
 
 /*
  * Created by Federico Vara on 9/4/2017.
@@ -20,11 +20,9 @@ public class ManejoEstablecimiento {
 
     }
 
-    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
-        Establecimiento establecimiento = new Establecimiento();
-        establecimiento.setNombre(nombre);
-        establecimiento.setCategoria(categoria);
-        establecimiento.setCoordenada(lugar);
+    public Establecimiento crearEstablecimiento(Coordenada coordenada, String nombre, Categoria categoria) {
+
+        Establecimiento establecimiento = new Establecimiento(coordenada, nombre, categoria);
 
         return establecimiento;
     }
@@ -75,7 +73,7 @@ public class ManejoEstablecimiento {
     }
 
     public void calcularRiesgo(Establecimiento establecimiento) {
-        IRiesgoStrategy RiesgoStrategy = new RiesgoEstablecimientoStrategy();
+        IRiesgoStrategy RiesgoStrategy = new RiesgoUbicacionStrategy();
         RiesgoBuilder riesgoBuilder = new RiesgoBuilder(RiesgoStrategy);
         String riesgo = riesgoBuilder.getRiesgo(establecimiento);
         establecimiento.setRiesgo(riesgo);

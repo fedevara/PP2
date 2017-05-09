@@ -19,19 +19,9 @@ public class ManejoIncidente {
 
     }
 
-    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar) {
-        Incidente incidente = new Incidente();
-        incidente.setId(id);
-        incidente.setTitulo(titulo);
-        incidente.setDescripcion(descripcion);
-        if (fecha == null) {
-            incidente.setFecha(Calendar.getInstance().getTime());
-        } else {
-            incidente.setFecha(fecha);
-        }
-        incidente.setFechaCreacion(Calendar.getInstance().getTime());
-        incidente.setCategoria(categoria);
-        incidente.setCoordenada(lugar);
+    public Incidente crearIncidente(Coordenada coordenada, Integer id, String titulo, String descripcion, Date fecha, Categoria categoria) {
+
+        Incidente incidente = new Incidente(coordenada, id, titulo, descripcion, fecha, new Date(), categoria);
 
         return incidente;
     }

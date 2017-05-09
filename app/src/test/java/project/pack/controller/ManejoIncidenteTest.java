@@ -32,7 +32,7 @@ public class ManejoIncidenteTest {
     @Test
     public void crearIncidente() throws Exception {
 
-        Incidente incidente = new Incidente();
+        Incidente incidente = new Incidente(null,1, "robo de auto", "bla blab la", new Date(), null,null);
 
         incidente.setId(1);
         incidente.setTitulo("Robo de auto");

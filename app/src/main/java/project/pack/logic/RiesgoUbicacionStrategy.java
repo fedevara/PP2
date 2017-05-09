@@ -2,6 +2,7 @@ package project.pack.logic;
 
 import java.util.ArrayList;
 
+import project.pack.domain.AbstractUbicacion;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
@@ -12,16 +13,16 @@ import project.pack.utilities.DateUtils;
  * Created by sgarcete on 4/16/17.
  */
 
-public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
+public class RiesgoUbicacionStrategy implements IRiesgoStrategy {
 
     private Double incidentesRiesgoAlto = 0.0;
     private Double incidentesRiesgoMedio = 0.0;
     private Double incidentesRiesgoBajo = 0.0;
 
     @Override
-    public String getRiesgo(Object object) {
+    public String getRiesgo(AbstractUbicacion ubicacion) {
 
-        Double riesgo = calcularRiesgo(object);
+        Double riesgo = calcularRiesgo(ubicacion);
 
         if (riesgo <= 0.25) {
             return "MUY BAJO";
@@ -39,11 +40,10 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
     }
 
     @Override
-    public Double calcularRiesgo(Object object) {
+    public Double calcularRiesgo(AbstractUbicacion ubicacion) {
 
-        Establecimiento establecimiento = (Establecimiento) object;
 
-        categorizarIncidentes(establecimiento.getCoordenada());
+        categorizarLista(ubicacion.getCoordenada());
 
         Double cantidadRiesgos = this.incidentesRiesgoAlto + this.incidentesRiesgoMedio + this.incidentesRiesgoBajo;
 
@@ -55,7 +55,7 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
 
     }
 
-    public void categorizarIncidentes(Coordenada coordenada) {
+    public void categorizarLista(Coordenada coordenada) {
 
         ArrayList<Incidente> incidentesCercanos = (ArrayList<Incidente>) Facade.getInstance().getListaIncidentesCercanos(coordenada);
 
@@ -63,12 +63,12 @@ public class RiesgoEstablecimientoStrategy implements IRiesgoStrategy {
             Incidente incidenteActual = incidentesCercanos.get(i);
 
             if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFechaCreacion()) <= 30) { //Acá los días se sacan del properties
-                categorizarIncidente(incidenteActual);
+                categorizar(incidenteActual);
             }
         }
     }
 
-    public void categorizarIncidente(Incidente incidente) {
+    public void categorizar(Incidente incidente) {
 
         Double riesgoCategoria = Double.valueOf(incidente.getCategoria().getRiesgo()); //Hardcodeado momentaneamente
 
