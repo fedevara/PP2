@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnEliminarCache)
     Button btnEliminarCache;
 
+    @Bind(R.id.btnCrearIncidenteCategoria)
+    Button btnCrearIncidenteCategoria;
+
     Facade facade = Facade.getInstance();
 
     @Override
@@ -57,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mostrarIncidente = new Intent(MainActivity.this, VerIncidenteActivity.class);
                 startActivity(mostrarIncidente);
+            }
+        });
+
+        btnCrearIncidenteCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteCategoria.class);
+                startActivity(layautCrearIncidenteCategoria);
             }
         });
     }

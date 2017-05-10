@@ -14,24 +14,17 @@ public class CategoriaProperties {
     public static final String[] CATEGORIAS = new String[]{"Transito", "Robo", "Reclamo"};
 
     /* INCIDENTES DE TRANSITO */
-    public final static Categoria CHOQUE = new Categoria(0, "Choque", "10",null);
-
-    public final static Categoria CORTE_CALLE = new Categoria(1, "Corte de Calle", "10",null);
-
-    public final static Categoria CALLE_ROTA = new Categoria(2, "Calle rota", "10",null);
+    public static final String[] PALABRAS_CLAVES_TRANSITO= new String[]{"trafico", "recorrido", "muerte","transporte"};
+    public final static Categoria TRANSITO = new Categoria(0, "Transito", "10",PALABRAS_CLAVES_TRANSITO);
 
     /* INCIDENTES DE INSEGURIDAD */
-    public static final ArrayList<String> PALABRAS_CLAVES = new ArrayList<String>(){};
-    public final static Categoria ROBO_ARMADO = new Categoria(0, "Robo a mano armada", "10",null);
-    public final static Categoria ARREBATO = new Categoria(1, "Arrebato", "10",null);
-    public final static Categoria ROBO_VEHICULO = new Categoria(2, "Robo de vehiculo", "10",null);
+    public static final String[] PALABRAS_CLAVES_ROBO = new String[]{"robo","hurto","saqueo", "arrebatamiento"};
+    public final static Categoria ROBO = new Categoria(0, "Robo", "10",PALABRAS_CLAVES_ROBO);
 
     /* INCIDENTES DE RECLAMOS */
-    public final static Categoria CORTE_LUZ = new Categoria(0, "Corte de luz", "10",null);
-    public final static Categoria ANEGAMIENTO = new Categoria(1, "Anegamientos", "10",null);
-    public final static Categoria POZO = new Categoria(2, "Pozo", "10",null);
-    public final static Categoria VEHICULO_ABANDONADO = new Categoria(3, "Vehiculo abandonado", "10",null);
-    public final static Categoria CAIDA_ARBOL = new Categoria(4, "Caida de arbol", "10",null);
+    public static final String[] PALABRAS_CLAVES_RECLAMO = new String[]{"reclamo", "queja", "protesta"};
+    public final static Categoria RECLAMO = new Categoria(0, "Reclamo", "10",PALABRAS_CLAVES_RECLAMO);
+
 
     /* LISTAS DE TODOS LOS INCIDENTES DE CADA TIPO */
     public static final ArrayList<Categoria> LISTA_TRANSITO = obtenerTransito();
@@ -46,27 +39,19 @@ public class CategoriaProperties {
 
     private static ArrayList<Categoria> obtenerTransito() {
         ArrayList<Categoria> list = new ArrayList<>();
-        list.add(CHOQUE);
-        list.add(CORTE_CALLE);
-        list.add(CALLE_ROTA);
+        list.add(TRANSITO);
         return list;
     }
 
     private static ArrayList<Categoria> obtenerInseguridad() {
         ArrayList<Categoria> list = new ArrayList<>();
-        list.add(ROBO_ARMADO);
-        list.add(ARREBATO);
-        list.add(ROBO_VEHICULO);
+        list.add(ROBO);
         return list;
     }
 
     private static ArrayList<Categoria> obtenerReclamos() {
         ArrayList<Categoria> list = new ArrayList<>();
-        list.add(CORTE_LUZ);
-        list.add(ANEGAMIENTO);
-        list.add(POZO);
-        list.add(VEHICULO_ABANDONADO);
-        list.add(CAIDA_ARBOL);
+        list.add(RECLAMO);
         return list;
     }
 

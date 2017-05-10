@@ -56,8 +56,6 @@ public class CrearIncidenteActivity extends AppCompatActivity {
     Facade facade = Facade.getInstance();
     Map<String, ArrayList<Categoria>> subCategorias;
 
-    CategoriaLogic categoriaLogic;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +71,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = Facade.getInstance();
 
-/*                if (validarCampos()) {
+               if (validarCampos()) {
                     // Armo la Categoria con los ComboBoxs
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
@@ -86,23 +84,6 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
-                }*/
-
-                categoriaLogic = new CategoriaLogicImp();
-
-                String texto = descripcion.getText().toString();
-
-                String[] arrayPalabrasDelTexto = categoriaLogic.getArray(texto);
-
-                ArrayList<Categoria> categorias = categoriaLogic.getCategorias();
-
-                Categoria nuevaCategoria  = categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
-
-                if(nuevaCategoria.getId()!=null){
-                    Toast.makeText(getApplicationContext(), "Categoria encontrada: "+nuevaCategoria.getNombre(), Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "El sistema no encontro una categoria", Toast.LENGTH_LONG).show();
                 }
             }
         });

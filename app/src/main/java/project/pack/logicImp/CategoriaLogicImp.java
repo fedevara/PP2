@@ -49,18 +49,7 @@ public class CategoriaLogicImp implements CategoriaLogic{
 
     public ArrayList<Categoria> getCategorias(){
 
-        //CATEGORIAS
-        String[] palabrasClavesRobo = new String[]{"robo", "hurto", "arrebatamiento","saqueo"};
-        Categoria categoriaRobo = new Categoria(1,"Robo", "riegos",palabrasClavesRobo);
-
-
-        String[] palabrasClavesReclamo = new String[]{"reclamo", "queja", "protesta"};
-        Categoria categoriaReclamo = new Categoria(2,"Reclamo", "riego", palabrasClavesReclamo);
-
-        //Array de Categorias
-        ArrayList<Categoria> categorias = new ArrayList<Categoria>();
-        categorias.add(categoriaRobo);
-        categorias.add(categoriaReclamo);
+        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
 
         return categorias;
     }
