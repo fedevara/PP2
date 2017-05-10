@@ -6,16 +6,19 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
+import project.pack.domain.Punto;
 import project.pack.facade.Facade;
 
 /*
  * Created by sgarcete on 4/20/17.
  */
-public class RiesgoEstablecimientoStrategyTest {
+public class RiesgoUbicacionStrategyTest {
+
     @Before
     public void setUp() throws Exception {
         Facade.getInstance().eliminarCache();
@@ -26,9 +29,56 @@ public class RiesgoEstablecimientoStrategyTest {
         Facade.getInstance().eliminarCache();
     }
 
+    /**
+     * El segundo incidente no influye en el riesgo por que está ubicado fuere del territorio establecido del establecimiento
+     * @throws Exception
+     */
+    @Test
+    public void calcularRiesgoAltoPorDistanciaTest() throws Exception{
+
+        Categoria categoria = new Categoria(1, "categoria", "8");
+
+        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));
+
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
+
+        Assert.assertEquals("ALTO", riesgo);
+    }
+
+    @Test
+    public void calcularRiesgoAltoPorFechaTest() throws Exception{
+
+        Date fechaCreacion = new Date("09/04/2017");
+        Categoria categoria = new Categoria(1, "categoria", "8");
+
+        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", fechaCreacion, categoria, new Coordenada(30.0, 30.0));
+        Facade.getInstance().crearIncidente(2,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
+
+        Assert.assertEquals("ALTO", riesgo);
+    }
+
+    @Test
+    public void calcularRiesgoAltoPorCantidadTest() throws Exception{
+
+        Categoria categoria = new Categoria(1, "categoria", "8");
+
+        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));
+
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
+
+        Assert.assertEquals("ALTO", riesgo);
+    }
+
     @Test
     public void calcularRiesgoBajoTest() throws Exception {
-
         Categoria categoria = new Categoria(1, "categoria1", "3");
         Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
@@ -36,38 +86,28 @@ public class RiesgoEstablecimientoStrategyTest {
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
         Facade.getInstance().crearIncidente(1,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.3, 10.3));
 
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
 
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(4);
-
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "BAJO");
-
+        Assert.assertEquals("BAJO", riesgo);
     }
 
     @Test
     public void calcularRiesgoMuyBajoTest() throws Exception{
-
         Categoria categoria = new Categoria(1, "categoria1", "3");
         Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
 
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
 
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(3);
-
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "MUY BAJO");
-
+        Assert.assertEquals("MUY BAJO", riesgo);
     }
 
     @Test
     public void calcularRiesgoMedioTest() throws Exception{
-
         Categoria categoria2 = new Categoria(2, "categoria2", "5");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
@@ -78,31 +118,23 @@ public class RiesgoEstablecimientoStrategyTest {
         Facade.getInstance().crearIncidente(5,"incidente6", "incidente6", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
         Facade.getInstance().crearIncidente(6,"incidente7", "incidente7", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
 
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
 
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(8);
-
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "MEDIO");
-
+        Assert.assertEquals("MEDIO", riesgo);
     }
 
     @Test
     public void calcularRiesgoAltoTest() throws Exception{
-
         Categoria categoria = new Categoria(1, "categoria", "8");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-
         Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
 
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(2);
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
 
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "ALTO");
-
+        Assert.assertEquals("ALTO", riesgo);
     }
 
     @Test
@@ -113,39 +145,9 @@ public class RiesgoEstablecimientoStrategyTest {
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
 
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(3);
-
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "MUY ALTO");
-
+        Assert.assertEquals("MUY ALTO", riesgo);
     }
-
-    /**
-     * El segundo incidente no influye en el riesgo por que está ubicado fuere del territorio establecido del establecimiento
-     * @throws Exception
-     */
-
-    @Test
-    public void calcularRiesgoAltoPorDistanciaTest() throws Exception{
-
-        Categoria categoria = new Categoria(1, "categoria", "8");
-
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));
-
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
-
-        Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(3);
-
-        String riesgo = establecimiento.getRiesgo();
-
-        Assert.assertEquals(riesgo, "ALTO");
-
-    }
-
-
-
 }

@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import project.pack.domain.AbstractUbicacion;
 import project.pack.domain.Coordenada;
-import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
 import project.pack.utilities.DateUtils;
 
-/**
+/*
  * Created by sgarcete on 4/16/17.
  */
 

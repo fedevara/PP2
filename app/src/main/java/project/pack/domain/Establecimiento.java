@@ -57,4 +57,8 @@ public class Establecimiento extends AbstractUbicacion {
         result = 31 * result + (riesgo != null ? riesgo.hashCode() : 0);
         return result;
     }
+
+    public void generarRiesgo(){
+        riesgo = super.calcularRiesgo();
+    }
 }
