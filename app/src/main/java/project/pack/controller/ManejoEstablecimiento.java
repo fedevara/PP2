@@ -32,9 +32,8 @@ public class ManejoEstablecimiento {
     }
 
     public Establecimiento getEstablecimiento(int id1) {
-
         Establecimiento establecimiento = (Establecimiento) CacheSingleton.getInstance().get(id1);
-        calcularRiesgo(establecimiento);
+        establecimiento.generarRiesgo();
         return establecimiento;
     }
 
@@ -70,13 +69,6 @@ public class ManejoEstablecimiento {
     public List<Establecimiento> getListaEstablecimientos() {
         List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerListaEstablecimientos();
         return Establecimiento;
-    }
-
-    public void calcularRiesgo(Establecimiento establecimiento) {
-        IRiesgoStrategy RiesgoStrategy = new RiesgoUbicacionStrategy();
-        RiesgoBuilder riesgoBuilder = new RiesgoBuilder(RiesgoStrategy);
-        String riesgo = riesgoBuilder.getRiesgo(establecimiento);
-        establecimiento.setRiesgo(riesgo);
     }
 
 }

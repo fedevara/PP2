@@ -59,7 +59,7 @@ public class ManejoEstablecimientoTest {
 
         Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(4);
 
-        Assert.assertEquals(establecimiento.getRiesgo(), "BAJO");
+        Assert.assertEquals("BAJO", establecimiento.getRiesgo());
     }
 
     @Test
