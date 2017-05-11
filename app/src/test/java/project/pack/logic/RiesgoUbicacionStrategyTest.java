@@ -29,6 +29,33 @@ public class RiesgoUbicacionStrategyTest {
         Facade.getInstance().eliminarCache();
     }
 
+
+    /**
+     * Calculo general para demostrar el valor del riesgo si los 3 incidentes son tomados en cuenta.
+     * @throws Exception
+     */
+    @Test
+    public void calcularRiesgoTest() throws Exception{
+
+        //Agregamos 3 incidentes de niveles de riesgos diferentes en el contexto
+
+        Categoria bajo = new Categoria(1, "categoria", "1");
+        Categoria medio = new Categoria(2, "categoria", "6");
+        Categoria alto = new Categoria(3, "categoria", "10");
+
+        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(2,"incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+
+        Facade.getInstance().crearIncidente(1,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), alto, new Coordenada(10.0, 10.0));
+
+        /*Ubicamos el punto en el mapa y calculamos el riesgo*/
+
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        String riesgo = punto.calcularRiesgo();
+
+        Assert.assertEquals("ALTO", riesgo);
+    }
+
     /**
      * El segundo incidente no influye en el riesgo por que está ubicado fuere del territorio establecido del establecimiento
      * @throws Exception
@@ -36,46 +63,75 @@ public class RiesgoUbicacionStrategyTest {
     @Test
     public void calcularRiesgoAltoPorDistanciaTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "8");
+        //Agregamos 3 incidentes de niveles de riesgo diferentes en el contexto.
+        //El incidente de riesgo alto no va a ser tenido en cuenta por la distancia en la que se encuentra
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));
+        Categoria bajo = new Categoria(1, "categoria", "1");
+        Categoria medio = new Categoria(2, "categoria", "6");
+        Categoria alto = new Categoria(3, "categoria", "10");
+
+        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+
+        Facade.getInstance().crearIncidente(1,"incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), alto, new Coordenada(30.0, 30.0));
+
+        //Calculamos el riesgo
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
 
-        Assert.assertEquals("ALTO", riesgo);
+        //Como el incidente de riesgo alto (el que más suma a la hora de calcular el riesgo) no influye en la fórmula por su distancia
+
+        Assert.assertEquals("MUY BAJO", riesgo);
     }
 
+    /**
+     * El tercer incidente de riesgo alto no influye en el riesgo por que su fecha de creación supera los 30 días
+     * @throws Exception
+     */
     @Test
     public void calcularRiesgoAltoPorFechaTest() throws Exception{
 
-        Date fechaCreacion = new Date("09/04/2017");
-        Categoria categoria = new Categoria(1, "categoria", "8");
+        Date fechaCreacion = new Date("03/08/2017"); //fecha que supera los 30 días : 8 de Marzo de 2017
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", fechaCreacion, categoria, new Coordenada(30.0, 30.0));
-        Facade.getInstance().crearIncidente(2,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Categoria bajo = new Categoria(1, "categoria", "1");
+        Categoria medio = new Categoria(2, "categoria", "6");
+        Categoria alto = new Categoria(3, "categoria", "10");
+
+        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+
+        Facade.getInstance().crearIncidente(1,"incidenteAlto", "incidenteAlto", fechaCreacion, alto, new Coordenada(10.0, 10.0));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
 
-        Assert.assertEquals("ALTO", riesgo);
+        Assert.assertEquals("MUY BAJO", riesgo);
     }
+
+    /*Se tiene en cuenta la cantidad de riesgos:
+    Muchos incidentes de rango bajo generan un riesgo medio*/
 
     @Test
-    public void calcularRiesgoAltoPorCantidadTest() throws Exception{
+    public void calcularRiesgoMedioPorCantidadTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "8");
+        Categoria categoriaBaja = new Categoria(2, "categoriaBaja", "5");
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(30.0, 30.0));
+        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente(2,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente(3,"incidente4", "incidente4", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente(4,"incidente5", "incidente5", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente(5,"incidente6", "incidente6", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente(6,"incidente7", "incidente7", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
 
-        Assert.assertEquals("ALTO", riesgo);
+        Assert.assertEquals("MEDIO", riesgo);
     }
+
+    /*Test de cada nivel de salida de riesgo*/
 
     @Test
     public void calcularRiesgoBajoTest() throws Exception {
@@ -129,7 +185,6 @@ public class RiesgoUbicacionStrategyTest {
         Categoria categoria = new Categoria(1, "categoria", "8");
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3,10.3));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
