@@ -5,13 +5,9 @@ import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import project.pack.controller.ManejoIncidente;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
-import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
@@ -36,7 +32,7 @@ public class ManejoIncidenteTest {
     @Test
     public void crearIncidente() throws Exception {
 
-        Incidente incidente = new Incidente();
+        Incidente incidente = new Incidente(null,1, "robo de auto", "bla blab la", new Date(), null,null);
 
         incidente.setId(1);
         incidente.setTitulo("Robo de auto");

@@ -20,8 +20,14 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnAgragarIncidente)
     Button btnAgragarIncidente;
 
+    @Bind(R.id.btnVerListIncidentes)
+    Button btnVerListIncidentes;
+
     @Bind(R.id.btnEliminarCache)
     Button btnEliminarCache;
+
+    @Bind(R.id.btnCrearIncidenteCategoria)
+    Button btnCrearIncidenteCategoria;
 
     Facade facade = Facade.getInstance();
 
@@ -30,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        facade.initProperties(this);
         ButterKnife.bind(this);
 
         btnAgragarIncidente.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +55,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnVerListIncidentes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mostrarIncidente = new Intent(MainActivity.this, VerIncidenteActivity.class);
+                startActivity(mostrarIncidente);
+            }
+        });
+
+        btnCrearIncidenteCategoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteCategoria.class);
+                startActivity(layautCrearIncidenteCategoria);
+            }
+        });
     }
 
     @OnClick(R.id.btnAgragarIncidente)

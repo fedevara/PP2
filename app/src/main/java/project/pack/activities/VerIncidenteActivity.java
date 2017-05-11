@@ -1,6 +1,5 @@
 package project.pack.activities;
 
-
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -10,8 +9,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +17,8 @@ import butterknife.ButterKnife;
 import project.pack.R;
 import project.pack.controller.CacheSingleton;
 import project.pack.domain.Incidente;
-import project.pack.facade.Facade;
 
 public class VerIncidenteActivity extends AppCompatActivity {
-
 
     @Bind(R.id.btnVolver)
     Button btnVolver;
@@ -33,7 +28,6 @@ public class VerIncidenteActivity extends AppCompatActivity {
 
     @Bind(R.id.twTitulo)
     TextView twTitulo;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,39 +42,24 @@ public class VerIncidenteActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-//        recogerExtras();
         cargarListaIncidentes();
     }
 
     private void cargarListaIncidentes() {
-        List<Incidente> incidentes;
-        try {
-            incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-            //List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-            ArrayList<String> listaIncidentes = new ArrayList<String>();
-            if(incidentes.size()>0) {
-                for (int i = 0; i < incidentes.size(); i++) {
-                    Incidente incidente = incidentes.get(i);
-                    listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
-                }
 
-                ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
-                lvResultado.setAdapter(adaptador);
+        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+        ArrayList<String> listaIncidentes = new ArrayList<String>();
+
+        if (incidentes != null && incidentes.size() > 0) {
+            for (int i = 0; i < incidentes.size(); i++) {
+                Incidente incidente = incidentes.get(i);
+                listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
             }
-            else {
-                twTitulo.setText("Aun no ha creado ningun incidente");
-            }
-        }
-        catch (Exception e){
-            Toast.makeText(getApplicationContext(), "Error. No se logró cargar", Toast.LENGTH_LONG).show();
+
+            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
+            lvResultado.setAdapter(adaptador);
+        } else {
+            Toast.makeText(getApplicationContext(), "Usted no Cargó ningún Incidente.", Toast.LENGTH_LONG).show();
         }
     }
-
-/*
-    public void recogerExtras() { //Aquí recogemos y tratamos los parámetros
-        Facade facade = new Facade();
-        Incidente incidente = facade.obtenerIncidente(1);
-        titulo.setText(incidente.getTitulo());
-        descripcion.setText(incidente.getDescripcion());
-    }*/
 }

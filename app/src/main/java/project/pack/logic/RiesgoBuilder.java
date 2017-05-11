@@ -1,5 +1,7 @@
 package project.pack.logic;
 
+import project.pack.domain.AbstractUbicacion;
+
 /**
  * Created by sgarcete on 4/16/17.
  */
@@ -16,8 +18,8 @@ public class RiesgoBuilder {
         this.IRiesgoStrategy = IRiesgoStrategy;
     }
 
-    public String getRiesgo(Object object) {
-        return IRiesgoStrategy.getRiesgo(object);
+    public String getRiesgo(AbstractUbicacion ubicacion) {
+        return IRiesgoStrategy.getRiesgo(ubicacion);
     }
 
 }

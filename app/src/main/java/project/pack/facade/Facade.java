@@ -1,23 +1,20 @@
 package project.pack.facade;
 
-import android.content.Context;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import project.pack.activities.MainActivity;
 import project.pack.controller.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
-import project.pack.controller.ManejoProperties;
+import project.pack.utilities.ManejoProperties;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
 
-/**
+/*
  * Created by Federico Vara on 9/4/2017.
  */
 
@@ -38,8 +35,10 @@ public class Facade {
     private Facade() {
         manejoIncidente = new ManejoIncidente();
         manejoEstablecimiento = new ManejoEstablecimiento();
-        manejoProperties = ManejoProperties.getInstance();
+        manejoProperties = new ManejoProperties();
     }
+
+    /* INICIO METODOS CORRESPONDIENTES A INCIDENTES */
 
     /**
      * Crea un incidente y lo guarda en la memoria cache
@@ -49,12 +48,11 @@ public class Facade {
      * @param descripcion Descripcion del incidente
      * @param fecha       Fecha en la que sucesio el incidente, puede ser distinta a la actual
      * @param categoria   Categoria del incidente
-     * @param lugar       Lugar donde ocurrio el incidente
+     * @param coordenada       Lugar donde ocurrio el incidente
      * @return Devuelve el objeto creado y guardado en la base
      */
-    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada lugar) {
-        Integer idIncidente = id;
-        Incidente incidente = manejoIncidente.crearIncidente(idIncidente, titulo, descripcion, fecha, categoria, lugar);
+    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
+        Incidente incidente = manejoIncidente.crearIncidente(coordenada,id, titulo, descripcion, fecha, categoria);
         manejoIncidente.guardarIncidente(incidente);
         return incidente;
     }
@@ -63,8 +61,20 @@ public class Facade {
         return manejoIncidente.getIncidente(id1);
     }
 
-    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada lugar) {
-        Establecimiento establecimiento = manejoEstablecimiento.crearEstacimiento(nombre, categoria, lugar);
+    public List<Incidente> obtenerListaIncidentes() {
+        return manejoIncidente.getListaIncidentes();
+    }
+
+    public List<Incidente> getListaIncidentesCercanos(Coordenada coordenada) {
+        return manejoIncidente.getListaIncidentesConCoordenada(coordenada);
+    }
+
+    /**
+     * INICIO METODOS CORRESPONDIENTES A ESTABLECIMIENTOS
+     */
+
+    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+        Establecimiento establecimiento = manejoEstablecimiento.crearEstablecimiento(coordenada, nombre, categoria);
         manejoEstablecimiento.guardarEstablecimiento(establecimiento);
     }
 
@@ -72,22 +82,25 @@ public class Facade {
         return manejoEstablecimiento.getEstablecimiento(id1);
     }
 
-    public List<Incidente> obtenerListaIncidentes() {
-        List<Incidente> listaIncidentes = manejoIncidente.getListaIncidentes();
-        return listaIncidentes;
-    }
-
-    public List<Incidente> getListaIncidentesCercanos(Coordenada coordenada) {
-        return manejoIncidente.getListaIncidentesConCoordenada(coordenada);
+    public List<Establecimiento> obtenerListaEstablecimientos() {
+        return manejoEstablecimiento.getListaEstablecimientos();
     }
 
     public List<Establecimiento> getListaEstablecimientosCercanos(Coordenada coordenada) {
         return manejoEstablecimiento.getListaEstablecimientosConCoordenada(coordenada);
     }
 
+    /**
+     * INICIO METODOS CORRESPONDIENTES A CACHE
+     */
+
     public void eliminarCache() {
         CacheSingleton.getInstance().limpiarCache();
     }
+
+    /**
+     * INICIO METODOS CORRESPONDIENTES A CATEGORIAS
+     */
 
     public ArrayList<Categoria> getCategorias() {
         return manejoProperties.getCategorias();
@@ -96,19 +109,5 @@ public class Facade {
     public Map<String, ArrayList<Categoria>> getSubCategorias() {
         return manejoProperties.getSubCategorias();
     }
-
-    public void initProperties(Context context) {
-        manejoProperties.initProperties(context);
-    }
-
-    public int getDiasMaximo() {
-        return manejoProperties.getInstance().getDiasmax();
-    }
-
-    public List<Establecimiento> obtenerListaEstablecimientos() {
-        List<Establecimiento> listaEstablecimientos = manejoEstablecimiento.getListaEstablecimientos();
-        return listaEstablecimientos;
-    }
-
 
 }

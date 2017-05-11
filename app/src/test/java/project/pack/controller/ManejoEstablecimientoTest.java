@@ -12,7 +12,10 @@ import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 
-/**
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
+/*
  * Created by Federico Vara on 14/4/2017.
  */
 public class ManejoEstablecimientoTest {
@@ -45,8 +48,8 @@ public class ManejoEstablecimientoTest {
 
     @Test
     public void calcularRiesgo() throws Exception {
-        Categoria categoria = new Categoria(1, "categoria1", "subcategoria1", null, "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "subcategoria2", null, "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3",null);
+        Categoria categoria2 = new Categoria(2, "categoria2", "5",null);
 
         Facade.getInstance().crearIncidente(0, "incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1, "incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -56,22 +59,36 @@ public class ManejoEstablecimientoTest {
 
         Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(4);
 
-        Assert.assertEquals(establecimiento.getRiesgo(), "BAJO");
+        Assert.assertEquals("BAJO", establecimiento.getRiesgo());
     }
 
     @Test
-    public void crearEstacimiento() throws Exception {
+    public void crearEstablecimiento() throws Exception {
+        Establecimiento establecimiento = new Establecimiento(null,"Establecimiento",null);
 
+        establecimiento.setRiesgo("10");
+
+        assertNotNull(establecimiento);
     }
 
     @Test
     public void guardarEstablecimiento() throws Exception {
-
+        // Guardar
+        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        // obtengo el incidente guardado
+        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        // compruebo que lo que se guardo sea lo mismo que mande a guardar
+        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
     }
 
     @Test
     public void getEstablecimiento() throws Exception {
-
+        // Guardar
+        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        // obtengo el incidente guardado
+        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        // compruebo que lo que se guardo sea lo mismo que mande a guardar
+        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
     }
 
 }

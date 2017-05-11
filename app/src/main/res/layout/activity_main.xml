@@ -30,18 +30,23 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Ver Lista Incidentes"
+        android:id="@+id/btnVerListIncidentes"
+        android:layout_below="@+id/btnAgragarIncidente"
+        android:layout_marginTop="50dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Eliminar Cache"
         android:id="@+id/btnEliminarCache"
-        android:layout_below="@+id/btnAgragarIncidente"
-        />
-  <!--  <Button
-        android:text="Agregar Incidente"
-        android:layout_width="wrap_content"
+        android:layout_below="@+id/btnVerListIncidentes"/>
+
+    <Button
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/Boton1"
-        android:layout_alignParentEnd="true" />
--->
+        android:layout_below="@+id/btnEliminarCache"
+        android:id="@+id/btnCrearIncidenteCategoria"
+        android:text="Crear Incidente V2"/>
+
 </RelativeLayout>
