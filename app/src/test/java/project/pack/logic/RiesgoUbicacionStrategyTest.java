@@ -39,9 +39,9 @@ public class RiesgoUbicacionStrategyTest {
 
         //Agregamos 3 incidentes de niveles de riesgos diferentes en el contexto
 
-        Categoria bajo = new Categoria(1, "categoria", "1");
-        Categoria medio = new Categoria(2, "categoria", "6");
-        Categoria alto = new Categoria(3, "categoria", "10");
+        Categoria bajo = new Categoria(1, "categoria", "1", null);
+        Categoria medio = new Categoria(2, "categoria", "6", null);
+        Categoria alto = new Categoria(3, "categoria", "10", null);
 
         Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(2,"incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -66,9 +66,9 @@ public class RiesgoUbicacionStrategyTest {
         //Agregamos 3 incidentes de niveles de riesgo diferentes en el contexto.
         //El incidente de riesgo alto no va a ser tenido en cuenta por la distancia en la que se encuentra
 
-        Categoria bajo = new Categoria(1, "categoria", "1");
-        Categoria medio = new Categoria(2, "categoria", "6");
-        Categoria alto = new Categoria(3, "categoria", "10");
+        Categoria bajo = new Categoria(1, "categoria", "1", null);
+        Categoria medio = new Categoria(2, "categoria", "6", null);
+        Categoria alto = new Categoria(3, "categoria", "10", null);
 
         Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -94,9 +94,9 @@ public class RiesgoUbicacionStrategyTest {
 
         Date fechaCreacion = new Date("03/08/2017"); //fecha que supera los 30 días : 8 de Marzo de 2017
 
-        Categoria bajo = new Categoria(1, "categoria", "1");
-        Categoria medio = new Categoria(2, "categoria", "6");
-        Categoria alto = new Categoria(3, "categoria", "10");
+        Categoria bajo = new Categoria(1, "categoria", "1", null);
+        Categoria medio = new Categoria(2, "categoria", "6", null);
+        Categoria alto = new Categoria(3, "categoria", "10", null);
 
         Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -115,7 +115,7 @@ public class RiesgoUbicacionStrategyTest {
     @Test
     public void calcularRiesgoMedioPorCantidadTest() throws Exception{
 
-        Categoria categoriaBaja = new Categoria(2, "categoriaBaja", "5");
+        Categoria categoriaBaja = new Categoria(2, "categoriaBaja", "5", null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
@@ -135,8 +135,8 @@ public class RiesgoUbicacionStrategyTest {
 
     @Test
     public void calcularRiesgoBajoTest() throws Exception {
-        Categoria categoria = new Categoria(1, "categoria1", "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3", null);
+        Categoria categoria2 = new Categoria(2, "categoria2", "5", null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.1, 10.1));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
@@ -150,8 +150,8 @@ public class RiesgoUbicacionStrategyTest {
 
     @Test
     public void calcularRiesgoMuyBajoTest() throws Exception{
-        Categoria categoria = new Categoria(1, "categoria1", "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3", null);
+        Categoria categoria2 = new Categoria(2, "categoria2", "5", null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -164,7 +164,7 @@ public class RiesgoUbicacionStrategyTest {
 
     @Test
     public void calcularRiesgoMedioTest() throws Exception{
-        Categoria categoria2 = new Categoria(2, "categoria2", "5");
+        Categoria categoria2 = new Categoria(2, "categoria2", "5",null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -182,7 +182,7 @@ public class RiesgoUbicacionStrategyTest {
 
     @Test
     public void calcularRiesgoAltoTest() throws Exception{
-        Categoria categoria = new Categoria(1, "categoria", "8");
+        Categoria categoria = new Categoria(1, "categoria", "8", null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
@@ -195,7 +195,7 @@ public class RiesgoUbicacionStrategyTest {
     @Test
     public void calcularRiesgoMuyAltoTest() throws Exception{
 
-        Categoria categoria = new Categoria(1, "categoria", "8");
+        Categoria categoria = new Categoria(1, "categoria", "8", null);
 
         Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
