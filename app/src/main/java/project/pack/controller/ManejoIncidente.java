@@ -37,7 +37,7 @@ public class ManejoIncidente {
 
     public List<Incidente> getListaIncidentes() {
 
-        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
         return listaIncidentes;
     }
 
@@ -49,7 +49,7 @@ public class ManejoIncidente {
      */
     public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada) {
 
-        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
         List<Incidente> incidentesAprobados = new ArrayList<>();
 
         Double distanciaMaxima = 10.5;
