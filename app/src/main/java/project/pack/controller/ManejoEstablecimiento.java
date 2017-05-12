@@ -45,7 +45,7 @@ public class ManejoEstablecimiento {
      */
     public List<Establecimiento> getListaEstablecimientosConCoordenada(Coordenada coordenada) {
 
-        List<Establecimiento> listaEstablecimientos = CacheSingleton.getInstance().obtenerListaEstablecimientos();
+        List<Establecimiento> listaEstablecimientos = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
         List<Establecimiento> establecimientosAprobados = new ArrayList<Establecimiento>();
 
         Double distanciaMaxima = 10.5;
@@ -67,7 +67,7 @@ public class ManejoEstablecimiento {
      * @return Devuelve una lista de establecimientos.
      */
     public List<Establecimiento> getListaEstablecimientos() {
-        List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerListaEstablecimientos();
+        List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
         return Establecimiento;
     }
 

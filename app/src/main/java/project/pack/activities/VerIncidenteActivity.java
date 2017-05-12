@@ -47,7 +47,7 @@ public class VerIncidenteActivity extends AppCompatActivity {
 
     private void cargarListaIncidentes() {
 
-        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
+        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
         ArrayList<String> listaIncidentes = new ArrayList<String>();
 
         if (incidentes != null && incidentes.size() > 0) {
