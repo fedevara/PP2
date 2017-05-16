@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:text="Crear Incidente"
         android:id="@+id/btnCrearIncidente"
-        android:layout_below="@+id/linearLayoutCategoria"
+        android:layout_below="@+id/linearLayoutCoordenadas"
         android:layout_centerHorizontal="true"/>
 
     <Button
@@ -69,5 +69,51 @@
     android:layout_below="@+id/btnCrearIncidente"
     android:layout_centerHorizontal="true"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="11dp"
+        android:id="@+id/linearLayoutCoordenadas"
+        android:layout_below="@+id/linearLayoutCategoria"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Coordenadas*"
+            android:id="@+id/txtcoor"
+            android:layout_weight="3"
+            android:textSize="18sp" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:ems="10"
+            android:text=""
+            android:id="@+id/txtLatitud"
+            android:layout_weight="3"
+            android:hint="Latitud"
+            android:textSize="14sp"
+            android:textAlignment="textEnd" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number|numberSigned|numberDecimal"
+            android:ems="10"
+            android:text=""
+            android:id="@+id/txtLongitud"
+            android:layout_weight="3"
+            android:hint="Longitud"
+            android:textSize="14sp"
+            android:textAlignment="textEnd" />
+
+
+    </LinearLayout>
+
 </RelativeLayout>
+
+
 

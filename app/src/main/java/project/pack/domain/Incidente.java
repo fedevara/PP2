@@ -108,6 +108,11 @@ public class Incidente extends AbstractUbicacion{
     }
 
     @Override
+    public String toString(){
+        return descripcion + " - " + getCategoria().getNombre();
+    }
+
+    @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
