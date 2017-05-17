@@ -1,4 +1,4 @@
-﻿package project.pack.logic;
+package project.pack.logic;
 
 import org.junit.After;
 import org.junit.Assert;
