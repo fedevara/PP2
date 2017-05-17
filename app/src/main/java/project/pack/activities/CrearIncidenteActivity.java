@@ -21,6 +21,8 @@ import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
+import project.pack.logic.CategoriaLogic;
+import project.pack.logicImp.CategoriaLogicImp;
 
 public class CrearIncidenteActivity extends AppCompatActivity {
 
@@ -69,7 +71,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                 Intent mostrarIncidente = new Intent(CrearIncidenteActivity.this, VerIncidenteActivity.class);
                 Facade facade = Facade.getInstance();
 
-                if (validarCampos()) {
+               if (validarCampos()) {
                     // Armo la Categoria con los ComboBoxs
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
@@ -139,7 +141,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         } else if (categoria.getNombre().equals("Reclamo")) {
             subCategorias = categorias.get("Reclamo");
         } else {
-            subCategorias.add(new Categoria(0, "Error", ""));
+            subCategorias.add(new Categoria(0, "Error", "",null));
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
@@ -198,5 +200,4 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         }
         return false;
     }
-
 }

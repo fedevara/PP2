@@ -1,6 +1,7 @@
 package project.pack.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /*
  * Created by Federico Vara on 9/4/2017.
@@ -11,11 +12,17 @@ public class Categoria implements Serializable {
     private Integer id;
     private String nombre;
     private String riesgo;
+    private String[] palabrasClaves;
 
-    public Categoria(Integer id, String nombre, String riesgo) {
+    public Categoria(){
+
+    }
+
+    public Categoria(Integer id, String nombre, String riesgo, String[] palabrasClaves) {
         setId(id);
         setNombre(nombre);
         setRiesgo(riesgo);
+        setPalabrasClaves(palabrasClaves);
     }
 
     public Integer getId() {
@@ -44,5 +51,12 @@ public class Categoria implements Serializable {
 
     public String toString() {
         return nombre;
+    }
+
+    public String[] getPalabrasClaves() {
+        return palabrasClaves;
+    }
+    public void setPalabrasClaves(String[] palabrasClaves) {
+        this.palabrasClaves = palabrasClaves;
     }
 }
