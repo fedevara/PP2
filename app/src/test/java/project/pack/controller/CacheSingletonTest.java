@@ -187,7 +187,7 @@ public class CacheSingletonTest {
         CacheSingleton cache = CacheSingleton.getInstance();
 
         String saludo = "hola";
-        Incidente incidente = new Incidente();
+        Incidente incidente = null;
         Integer numero = 4;
 
         cache.put(saludo);
@@ -203,7 +203,7 @@ public class CacheSingletonTest {
         CacheSingleton cache = CacheSingleton.getInstance();
 
         String saludo = "hola";
-        Incidente incidente = new Incidente();
+        Incidente incidente = null;
         Integer numero = 4;
 
         cache.put(saludo);

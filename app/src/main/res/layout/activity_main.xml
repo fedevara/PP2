@@ -42,4 +42,11 @@
         android:id="@+id/btnEliminarCache"
         android:layout_below="@+id/btnVerListIncidentes"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnEliminarCache"
+        android:id="@+id/btnCrearIncidenteCategoria"
+        android:text="Crear Incidente V2"/>
+
 </RelativeLayout>

@@ -20,7 +20,7 @@ public class ManejoProperties {
     public ArrayList<Categoria> getCategorias() {
         ArrayList<Categoria> categorias = new ArrayList<>();
         for (int i = 0; i < CategoriaProperties.CATEGORIAS.length; i++){
-            categorias.add(new Categoria(i, CategoriaProperties.CATEGORIAS[i], null));
+            categorias.add(new Categoria(i, CategoriaProperties.CATEGORIAS[i], null, null));
         }
         return categorias;
     }

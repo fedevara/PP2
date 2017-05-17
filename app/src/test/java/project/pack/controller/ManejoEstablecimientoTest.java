@@ -48,8 +48,8 @@ public class ManejoEstablecimientoTest {
 
     @Test
     public void calcularRiesgo() throws Exception {
-        Categoria categoria = new Categoria(1, "categoria1", "3");
-        Categoria categoria2 = new Categoria(2, "categoria2", "5");
+        Categoria categoria = new Categoria(1, "categoria1", "3",null);
+        Categoria categoria2 = new Categoria(2, "categoria2", "5",null);
 
         Facade.getInstance().crearIncidente(0, "incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente(1, "incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -59,16 +59,13 @@ public class ManejoEstablecimientoTest {
 
         Establecimiento establecimiento = Facade.getInstance().obtenerEstablecimiento(4);
 
-        Assert.assertEquals(establecimiento.getRiesgo(), "BAJO");
+        Assert.assertEquals("BAJO", establecimiento.getRiesgo());
     }
 
     @Test
     public void crearEstablecimiento() throws Exception {
-        Establecimiento establecimiento = new Establecimiento();
+        Establecimiento establecimiento = new Establecimiento(null,"Establecimiento",null);
 
-        establecimiento.setNombre("Establecimiento");
-        establecimiento.setCategoria(null);
-        establecimiento.setCoordenada(null);
         establecimiento.setRiesgo("10");
 
         assertNotNull(establecimiento);
