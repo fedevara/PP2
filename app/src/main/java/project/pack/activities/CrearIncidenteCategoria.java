@@ -75,7 +75,10 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
                   if(true) {
 //                if(validarCampos()) {
-                    if(setearCategoria()!=null){
+
+                    Categoria categoriaSeteada = setearCategoria();
+
+                    if(categoriaSeteada!=null){
 
                         Intent mostrarIncidente = new Intent(CrearIncidenteCategoria.this, VerIncidenteActivity.class);
                         Facade facade = Facade.getInstance();
@@ -119,7 +122,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
     private Categoria setearCategoria(){
 
-        Categoria nuevaCategoriaReturn = null;
+        Categoria nuevaCategoria = null;
 
         if(noEncontro !=true){
 
@@ -131,10 +134,9 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
             ArrayList<Categoria> categorias = categoriaLogic.getCategorias();
 
-            Categoria nuevaCategoria  = categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
+            Categoria categoria  = this.categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
 
-            if(nuevaCategoria.getId()!=null){
-                nuevaCategoriaReturn= nuevaCategoria;
+                nuevaCategoria= categoria;
             }
             else{
                 Toast.makeText(getApplicationContext(), "No se encontró la categoria", Toast.LENGTH_LONG).show();
@@ -142,11 +144,10 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
                 noEncontro =true;
             }
         }else{
-            Categoria categoria = (Categoria) spnCategorias.getSelectedItem();
-            nuevaCategoriaReturn= categoria;
+            nuevaCategoria = (Categoria) spnCategorias.getSelectedItem();
         }
 
-        return nuevaCategoriaReturn;
+        return nuevaCategoria;
     }
 
 

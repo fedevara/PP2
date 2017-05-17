@@ -28,7 +28,7 @@ public class CategoriaLogicImp implements CategoriaLogic{
     @Override
     public Categoria searchWorld(String[] arrayPalabrasDelTexto, ArrayList<Categoria> categorias) {
 
-        Categoria nuevaCategoria = new Categoria();
+        Categoria nuevaCategoria = null;
 
         for (String palabra: arrayPalabrasDelTexto) {
 
