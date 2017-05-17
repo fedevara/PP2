@@ -47,13 +47,6 @@ public class CategoriaLogicImp implements CategoriaLogic{
         return nuevaCategoria;
     }
 
-    public ArrayList<Categoria> getCategorias(){
-
-        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-
-        return categorias;
-    }
-
     @Override
     public String[] getArray(String texto) {
 

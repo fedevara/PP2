@@ -14,8 +14,6 @@ public interface CategoriaLogic {
 
     Categoria searchWorld(String[] arrayPalabrasDelTexto, ArrayList<Categoria> categorias);
 
-    ArrayList<Categoria> getCategorias();
-
     String[] getArray(String texto);
 
 }

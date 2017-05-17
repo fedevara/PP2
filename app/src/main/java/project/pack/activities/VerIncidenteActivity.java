@@ -27,9 +27,6 @@ public class VerIncidenteActivity extends AppCompatActivity {
     @Bind(R.id.lvResultado)
     ListView lvResultado;
 
-    @Bind(R.id.twTitulo)
-    TextView twTitulo;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -24,6 +24,7 @@ import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
 import project.pack.logic.CategoriaLogic;
 import project.pack.logicImp.CategoriaLogicImp;
+import project.pack.utilities.CategoriaProperties;
 
 public class CrearIncidenteCategoria extends AppCompatActivity {
 
@@ -132,7 +133,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
             String[] arrayPalabrasDelTexto = categoriaLogic.getArray(texto);
 
-            ArrayList<Categoria> categorias = categoriaLogic.getCategorias();
+            ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
 
             Categoria categoria  = this.categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
 

@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import project.pack.domain.Categoria;
+import project.pack.logicImp.CategoriaLogicImp;
 import project.pack.utilities.CategoriaProperties;
 
 import static org.junit.Assert.*;
@@ -45,49 +46,17 @@ public class CategoriaLogicImpTest {
     }
 
     @Test
-    public void searchWorld() throws Exception {
+    public void searchWorldTest() throws Exception {
 
-        //CASO 1
+        CategoriaLogic categoriaLogic;
+        categoriaLogic = new CategoriaLogicImp();
+
         String[] arrayPalabrasDelTexto = {"notifico","un","robo"};
-        Categoria nuevaCategoria = null;
         ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
+        Categoria categoria = categoriaLogic.searchWorld(arrayPalabrasDelTexto,categorias);
 
-        for (String palabra: arrayPalabrasDelTexto) {
+        assertEquals(categoria.getNombre(),"Robo");
 
-            for (Categoria categoria: categorias) {
-                nuevaCategoria = searchCategoria(categoria,palabra);
-                if(nuevaCategoria.getId()!=null)
-                    break;
-                else
-                    continue;
-            }
-            if(nuevaCategoria.getId()!=null)
-                break;
-            else
-                continue;
-        }
-        assertNotNull(nuevaCategoria);
-
-        //CASO 2
-        String[] arrayPalabrasDelTextoCaso2 = {"notifico","un","roVo"};
-        Categoria nuevaCategoriaCaso2 = null;
-        ArrayList<Categoria> categoriasCaso2 = CategoriaProperties.LISTA_CATEGORIAS;
-
-        for (String palabra: arrayPalabrasDelTextoCaso2) {
-
-            for (Categoria categoria: categoriasCaso2) {
-                nuevaCategoriaCaso2 = searchCategoria(categoria,palabra);
-                if(nuevaCategoriaCaso2.getId()!=null)
-                    break;
-                else
-                    continue;
-            }
-            if(nuevaCategoriaCaso2.getId()!=null)
-                break;
-            else
-                continue;
-        }
-        assertNull(nuevaCategoriaCaso2.getId());
     }
 
     // Meotodo que me devuelve la categoria, necesario para el metodo serchWorld
@@ -109,22 +78,19 @@ public class CategoriaLogicImpTest {
         assertNotNull(categorias);
         //Valido que el tamaño sea mayor a 0
         assertTrue(categorias.size()>0);
-
     }
 
     @Test
-    public void getArray() throws Exception {
+    public void getArrayTest() throws Exception {
 
-        String texto = "Notifico un RoBo";
+        CategoriaLogic categoriaLogic;
+        categoriaLogic = new CategoriaLogicImp();
 
-        String textoEnMinusculas = texto.toLowerCase();
+        String texto = "notifico un robo";
+        String[] arrayPalabrasDelTexto = categoriaLogic.getArray(texto);
 
-        String[] arrayPalabrasDelTexto = textoEnMinusculas.split(" ");
+        assertEquals(arrayPalabrasDelTexto.length,3);
 
-        //Comparo el tamaño del arreglo con la cantidad de palabras del texto.
-        Assert.assertEquals(arrayPalabrasDelTexto.length,3);
-        //comparo el resultado convertido en minusculas con un texto igual.
-        assertTrue(textoEnMinusculas.equals("notifico un robo"));
     }
 
 }
