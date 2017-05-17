@@ -136,6 +136,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
             Categoria categoria  = this.categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
 
+            if(categoria.getId()!=null){
                 nuevaCategoria= categoria;
             }
             else{
