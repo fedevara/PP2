@@ -1,5 +1,6 @@
 package project.pack.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -39,7 +40,8 @@ public class VerIncidenteActivity extends AppCompatActivity {
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                Intent layautPaginaPrincipal = new Intent(VerIncidenteActivity.this, MainActivity.class);
+                startActivity(layautPaginaPrincipal);
             }
         });
         cargarListaIncidentes();
@@ -48,16 +50,16 @@ public class VerIncidenteActivity extends AppCompatActivity {
     private void cargarListaIncidentes() {
 
         List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        ArrayList<String> listaIncidentes = new ArrayList<String>();
+        ArrayList<Incidente> listaIncidentes = new ArrayList<Incidente>();
 
         if (incidentes != null && incidentes.size() > 0) {
             for (int i = 0; i < incidentes.size(); i++) {
                 Incidente incidente = incidentes.get(i);
-                listaIncidentes.add(incidente.getTitulo() + " - " + incidente.getDescripcion());
+                listaIncidentes.add(incidente);
             }
-
-            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
+            ArrayAdapter<Incidente> adaptador = new ArrayAdapter<Incidente>(this, android.R.layout.simple_list_item_1, listaIncidentes);
             lvResultado.setAdapter(adaptador);
+
         } else {
             Toast.makeText(getApplicationContext(), "Usted no Cargó ningún Incidente.", Toast.LENGTH_LONG).show();
         }
