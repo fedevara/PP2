@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 import project.pack.domain.AbstractUbicacion;
 import project.pack.domain.Coordenada;
-import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
 import project.pack.utilities.DateUtils;
 
-/**
+/*
  * Created by sgarcete on 4/16/17.
  */
 
@@ -62,7 +61,7 @@ public class RiesgoUbicacionStrategy implements IRiesgoStrategy {
         for (int i = 0; i < incidentesCercanos.size(); i++) {
             Incidente incidenteActual = incidentesCercanos.get(i);
 
-            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFechaCreacion()) <= 30) { //Acá los días se sacan del properties
+            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFecha()) <= 30) { //Acá los días se sacan del properties
                 categorizar(incidenteActual);
             }
         }

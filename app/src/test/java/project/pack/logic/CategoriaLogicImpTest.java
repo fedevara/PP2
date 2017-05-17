@@ -1,4 +1,4 @@
-package project.pack.logicImp;
+package project.pack.logic;
 
 import junit.framework.Assert;
 
