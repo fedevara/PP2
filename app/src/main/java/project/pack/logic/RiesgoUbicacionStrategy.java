@@ -61,7 +61,7 @@ public class RiesgoUbicacionStrategy implements IRiesgoStrategy {
         for (int i = 0; i < incidentesCercanos.size(); i++) {
             Incidente incidenteActual = incidentesCercanos.get(i);
 
-            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFechaCreacion()) <= 30) { //Acá los días se sacan del properties
+            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFecha()) <= 30) { //Acá los días se sacan del properties
                 categorizar(incidenteActual);
             }
         }

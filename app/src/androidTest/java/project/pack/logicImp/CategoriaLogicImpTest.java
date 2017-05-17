@@ -87,7 +87,7 @@ public class CategoriaLogicImpTest {
             else
                 continue;
         }
-        assertNull(nuevaCategoriaCaso2);
+        assertNull(nuevaCategoriaCaso2.getId());
     }
 
     // Meotodo que me devuelve la categoria, necesario para el metodo serchWorld
