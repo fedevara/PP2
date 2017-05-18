@@ -74,8 +74,8 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                  if(true) {
-//                if(validarCampos()) {
+//                  if(true) {
+                if(validarCampos()) {
 
                     Categoria categoriaSeteada = setearCategoria();
 
@@ -94,7 +94,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
                         }
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Faltan completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
                 }
             }
         });
