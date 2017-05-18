@@ -53,6 +53,12 @@ public class CategoriaLogicImpTest {
 
         assertEquals(categoria.getNombre(),"Robo");
 
+        //Detecto la primer categoria encontrada:
+        String[] arrayPalabrasDelTexto2 = {"notifico","una","queja", "de","robo"};
+        Categoria categoria2 = categoriaLogic.searchWorld(arrayPalabrasDelTexto2,categorias);
+
+        assertEquals(categoria2.getNombre(),"Reclamo");
+
     }
 
     @Test
