@@ -19,29 +19,25 @@ public class CategoriaLogicImpTest {
     @Test
     public void searchCategoria() throws Exception {
 
+        CategoriaLogic categoriaLogic;
+        categoriaLogic = new CategoriaLogicImp();
+
         String[] palabrasClaves = {"robo","hurto"};
         Categoria categoria = new Categoria(1, "Robo", "riesgo",palabrasClaves);
+
         Categoria categoriaReturn = null;
 
         //TEST 1
-        String palabraTest = "hurto";
-        for (int i=0; i<categoria.getPalabrasClaves().length;i++){
-            if(categoria.getPalabrasClaves()[i].equals(palabraTest)){
-                categoriaReturn = categoria;
-            }
-        }
+        String descripcion = "hurto";
+        categoriaReturn = categoriaLogic.searchCategoria(categoria,descripcion);
         assertNotNull(categoriaReturn);
+        assertEquals("Robo", categoriaReturn.getNombre());
 
         // TEST 2
-        String palabraTest2 = "hola";
+        String descripcion2 = "hola";
         Categoria categoriaReturnTest2 = null;
-
-        for (int i=0; i<categoria.getPalabrasClaves().length;i++){
-            if(categoria.getPalabrasClaves()[i].equals(palabraTest2)){
-                categoriaReturnTest2 = categoria;
-            }
-        }
-        assertNull(categoriaReturnTest2);
+        categoriaReturnTest2 = categoriaLogic.searchCategoria(categoria,descripcion2);
+        assertNull(categoriaReturnTest2.getId());
 
     }
 
@@ -57,18 +53,6 @@ public class CategoriaLogicImpTest {
 
         assertEquals(categoria.getNombre(),"Robo");
 
-    }
-
-    // Meotodo que me devuelve la categoria, necesario para el metodo serchWorld
-    private Categoria searchCategoria(Categoria cat, String palabra) {
-        Categoria categoria = new Categoria();
-
-        for (int i=0; i<cat.getPalabrasClaves().length;i++){
-            if(cat.getPalabrasClaves()[i].equals(palabra)){
-                categoria = cat;
-            }
-        }
-        return categoria;
     }
 
     @Test
