@@ -51,9 +51,9 @@ public class ManejoEstablecimientoTest {
         Categoria categoria = new Categoria(1, "categoria1", "3",null);
         Categoria categoria2 = new Categoria(2, "categoria2", "5",null);
 
-        Facade.getInstance().crearIncidente(0, "incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1, "incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(1, "incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
 
         Facade.getInstance().crearEstablecimiento("establecimiento1", null, new Coordenada(10.3, 10.3));
 
@@ -74,21 +74,24 @@ public class ManejoEstablecimientoTest {
     @Test
     public void guardarEstablecimiento() throws Exception {
         // Guardar
-        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        Establecimiento e1 = Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
         // obtengo el incidente guardado
-        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        Establecimiento e2 = Facade.getInstance().obtenerEstablecimiento(e1.getId());
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
-        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
+        assertTrue(e2.getNombre().equals(e1.getNombre()) && e2.getCategoria() == null && e2.getCoordenada() == null);
     }
 
     @Test
     public void getEstablecimiento() throws Exception {
+
         // Guardar
-        Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+        Establecimiento e1 = Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
+
         // obtengo el incidente guardado
-        Establecimiento e = Facade.getInstance().obtenerEstablecimiento(1);
+        Establecimiento e2 = Facade.getInstance().obtenerEstablecimiento(e1.getId());
+
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
-        assertTrue(e.getNombre().equals("Establecimiento Pepe") && e.getCategoria() == null && e.getCoordenada() == null);
+        assertTrue(e2.getNombre().equals("Establecimiento Pepe") && e2.getCategoria() == null && e2.getCoordenada() == null);
     }
 
 }

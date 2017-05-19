@@ -1,12 +1,11 @@
 package project.pack.domain;
 
-import java.io.Serializable;
 
 /**
  * Created by Federico Vara on 9/4/2017.
  */
 
-public class Coordenada implements Serializable {
+public class Coordenada {
 
     private Double latitud;
     private Double longitud;

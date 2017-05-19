@@ -19,10 +19,23 @@ public class Incidente extends AbstractUbicacion{
     private Date fechaCreacion;
     private Categoria categoria;
 
-
     public Incidente(Coordenada coordenada, int id, String titulo, String descripcion, Date fecha, Date fechaCreacion, Categoria categoria) {
         super(coordenada);
         this.id = id;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.categoria = categoria;
+
+        if (fecha == null) {
+            this.fecha = Calendar.getInstance().getTime();
+        } else {
+            this.fecha = fecha;
+        }
+    }
+
+    public Incidente(Coordenada coordenada, String titulo, String descripcion, Date fecha, Date fechaCreacion, Categoria categoria) {
+        super(coordenada);
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.fechaCreacion = fechaCreacion;
@@ -95,12 +108,14 @@ public class Incidente extends AbstractUbicacion{
 
         Incidente incidente = (Incidente) o;
 
-        if (id != incidente.id) return false;
+        if (id != incidente.id)
+            return false;
         if (titulo != null ? !titulo.equals(incidente.titulo) : incidente.titulo != null)
             return false;
         if (descripcion != null ? !descripcion.equals(incidente.descripcion) : incidente.descripcion != null)
             return false;
-        if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null) return false;
+        if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null)
+            return false;
         if (fechaCreacion != null ? !fechaCreacion.equals(incidente.fechaCreacion) : incidente.fechaCreacion != null)
             return false;
         return categoria != null ? categoria.equals(incidente.categoria) : incidente.categoria == null;

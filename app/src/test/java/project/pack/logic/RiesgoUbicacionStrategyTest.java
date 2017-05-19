@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package project.pack.logic;
 
 import org.junit.After;

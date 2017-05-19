@@ -1,5 +1,7 @@
 package project.pack.facade;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Facade {
     private ManejoIncidente manejoIncidente;
     private ManejoEstablecimiento manejoEstablecimiento;
     private ManejoProperties manejoProperties;
+    private Context context;
 
     private static Facade INSTANCE;
 
@@ -38,7 +41,9 @@ public class Facade {
         manejoProperties = new ManejoProperties();
     }
 
-    /* INICIO METODOS CORRESPONDIENTES A INCIDENTES */
+    /**
+    * INICIO METODOS CORRESPONDIENTES A INCIDENTES
+    */
 
     /**
      * Crea un incidente y lo guarda en la memoria cache
@@ -51,9 +56,9 @@ public class Facade {
      * @param coordenada       Lugar donde ocurrio el incidente
      * @return Devuelve el objeto creado y guardado en la base
      */
-    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
-        Incidente incidente = manejoIncidente.crearIncidente(coordenada,id, titulo, descripcion, fecha, categoria);
-        manejoIncidente.guardarIncidente(incidente);
+    public Incidente crearIncidente(String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
+        Incidente incidente = manejoIncidente.crearIncidente(coordenada, titulo, descripcion, fecha, categoria);
+        incidente = manejoIncidente.guardarIncidente(incidente);
         return incidente;
     }
 
@@ -73,9 +78,13 @@ public class Facade {
      * INICIO METODOS CORRESPONDIENTES A ESTABLECIMIENTOS
      */
 
-    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+
         Establecimiento establecimiento = manejoEstablecimiento.crearEstablecimiento(coordenada, nombre, categoria);
-        manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        establecimiento = manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        return establecimiento;
     }
 
     public Establecimiento obtenerEstablecimiento(Integer id1) {
@@ -110,4 +119,11 @@ public class Facade {
         return manejoProperties.getSubCategorias();
     }
 
+    public void setContext(Context context){
+        this.context = context;
+    }
+
+    public Context getContext(){
+        return context;
+    }
 }
