@@ -47,7 +47,7 @@ public class ManejoIncidenteTest {
         // Guardar
         Incidente inGuardar = Facade.getInstance().crearIncidente(1 , "Robo", "Paso tal cosa", new Date(), null, new Coordenada(-30.0,-40.0));
         // obtengo el incidente guardado
-        Incidente IncidenteGuardado = (Incidente) CacheSingleton.getInstance().get(1);
+        Incidente IncidenteGuardado = (Incidente) CacheSingleton.getInstance().get(1,Incidente.class);
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
         assertTrue(inGuardar.equals(IncidenteGuardado));
 

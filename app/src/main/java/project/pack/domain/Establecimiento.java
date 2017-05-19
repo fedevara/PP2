@@ -5,7 +5,7 @@ package project.pack.domain;
  */
 
 public class Establecimiento extends AbstractUbicacion {
-
+    private int id;
     private String nombre;
     private Categoria categoria;
     private String riesgo;
@@ -14,6 +14,21 @@ public class Establecimiento extends AbstractUbicacion {
         super(coordenada);
         this.nombre = nombre;
         this.categoria = categoria;
+    }
+
+    public Establecimiento(int id, Coordenada coordenada, String nombre, Categoria categoria) {
+        super(coordenada);
+        this.id = id;
+        this.nombre = nombre;
+        this.categoria = categoria;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {

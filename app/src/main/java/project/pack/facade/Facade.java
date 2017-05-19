@@ -1,5 +1,7 @@
 package project.pack.facade;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class Facade {
     private ManejoIncidente manejoIncidente;
     private ManejoEstablecimiento manejoEstablecimiento;
     private ManejoProperties manejoProperties;
+    private Context context;
 
     private static Facade INSTANCE;
 
@@ -38,7 +41,9 @@ public class Facade {
         manejoProperties = new ManejoProperties();
     }
 
-    /* INICIO METODOS CORRESPONDIENTES A INCIDENTES */
+    /**
+    * INICIO METODOS CORRESPONDIENTES A INCIDENTES
+    */
 
     /**
      * Crea un incidente y lo guarda en la memoria cache
@@ -110,4 +115,11 @@ public class Facade {
         return manejoProperties.getSubCategorias();
     }
 
+    public void setContext(Context context){
+        this.context = context;
+    }
+
+    public Context getContext(){
+        return context;
+    }
 }

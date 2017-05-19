@@ -6,9 +6,7 @@ import java.util.List;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
-import project.pack.logic.IRiesgoStrategy;
-import project.pack.logic.RiesgoBuilder;
-import project.pack.logic.RiesgoUbicacionStrategy;
+import project.pack.persistence.PersistenciaEstablecimiento;
 
 /*
  * Created by Federico Vara on 9/4/2017.
@@ -16,9 +14,9 @@ import project.pack.logic.RiesgoUbicacionStrategy;
 
 public class ManejoEstablecimiento {
 
-    public ManejoEstablecimiento() {
+    private PersistenciaEstablecimiento Persistencia = new PersistenciaEstablecimiento();
 
-    }
+    public ManejoEstablecimiento() {}
 
     public Establecimiento crearEstablecimiento(Coordenada coordenada, String nombre, Categoria categoria) {
 
@@ -28,12 +26,22 @@ public class ManejoEstablecimiento {
     }
 
     public void guardarEstablecimiento(Establecimiento establecimiento) {
-        CacheSingleton.getInstance().put(establecimiento);
+        Persistencia.addEstablecimiento(establecimiento);
     }
 
-    public Establecimiento getEstablecimiento(int id1) {
-        Establecimiento establecimiento = (Establecimiento) CacheSingleton.getInstance().get(id1);
-        establecimiento.generarRiesgo();
+    public Establecimiento getEstablecimiento(int id) {
+
+        List<Establecimiento> List = getListaEstablecimientos();
+        Establecimiento establecimiento = null;
+        if(List!=null && List.size()>0){
+            for (int i = 0; i < List.size(); i++){
+                establecimiento = List.get(i);
+                if(establecimiento.getId() == id){
+                    establecimiento.generarRiesgo();
+                    return establecimiento;
+                }
+            }
+        }
         return establecimiento;
     }
 
@@ -45,7 +53,7 @@ public class ManejoEstablecimiento {
      */
     public List<Establecimiento> getListaEstablecimientosConCoordenada(Coordenada coordenada) {
 
-        List<Establecimiento> listaEstablecimientos = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
+        List<Establecimiento> listaEstablecimientos = getListaEstablecimientos();
         List<Establecimiento> establecimientosAprobados = new ArrayList<Establecimiento>();
 
         Double distanciaMaxima = 10.5;
@@ -67,7 +75,7 @@ public class ManejoEstablecimiento {
      * @return Devuelve una lista de establecimientos.
      */
     public List<Establecimiento> getListaEstablecimientos() {
-        List<Establecimiento> Establecimiento = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
+        List<Establecimiento> Establecimiento = Persistencia.getListaEstablecimiento();
         return Establecimiento;
     }
 

@@ -8,6 +8,7 @@ import java.util.List;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
+import project.pack.persistence.PersistenciaIncidente;
 
 /*
  * Created by Federico Vara on 9/4/2017.
@@ -15,9 +16,9 @@ import project.pack.domain.Incidente;
 
 public class ManejoIncidente {
 
-    public ManejoIncidente() {
+    private PersistenciaIncidente Persistencia = new PersistenciaIncidente();
 
-    }
+    public ManejoIncidente() {}
 
     public Incidente crearIncidente(Coordenada coordenada, Integer id, String titulo, String descripcion, Date fecha, Categoria categoria) {
 
@@ -28,16 +29,23 @@ public class ManejoIncidente {
 
     public void guardarIncidente(Incidente incidente) {
         System.out.println("ManejoIncidente.guardar incidente ID: "+ incidente.getId());
-        CacheSingleton.getInstance().put(incidente);
+        Persistencia.addIncidente(incidente);
     }
 
-    public Incidente getIncidente(Integer id) {
-        return (Incidente) CacheSingleton.getInstance().get(id);
+    public Incidente getIncidente(int id) {
+        List<Incidente> List = getListaIncidentes();
+        if(List!=null && List.size()>0){
+            for (int i = 0; i < List.size(); i++){
+                if(List.get(i).getId() == id){
+                    return List.get(i);
+                }
+            }
+        }
+        return null;
     }
 
     public List<Incidente> getListaIncidentes() {
-
-        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
+        List<Incidente> listaIncidentes = Persistencia.getListaIncidente();
         return listaIncidentes;
     }
 
@@ -48,8 +56,7 @@ public class ManejoIncidente {
      * @return devuelvo lista que cumple el rango.
      */
     public List<Incidente> getListaIncidentesConCoordenada(Coordenada coordenada) {
-
-        List<Incidente> listaIncidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
+        List<Incidente> listaIncidentes = getListaIncidentes();
         List<Incidente> incidentesAprobados = new ArrayList<>();
 
         Double distanciaMaxima = 10.5;

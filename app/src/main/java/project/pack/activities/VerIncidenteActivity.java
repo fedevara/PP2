@@ -17,6 +17,7 @@ import butterknife.ButterKnife;
 import project.pack.R;
 import project.pack.controller.CacheSingleton;
 import project.pack.domain.Incidente;
+import project.pack.facade.Facade;
 
 public class VerIncidenteActivity extends AppCompatActivity {
 
@@ -46,8 +47,7 @@ public class VerIncidenteActivity extends AppCompatActivity {
     }
 
     private void cargarListaIncidentes() {
-
-        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerLista(Incidente.class);
+        List<Incidente> incidentes = Facade.getInstance().obtenerListaIncidentes();
         ArrayList<String> listaIncidentes = new ArrayList<String>();
 
         if (incidentes != null && incidentes.size() > 0) {
