@@ -12,21 +12,13 @@ import android.net.NetworkInfo;
 public class ConnectionUtilities {
     private static ConnectivityManager manager;
 
-/*
-    public static boolean forzarConectado(Boolean estadoConexion){
-
-        return estadoConexion;
-    }
-
-    public static boolean forzarDesconectado(Boolean estadoConexion){
-
-        return estadoConexion;
-    }
-*/
     public static boolean estaConectado(Context context) {
-        ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+        if (context != null) {
+            ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+        }
+        return true;
     }
 
     /*

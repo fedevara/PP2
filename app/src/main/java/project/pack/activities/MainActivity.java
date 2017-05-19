@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean HayConex = ConnectionUtilities.estaConectado(context);
-                Toast.makeText(getApplicationContext(), "Estado de conexion: "+HayConex , Toast.LENGTH_LONG).show();
+                String HayConexion = (HayConex)? "Conectado!":"Desconectado!";
+                Toast.makeText(getApplicationContext(), "Estado de conexion: "+ HayConexion, Toast.LENGTH_LONG).show();
             }
         });
     }

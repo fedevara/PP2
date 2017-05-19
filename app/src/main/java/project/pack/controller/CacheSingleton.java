@@ -35,7 +35,7 @@ public class CacheSingleton<K, T> {
     // El constructor privado no permite que se genere un constructor por defecto.
     // (con mismo modificador de acceso que la definición de la clase)
     private CacheSingleton() {
-        //CacheMap = Deserializar();
+        CacheMap = Deserializar();
         if(CacheMap == null)
             CacheMap = new HashMap();
     }
@@ -194,30 +194,35 @@ public class CacheSingleton<K, T> {
     }
 
     public void Serializar(){
-
         ObjectOutputStream oos = null;
         FileOutputStream fos = null;
         Facade fac = Facade.getInstance();
         Context context = fac.getContext();
 
-        try {
-            fos = context.openFileOutput(CacheFile, Context.MODE_PRIVATE);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(CacheMap);
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
-        finally {
+        if(context!=null) {
             try {
-                if(fos!=null)
-                    fos.close();
-            } catch (IOException e) {e.printStackTrace();}
-            try {
-                if(oos!=null)
-                    oos.close();
-            } catch (IOException e) {e.printStackTrace();}
+                fos = context.openFileOutput(CacheFile, Context.MODE_PRIVATE);
+                oos = new ObjectOutputStream(fos);
+                oos.writeObject(CacheMap);
+            } catch (Exception e) {
+                //e.printStackTrace();
+            } finally {
+                try {
+                    if (fos != null)
+                        fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (oos != null)
+                        oos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
+
     public Map<String, T> Deserializar(){
 
         Map<String, T> item = null;
@@ -225,23 +230,27 @@ public class CacheSingleton<K, T> {
         FileInputStream fis = null;
         Facade fac = Facade.getInstance();
         Context context = fac.getContext();
-
-        try {
-            fis = context.openFileInput(CacheFile);
-            ois = new ObjectInputStream(fis);
-            item = (Map<String, T>) ois.readObject();
-        } catch (Exception e) {
-            //e.printStackTrace();
-        }
-        finally {
+        if(context!=null) {
             try {
-                if(fis!=null)
-                    fis.close();
-            } catch (IOException e) {e.printStackTrace();}
-            try {
-                if(ois!=null)
-                    ois.close();
-            } catch (IOException e) {e.printStackTrace();}
+                fis = context.openFileInput(CacheFile);
+                ois = new ObjectInputStream(fis);
+                item = (Map<String, T>) ois.readObject();
+            } catch (Exception e) {
+                //e.printStackTrace();
+            } finally {
+                try {
+                    if (fis != null)
+                        fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (ois != null)
+                        ois.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return item;
     }

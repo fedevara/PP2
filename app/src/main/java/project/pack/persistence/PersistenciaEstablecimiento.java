@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import project.pack.controller.CacheSingleton;
 import project.pack.domain.Establecimiento;
+import project.pack.facade.Facade;
 import project.pack.persistence.DAO.EstablecimientoDAO;
 import project.pack.persistence.DAOImpl.EstablecimientoDAOImpl;
+import project.pack.utilities.ConnectionUtilities;
 
 /**
  * Created by lukas on 14/05/2017.
@@ -18,7 +20,7 @@ public class PersistenciaEstablecimiento {
     public Establecimiento addEstablecimiento(Establecimiento item){
         // Comprueba si hay conexion a internet disponible
         // Si hay conexion, puede interactuar con la persistencia
-        if(hayConexion()){
+        if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
             // Guarda en la BD
             Establecimiento Est_guardado = persistenciaDAO.add(item);
             // Sincronizarlo en la cache
@@ -33,19 +35,15 @@ public class PersistenciaEstablecimiento {
     public ArrayList<Establecimiento> getListaEstablecimiento(){
         // Comprueba si hay conexion a internet disponible
         // Si hay conexion, puede interactuar con la persistencia
-        if(hayConexion()){
+        if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
             return persistenciaDAO.getListItem();
         }
         // Si no hay conexion, tiene que interactuar con el cache
         else{
-           return CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
+            return CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
         }
     }
 
-    private boolean hayConexion(){
-        return true;
-        //return ConnectionUtilities.estaConectado(Facade.getInstance().getContext());
-    }
 
     public void eliminarBD(){
         persistenciaDAO.eliminarBD();
