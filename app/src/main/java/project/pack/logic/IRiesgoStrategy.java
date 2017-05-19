@@ -1,6 +1,6 @@
 package project.pack.logic;
 
-import project.pack.domain.AbstractUbicacion;
+import project.pack.domain.interfaz.IUbicable;
 
 /**
  * Created by sgarcete on 4/16/17.
@@ -8,8 +8,8 @@ import project.pack.domain.AbstractUbicacion;
 
 public interface IRiesgoStrategy {
 
-    String getRiesgo(AbstractUbicacion ubicacion);
+    String getRiesgo(IUbicable ubicacion);
 
-    Double calcularRiesgo(AbstractUbicacion ubicacion);
+    Double calcularRiesgo(IUbicable ubicacion);
 
 }

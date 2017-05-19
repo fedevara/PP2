@@ -1,16 +1,15 @@
 package project.pack.domain;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Calendar;
 import java.util.Date;
+
+import project.pack.domain.interfaz.IUbicable;
 
 /**
  * Created by Federico Vara on 9/4/2017.
  */
 
-public class Incidente extends AbstractUbicacion{
+public class Incidente implements IUbicable {
 
     private int id;
     private String titulo;
@@ -18,10 +17,11 @@ public class Incidente extends AbstractUbicacion{
     private Date fecha;
     private Date fechaCreacion;
     private Categoria categoria;
+    private Coordenada coordenada;
 
 
     public Incidente(Coordenada coordenada, int id, String titulo, String descripcion, Date fecha, Date fechaCreacion, Categoria categoria) {
-        super(coordenada);
+        this.coordenada = coordenada;
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -34,7 +34,8 @@ public class Incidente extends AbstractUbicacion{
             this.fecha = fecha;
         }
     }
-    
+
+    //todo sacar todo lo que está al pedo
     
     public int getId() {
         return id;
@@ -84,8 +85,11 @@ public class Incidente extends AbstractUbicacion{
         this.fecha = fecha;
     }
 
-    public void setCoordenada(Coordenada coordenada){
-        super.setCoordenada(coordenada);
+    @Override
+    public Coordenada getCoordenada() {return this.coordenada;}
+
+    public Double getDistancia(IUbicable ubicacion) {
+        return Math.hypot(ubicacion.getCoordenada().getLatitud()- this.getCoordenada().getLatitud(), ubicacion.getCoordenada().getLongitud() - this.getCoordenada().getLongitud());
     }
 
     @Override

@@ -2,7 +2,7 @@ package project.pack.logic;
 
 import java.util.ArrayList;
 
-import project.pack.domain.AbstractUbicacion;
+import project.pack.domain.interfaz.IUbicable;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
@@ -19,7 +19,7 @@ public class RiesgoUbicacionStrategy implements IRiesgoStrategy {
     private Double incidentesRiesgoBajo = 0.0;
 
     @Override
-    public String getRiesgo(AbstractUbicacion ubicacion) {
+    public String getRiesgo(IUbicable ubicacion) {
 
         Double riesgo = calcularRiesgo(ubicacion);
 
@@ -39,7 +39,7 @@ public class RiesgoUbicacionStrategy implements IRiesgoStrategy {
     }
 
     @Override
-    public Double calcularRiesgo(AbstractUbicacion ubicacion) {
+    public Double calcularRiesgo(IUbicable ubicacion) {
 
 
         categorizarLista(ubicacion.getCoordenada());
