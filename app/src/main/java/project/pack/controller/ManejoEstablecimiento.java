@@ -21,12 +21,11 @@ public class ManejoEstablecimiento {
     public Establecimiento crearEstablecimiento(Coordenada coordenada, String nombre, Categoria categoria) {
 
         Establecimiento establecimiento = new Establecimiento(coordenada, nombre, categoria);
-
         return establecimiento;
     }
 
-    public void guardarEstablecimiento(Establecimiento establecimiento) {
-        Persistencia.addEstablecimiento(establecimiento);
+    public Establecimiento guardarEstablecimiento(Establecimiento establecimiento) {
+        return Persistencia.addEstablecimiento(establecimiento);
     }
 
     public Establecimiento getEstablecimiento(int id) {

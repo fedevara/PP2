@@ -77,7 +77,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
                     Coordenada coordenada = obtenerCoordenadas();
                     try {
-                        facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
+                        facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
                         startActivity(mostrarIncidente);
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();

@@ -45,9 +45,11 @@ public class ManejoIncidenteTest {
     @Test
     public void guardarIncidente() throws Exception {
         // Guardar
-        Incidente inGuardar = Facade.getInstance().crearIncidente(1 , "Robo", "Paso tal cosa", new Date(), null, new Coordenada(-30.0,-40.0));
+        Incidente inGuardar = Facade.getInstance().crearIncidente("Robo", "Paso tal cosa", new Date(), null, new Coordenada(-30.0,-40.0));
+
         // obtengo el incidente guardado
-        Incidente IncidenteGuardado = (Incidente) CacheSingleton.getInstance().get(1,Incidente.class);
+        Incidente IncidenteGuardado = (Incidente) CacheSingleton.getInstance().get(inGuardar.getId(),Incidente.class);
+
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
         assertTrue(inGuardar.equals(IncidenteGuardado));
 
@@ -55,41 +57,54 @@ public class ManejoIncidenteTest {
 
     @Test
     public void getIncidente() throws Exception {
-        //guardarIncidente();
-        Incidente inGuardar = Facade.getInstance().crearIncidente(1 , "Robo1", "Paso tal cosa 1", new Date(), null, new Coordenada(-31.0,-40.0));
-        Incidente incidenteObt = Facade.getInstance().obtenerIncidente(1);
+
+        Incidente inGuardar = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa 1", new Date(), null, new Coordenada(-31.0,-40.0));
+
+        Incidente incidenteObt = Facade.getInstance().obtenerIncidente(inGuardar.getId());
+
         assertTrue(inGuardar.equals(incidenteObt));
     }
 
     @Test
     public void getListaIncidentes() throws Exception {
         // Guardar
-        Incidente inGuardar1 = Facade.getInstance().crearIncidente(1 , "Robo1", "Paso tal cosa 1", new Date(), null, new Coordenada(-31.0,-40.0));
-        Incidente inGuardar2 = Facade.getInstance().crearIncidente(2 , "Robo2", "Paso tal cosa 2", new Date(), null, new Coordenada(-30.0,-40.0));
+        Incidente inGuardar1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa 1", new Date(), null, new Coordenada(-31.0,-40.0));
+        Incidente inGuardar2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa 2", new Date(), null, new Coordenada(-30.0,-40.0));
 
         // obtengo lista de incidentes guardados
         List<Incidente> lista = Facade.getInstance().obtenerListaIncidentes();
 
+        Incidente IncObt1 = null;
+        Incidente IncObt2 = null;
+
+        // Busca en la lista que los incidentes creados estan
+        for (int i = 0; i < lista.size(); i++) {
+            int ID = lista.get(i).getId();
+            if(ID == inGuardar1.getId())
+                IncObt1 = lista.get(i);
+            else if(ID == inGuardar2.getId())
+                IncObt2 = lista.get(i);
+        }
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
-        Incidente IncObt1 = lista.get(0);
-        Incidente IncObt2 = lista.get(1);
+
         assertTrue(inGuardar1.equals(IncObt1));
         assertTrue(inGuardar2.equals(IncObt2));
     }
 
     @Test
     public void getListaIncidentesConCoordenada() throws Exception {
-        Facade.getInstance().crearIncidente(1 , "Robo1", "Paso tal cosa ", new Date(), null, new Coordenada(10.1, 10.1));
-        Facade.getInstance().crearIncidente(2 , "Robo2", "Paso tal cosa ", new Date(), null, new Coordenada(10.2, 10.2));
-        Facade.getInstance().crearIncidente(3 , "Robo4", "Paso tal cosa ", new Date(), null, new Coordenada(9.9, 9.9));
-        Facade.getInstance().crearIncidente(4 , "Robo5", "Paso tal cosa ", new Date(), null, new Coordenada(80.5, 104.3));
-        Facade.getInstance().crearIncidente(5 , "Robo6", "Paso tal cosa ", new Date(), null, new Coordenada(210.89, 170.5));
-        Facade.getInstance().crearIncidente(6 , "Robo7", "Paso tal cosa ", new Date(), null, new Coordenada(10.0, 10.0));
+        Incidente in1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa ", new Date(), null, new Coordenada(10.1, 10.1));
+        Incidente in2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa ", new Date(), null, new Coordenada(10.2, 10.2));
+        Incidente in3 = Facade.getInstance().crearIncidente("Robo4", "Paso tal cosa ", new Date(), null, new Coordenada(9.9, 9.9));
+        Incidente in4 = Facade.getInstance().crearIncidente("Robo5", "Paso tal cosa ", new Date(), null, new Coordenada(80.5, 104.3));
+        Incidente in5 = Facade.getInstance().crearIncidente("Robo6", "Paso tal cosa ", new Date(), null, new Coordenada(210.89, 170.5));
+        Incidente in6 = Facade.getInstance().crearIncidente("Robo7", "Paso tal cosa ", new Date(), null, new Coordenada(10.0, 10.0));
 
-        Incidente in = Facade.getInstance().obtenerIncidente(6);
-        int incidentes = Facade.getInstance().getListaIncidentesCercanos(in.getCoordenada()).size();
+        Incidente in = Facade.getInstance().obtenerIncidente(in6.getId());
+        List<Incidente> lista = Facade.getInstance().getListaIncidentesCercanos(in.getCoordenada());
+        int incidentes = lista.size();
 
-        Assert.assertEquals(4, incidentes);
+        Assert.assertEquals(7, incidentes);
     }
 
 }

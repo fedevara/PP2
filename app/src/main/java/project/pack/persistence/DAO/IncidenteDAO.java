@@ -13,7 +13,7 @@ import project.pack.domain.Incidente;
 
         ArrayList<Incidente> getListItem();
 
-        boolean add(Incidente item);
+        Incidente add(Incidente item);
 
         boolean remove(Incidente id);
 

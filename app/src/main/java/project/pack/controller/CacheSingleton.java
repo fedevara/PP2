@@ -34,7 +34,7 @@ public class CacheSingleton<K, T> {
     // El constructor privado no permite que se genere un constructor por defecto.
     // (con mismo modificador de acceso que la definición de la clase)
     private CacheSingleton() {
-        CacheMap = Deserializar();
+        //CacheMap = Deserializar();
         if(CacheMap == null)
             CacheMap = new HashMap();
     }
@@ -193,7 +193,7 @@ public class CacheSingleton<K, T> {
     }
 
     public void Serializar(){
-
+/*
         ObjectOutputStream oos = null;
         FileOutputStream fos = null;
         Facade fac = Facade.getInstance();
@@ -215,10 +215,11 @@ public class CacheSingleton<K, T> {
                 if(oos!=null)
                     oos.close();
             } catch (IOException e) {e.printStackTrace();}
-        }
+        }*/
     }
-
+/*
     public Map<String, T> Deserializar(){
+
         Map<String, T> item = null;
         ObjectInputStream ois = null;
         FileInputStream fis = null;
@@ -245,5 +246,5 @@ public class CacheSingleton<K, T> {
         }
         return item;
     }
-
+*/
 }//-->FIN CLASE

@@ -4,11 +4,8 @@ import java.util.ArrayList;
 
 import project.pack.controller.CacheSingleton;
 import project.pack.domain.Establecimiento;
-import project.pack.facade.Facade;
 import project.pack.persistence.DAO.EstablecimientoDAO;
-import project.pack.persistence.DAOImpl.ConectionFile;
 import project.pack.persistence.DAOImpl.EstablecimientoDAOImpl;
-import project.pack.utilities.ConnectionUtilities;
 
 /**
  * Created by lukas on 14/05/2017.
@@ -18,18 +15,19 @@ public class PersistenciaEstablecimiento {
     private EstablecimientoDAO persistenciaDAO = new EstablecimientoDAOImpl();
     //private CacheSingleton cache = CacheSingleton.getInstance();
 
-    public boolean addEstablecimiento(Establecimiento item){
+    public Establecimiento addEstablecimiento(Establecimiento item){
         // Comprueba si hay conexion a internet disponible
         // Si hay conexion, puede interactuar con la persistencia
         if(hayConexion()){
-            Boolean guardado = persistenciaDAO.add(item);
-            if(guardado){
-                CacheSingleton.getInstance().put(item, item.getId());
-            }
-            return guardado;
+            // Guarda en la BD
+            Establecimiento Est_guardado = persistenciaDAO.add(item);
+            // Sincronizarlo en la cache
+            CacheSingleton.getInstance().put(item, item.getId());
+
+            return Est_guardado;
         }
         // Si hay o no hay conexion, no se puede agregar
-        return false;
+        return null;
     }
 
     public ArrayList<Establecimiento> getListaEstablecimiento(){
@@ -45,7 +43,8 @@ public class PersistenciaEstablecimiento {
     }
 
     private boolean hayConexion(){
-        return ConnectionUtilities.estaConectado(Facade.getInstance().getContext());
+        return true;
+        //return ConnectionUtilities.estaConectado(Facade.getInstance().getContext());
     }
 
 }

@@ -11,28 +11,41 @@ import project.pack.persistence.DAO.IncidenteDAO;
  */
 
 public class IncidenteDAOImpl implements IncidenteDAO {
+    private ArrayList<Incidente> lista = new ArrayList<>();
+    private Integer ID = 0;
 
-    @Override
-    public ArrayList<Incidente> getListItem() {
-        ArrayList<Incidente> lista = new ArrayList<>();
-        Incidente i1 = new Incidente(new Coordenada(), 1, "Persistencia 1", "descripcion", null, null, null);
-        Incidente i2 = new Incidente(new Coordenada(), 2, "Persistencia 2", "descripcion", null, null, null);
-        Incidente i3 = new Incidente(new Coordenada(), 3, "Persistencia 3", "descripcion", null, null, null);
-        Incidente i4 = new Incidente(new Coordenada(), 4, "Persistencia 4", "descripcion", null, null, null);
-        Incidente i5 = new Incidente(new Coordenada(), 5, "Persistencia 5", "descripcion", null, null, null);
-        Incidente i6 = new Incidente(new Coordenada(), 6, "Persistencia 6", "descripcion", null, null, null);
+    public IncidenteDAOImpl(){
+        init();
+    }
+
+    private void init(){
+        Incidente i1 = new Incidente(new Coordenada(210.89, 170.5), 1, "Incidente BD 1", "descripcion", null, null, null);
+        Incidente i2 = new Incidente(new Coordenada(210.89, 170.5), 2, "Incidente BD 2", "descripcion", null, null, null);
+        Incidente i3 = new Incidente(new Coordenada(210.89, 170.5), 3, "Incidente BD 3", "descripcion", null, null, null);
+        Incidente i4 = new Incidente(new Coordenada(210.89, 170.5), 4, "Incidente BD 4", "descripcion", null, null, null);
+        Incidente i5 = new Incidente(new Coordenada(210.89, 170.5), 5, "Incidente BD 5", "descripcion", null, null, null);
+        Incidente i6 = new Incidente(new Coordenada(210.89, 170.5), 6, "Incidente BD 6", "descripcion", null, null, null);
         lista.add(i1);
         lista.add(i2);
         lista.add(i3);
         lista.add(i4);
         lista.add(i5);
         lista.add(i6);
+        ID = 6;
+    }
+
+
+    @Override
+    public ArrayList<Incidente> getListItem() {
         return lista;
     }
 
     @Override
-    public boolean add(Incidente item) {
-        return false;
+    public Incidente add(Incidente item) {
+        lista.add(item);
+        ID++;
+        item.setId(ID);
+        return item;
     }
 
     @Override

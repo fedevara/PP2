@@ -20,16 +20,16 @@ public class ManejoIncidente {
 
     public ManejoIncidente() {}
 
-    public Incidente crearIncidente(Coordenada coordenada, Integer id, String titulo, String descripcion, Date fecha, Categoria categoria) {
+    public Incidente crearIncidente(Coordenada coordenada,String titulo, String descripcion, Date fecha, Categoria categoria) {
 
-        Incidente incidente = new Incidente(coordenada, id, titulo, descripcion, fecha, new Date(), categoria);
+        Incidente incidente = new Incidente(coordenada, titulo, descripcion, fecha, new Date(), categoria);
 
         return incidente;
     }
 
-    public void guardarIncidente(Incidente incidente) {
-        System.out.println("ManejoIncidente.guardar incidente ID: "+ incidente.getId());
-        Persistencia.addIncidente(incidente);
+    public Incidente guardarIncidente(Incidente incidente) {
+        incidente = Persistencia.addIncidente(incidente);
+        return incidente;
     }
 
     public Incidente getIncidente(int id) {
@@ -63,6 +63,7 @@ public class ManejoIncidente {
 
         for (int i = 0; i < listaIncidentes.size(); i++) {
             //Obtengo la distancia entre las coordenadas del Incidente
+
             Double distanciaIncidente = listaIncidentes.get(i).getCoordenada().getDistancia(coordenada);
 
             if (distanciaIncidente <= distanciaMaxima) {

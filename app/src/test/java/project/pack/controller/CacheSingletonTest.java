@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Federico Vara on 14/4/2017.
  */
-public class CacheSingletonTest extends InstrumentationTestCase{
+public class CacheSingletonTest {
     private CacheSingleton cache;
 
     //AndroidTestCase()
@@ -111,34 +111,7 @@ public class CacheSingletonTest extends InstrumentationTestCase{
         assertTrue(incidente1.equals(i1));
         assertTrue(incidente2.equals(i2));
     }
-/*
-    @Test
-    public void remove() throws Exception {
-        CacheSingleton cache = CacheSingleton.getInstance();
 
-        // Agrego items del cualquier tipo
-        cache.limpiarCache();
-        cache.put(123, 9);
-        cache.put("Hola mundo", 10);
-        cache.put("Muzza",11);
-
-        cache.put(new Incidente(new Coordenada(), 2, "titulo2", "Robo de auto", new Date(), new Date(), new Categoria()),2);
-        cache.put(new Establecimiento(3,new Coordenada(10.3,10.3), "establecimiento4", null),3);
-
-        assertEquals(new Integer(5), cache.size());
-
-        // Pruebo remover dos items
-        cache.remove(Incidente.class, 2);
-        cache.remove(Establecimiento.class, 3);
-
-        // Deben quedar 5 Cache objects
-        assertEquals(new Integer(3), cache.size());
-
-        // Al intentar obtenerlos debe dar null
-        assertNull(cache.get(2,Incidente.class));
-        assertNull(cache.get(3,Establecimiento.class));
-    }
-*/
     @Test
     public void size() throws Exception {
 

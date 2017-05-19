@@ -13,7 +13,7 @@ import project.pack.domain.Establecimiento;
 
         public ArrayList<Establecimiento> getListItem();
 
-        public boolean add(Establecimiento item);
+        public Establecimiento add(Establecimiento item);
 
         public boolean remove(Establecimiento id);
 

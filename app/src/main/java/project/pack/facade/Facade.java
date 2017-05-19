@@ -56,9 +56,9 @@ public class Facade {
      * @param coordenada       Lugar donde ocurrio el incidente
      * @return Devuelve el objeto creado y guardado en la base
      */
-    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
-        Incidente incidente = manejoIncidente.crearIncidente(coordenada,id, titulo, descripcion, fecha, categoria);
-        manejoIncidente.guardarIncidente(incidente);
+    public Incidente crearIncidente(String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
+        Incidente incidente = manejoIncidente.crearIncidente(coordenada, titulo, descripcion, fecha, categoria);
+        incidente = manejoIncidente.guardarIncidente(incidente);
         return incidente;
     }
 
@@ -78,9 +78,13 @@ public class Facade {
      * INICIO METODOS CORRESPONDIENTES A ESTABLECIMIENTOS
      */
 
-    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+
         Establecimiento establecimiento = manejoEstablecimiento.crearEstablecimiento(coordenada, nombre, categoria);
-        manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        establecimiento = manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        return establecimiento;
     }
 
     public Establecimiento obtenerEstablecimiento(Integer id1) {
