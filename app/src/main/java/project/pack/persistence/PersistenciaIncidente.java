@@ -53,5 +53,7 @@ public class PersistenciaIncidente {
         return true;
         //return ConnectionUtilities.estaConectado(Facade.getInstance().getContext());
     }
-
+    public void eliminarBDPersistencia(){
+        persistenciaDAO.eliminarBD();
+    }
 }

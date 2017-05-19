@@ -86,7 +86,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
                         try {
                             Coordenada coordenada = obtenerCoordenadas();
-                            facade.crearIncidente(1, "aa", etDescripcion.getText().toString(), Calendar.getInstance().getTime(), categoriaSeteada, coordenada);
+                            facade.crearIncidente("aa", etDescripcion.getText().toString(), Calendar.getInstance().getTime(), categoriaSeteada, coordenada);
                             startActivity(mostrarIncidente);
 
                         } catch (Exception e) {

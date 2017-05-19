@@ -15,7 +15,7 @@ public class IncidenteDAOImpl implements IncidenteDAO {
     private Integer ID = 0;
 
     public IncidenteDAOImpl(){
-        init();
+//        init();
     }
 
     private void init(){
@@ -56,6 +56,11 @@ public class IncidenteDAOImpl implements IncidenteDAO {
     @Override
     public boolean update(Incidente item) {
         return false;
+    }
+
+    @Override
+    public void eliminarBD() {
+        lista = new ArrayList<>();
     }
 
     @Override

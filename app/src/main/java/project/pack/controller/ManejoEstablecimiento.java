@@ -78,4 +78,8 @@ public class ManejoEstablecimiento {
         return Establecimiento;
     }
 
+    public void eliminar() {
+        Persistencia.eliminarBD();
+    }
+
 }

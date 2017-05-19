@@ -72,4 +72,7 @@ public class ManejoIncidente {
         }
         return incidentesAprobados;
     }
+    public void eliminarBD(){
+        Persistencia.eliminarBDPersistencia();
+    }
 }

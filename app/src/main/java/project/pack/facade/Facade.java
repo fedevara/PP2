@@ -48,7 +48,6 @@ public class Facade {
     /**
      * Crea un incidente y lo guarda en la memoria cache
      *
-     * @param id          Es el id con el que se va a guardar en la base de datos
      * @param titulo      Titulo del incidente
      * @param descripcion Descripcion del incidente
      * @param fecha       Fecha en la que sucesio el incidente, puede ser distinta a la actual
@@ -125,5 +124,10 @@ public class Facade {
 
     public Context getContext(){
         return context;
+    }
+
+    public void eliminarBDFacade(){
+        manejoEstablecimiento.eliminar();
+        manejoIncidente.eliminarBD();
     }
 }

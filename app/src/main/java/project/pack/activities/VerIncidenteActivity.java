@@ -46,18 +46,17 @@ public class VerIncidenteActivity extends AppCompatActivity {
     }
 
     private void cargarListaIncidentes() {
-
         List<Incidente> incidentes = Facade.getInstance().obtenerListaIncidentes();
         ArrayList<String> listaIncidentes = new ArrayList<String>();
 
         if (incidentes != null && incidentes.size() > 0) {
             for (int i = 0; i < incidentes.size(); i++) {
                 Incidente incidente = incidentes.get(i);
-                listaIncidentes.add(incidente);
+                listaIncidentes.add(incidente.getDescripcion()+" - " + incidente.getCategoria().getNombre());
             }
-            ArrayAdapter<Incidente> adaptador = new ArrayAdapter<Incidente>(this, android.R.layout.simple_list_item_1, listaIncidentes);
-            lvResultado.setAdapter(adaptador);
 
+            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
+            lvResultado.setAdapter(adaptador);
         } else {
             Toast.makeText(getApplicationContext(), "Usted no Cargó ningún Incidente.", Toast.LENGTH_LONG).show();
         }

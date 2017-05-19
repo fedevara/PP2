@@ -61,7 +61,14 @@ public class EstablecimientoDAOImpl implements EstablecimientoDAO {
     }
 
     @Override
+    public void eliminarBD() {
+        lista = new ArrayList<>();
+    }
+
+    @Override
     public Establecimiento getItem(Integer id) {
         return null;
     }
+
+
 }

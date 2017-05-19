@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.Date;
 import java.util.List;
 
+import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
@@ -93,18 +94,22 @@ public class ManejoIncidenteTest {
 
     @Test
     public void getListaIncidentesConCoordenada() throws Exception {
-        Incidente in1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa ", new Date(), null, new Coordenada(10.1, 10.1));
-        Incidente in2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa ", new Date(), null, new Coordenada(10.2, 10.2));
-        Incidente in3 = Facade.getInstance().crearIncidente("Robo4", "Paso tal cosa ", new Date(), null, new Coordenada(9.9, 9.9));
-        Incidente in4 = Facade.getInstance().crearIncidente("Robo5", "Paso tal cosa ", new Date(), null, new Coordenada(80.5, 104.3));
-        Incidente in5 = Facade.getInstance().crearIncidente("Robo6", "Paso tal cosa ", new Date(), null, new Coordenada(210.89, 170.5));
-        Incidente in6 = Facade.getInstance().crearIncidente("Robo7", "Paso tal cosa ", new Date(), null, new Coordenada(10.0, 10.0));
+
+        Facade.getInstance().eliminarBDFacade();
+        Categoria categoria = new Categoria(1,"Robo","3",null);
+
+        Incidente in1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa ", new Date(), categoria, new Coordenada(10.1, 10.1));
+        Incidente in2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa ", new Date(), categoria, new Coordenada(10.2, 10.2));
+        Incidente in3 = Facade.getInstance().crearIncidente("Robo4", "Paso tal cosa ", new Date(), categoria, new Coordenada(9.9, 9.9));
+        Incidente in4 = Facade.getInstance().crearIncidente("Robo5", "Paso tal cosa ", new Date(), categoria, new Coordenada(80.5, 104.3));
+        Incidente in5 = Facade.getInstance().crearIncidente("Robo6", "Paso tal cosa ", new Date(), categoria, new Coordenada(210.89, 170.5));
+        Incidente in6 = Facade.getInstance().crearIncidente("Robo7", "Paso tal cosa ", new Date(), categoria, new Coordenada(10.0, 10.0));
 
         Incidente in = Facade.getInstance().obtenerIncidente(in6.getId());
         List<Incidente> lista = Facade.getInstance().getListaIncidentesCercanos(in.getCoordenada());
         int incidentes = lista.size();
 
-        Assert.assertEquals(7, incidentes);
+        Assert.assertEquals(4, incidentes);
     }
 
 }

@@ -19,4 +19,6 @@ import project.pack.domain.Establecimiento;
 
         public boolean update(Establecimiento item);
 
+        public void eliminarBD();
+
     }

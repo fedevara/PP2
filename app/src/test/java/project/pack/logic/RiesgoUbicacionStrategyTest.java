@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package project.pack.logic;
 
 import org.junit.After;
@@ -23,6 +22,7 @@ public class RiesgoUbicacionStrategyTest {
     @Before
     public void setUp() throws Exception {
         Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarBDFacade();
     }
 
     @After
@@ -44,10 +44,10 @@ public class RiesgoUbicacionStrategyTest {
         Categoria medio = new Categoria(2, "categoria", "6", null);
         Categoria alto = new Categoria(3, "categoria", "10", null);
 
-        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(2,"incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
 
-        Facade.getInstance().crearIncidente(1,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), alto, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), alto, new Coordenada(10.0, 10.0));
 
         /*Ubicamos el punto en el mapa y calculamos el riesgo*/
 
@@ -71,10 +71,10 @@ public class RiesgoUbicacionStrategyTest {
         Categoria medio = new Categoria(2, "categoria", "6", null);
         Categoria alto = new Categoria(3, "categoria", "10", null);
 
-        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
 
-        Facade.getInstance().crearIncidente(1,"incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), alto, new Coordenada(30.0, 30.0));
+        Facade.getInstance().crearIncidente("incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), alto, new Coordenada(30.0, 30.0));
 
         //Calculamos el riesgo
 
@@ -99,10 +99,10 @@ public class RiesgoUbicacionStrategyTest {
         Categoria medio = new Categoria(2, "categoria", "6", null);
         Categoria alto = new Categoria(3, "categoria", "10", null);
 
-        Facade.getInstance().crearIncidente(0,"incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(2,"incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
 
-        Facade.getInstance().crearIncidente(1,"incidenteAlto", "incidenteAlto", fechaCreacion, alto, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidenteAlto", "incidenteAlto", fechaCreacion, alto, new Coordenada(10.0, 10.0));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -118,13 +118,13 @@ public class RiesgoUbicacionStrategyTest {
 
         Categoria categoriaBaja = new Categoria(2, "categoriaBaja", "5", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(2,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(3,"incidente4", "incidente4", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(4,"incidente5", "incidente5", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(5,"incidente6", "incidente6", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(6,"incidente7", "incidente7", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente3", "incidente3", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente4", "incidente4", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente5", "incidente5", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente6", "incidente6", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente7", "incidente7", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -139,9 +139,9 @@ public class RiesgoUbicacionStrategyTest {
         Categoria categoria = new Categoria(1, "categoria1", "3", null);
         Categoria categoria2 = new Categoria(2, "categoria2", "5", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.1, 10.1));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
-        Facade.getInstance().crearIncidente(1,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.3, 10.3));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.1, 10.1));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
+        Facade.getInstance().crearIncidente("incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.3, 10.3));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -154,8 +154,8 @@ public class RiesgoUbicacionStrategyTest {
         Categoria categoria = new Categoria(1, "categoria1", "3", null);
         Categoria categoria2 = new Categoria(2, "categoria2", "5", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -167,13 +167,13 @@ public class RiesgoUbicacionStrategyTest {
     public void calcularRiesgoMedioTest() throws Exception{
         Categoria categoria2 = new Categoria(2, "categoria2", "5", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(2,"incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(3,"incidente4", "incidente4", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(4,"incidente5", "incidente5", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(5,"incidente6", "incidente6", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
-        Facade.getInstance().crearIncidente(6,"incidente7", "incidente7", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente3", "incidente3", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente4", "incidente4", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente5", "incidente5", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente6", "incidente6", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
+        Facade.getInstance().crearIncidente("incidente7", "incidente7", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -185,7 +185,7 @@ public class RiesgoUbicacionStrategyTest {
     public void calcularRiesgoAltoTest() throws Exception{
         Categoria categoria = new Categoria(1, "categoria", "8", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();
@@ -197,8 +197,8 @@ public class RiesgoUbicacionStrategyTest {
     public void calcularRiesgoMuyAltoTest() throws Exception{
         Categoria categoria = new Categoria(1, "categoria", "8", null);
 
-        Facade.getInstance().crearIncidente(0,"incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
-        Facade.getInstance().crearIncidente(1,"incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
+        Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
         Punto punto = new Punto(new Coordenada(10.3,10.3));
         String riesgo = punto.calcularRiesgo();

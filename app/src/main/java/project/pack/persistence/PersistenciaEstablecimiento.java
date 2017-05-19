@@ -47,4 +47,8 @@ public class PersistenciaEstablecimiento {
         //return ConnectionUtilities.estaConectado(Facade.getInstance().getContext());
     }
 
+    public void eliminarBD(){
+        persistenciaDAO.eliminarBD();
+    }
+
 }

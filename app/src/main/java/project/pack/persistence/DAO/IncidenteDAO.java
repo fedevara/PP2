@@ -19,4 +19,6 @@ import project.pack.domain.Incidente;
 
         boolean update(Incidente item);
 
+        void eliminarBD();
+
     }
