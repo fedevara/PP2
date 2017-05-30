@@ -16,20 +16,16 @@ import project.pack.persistence.PersistenciaIncidente;
 
 public class ManejoIncidente {
 
-    private PersistenciaIncidente Persistencia = new PersistenciaIncidente();
-
     public ManejoIncidente() {}
 
     public Incidente crearIncidente(Coordenada coordenada,String titulo, String descripcion, Date fecha, Categoria categoria) {
 
         Incidente incidente = new Incidente(coordenada, titulo, descripcion, fecha, new Date(), categoria);
-
         return incidente;
     }
 
     public Incidente guardarIncidente(Incidente incidente) {
-        incidente = Persistencia.addIncidente(incidente);
-        return incidente;
+        return PersistenciaIncidente.getInstance().addIncidente(incidente);
     }
 
     public Incidente getIncidente(int id) {
@@ -45,7 +41,9 @@ public class ManejoIncidente {
     }
 
     public List<Incidente> getListaIncidentes() {
-        List<Incidente> listaIncidentes = Persistencia.getListaIncidente();
+
+        List<Incidente> listaIncidentes = PersistenciaIncidente.getInstance().getListaIncidente();
+
         return listaIncidentes;
     }
 
@@ -72,7 +70,9 @@ public class ManejoIncidente {
         }
         return incidentesAprobados;
     }
+
     public void eliminarBD(){
-        Persistencia.eliminarBDPersistencia();
+        PersistenciaIncidente.getInstance().vaciarBD();
     }
+
 }

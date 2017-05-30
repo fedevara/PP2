@@ -2,7 +2,6 @@ package project.pack.persistence.DAOImpl;
 
 import java.util.ArrayList;
 
-import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.persistence.DAO.IncidenteDAO;
 
@@ -11,29 +10,17 @@ import project.pack.persistence.DAO.IncidenteDAO;
  */
 
 public class IncidenteDAOImpl implements IncidenteDAO {
-    private ArrayList<Incidente> lista = new ArrayList<>();
+
+    private ConectionFile conex = new ConectionFile();
+    private ArrayList<Incidente> lista;
     private Integer ID = 0;
+    private String File = "Incidentes";
 
     public IncidenteDAOImpl(){
-//        init();
+        lista = (ArrayList<Incidente>) conex.Leer(File);
+        if(lista==null)
+            lista = new ArrayList<>();
     }
-
-    private void init(){
-        Incidente i1 = new Incidente(new Coordenada(210.89, 170.5), 1, "Incidente BD 1", "descripcion", null, null, null);
-        Incidente i2 = new Incidente(new Coordenada(210.89, 170.5), 2, "Incidente BD 2", "descripcion", null, null, null);
-        Incidente i3 = new Incidente(new Coordenada(210.89, 170.5), 3, "Incidente BD 3", "descripcion", null, null, null);
-        Incidente i4 = new Incidente(new Coordenada(210.89, 170.5), 4, "Incidente BD 4", "descripcion", null, null, null);
-        Incidente i5 = new Incidente(new Coordenada(210.89, 170.5), 5, "Incidente BD 5", "descripcion", null, null, null);
-        Incidente i6 = new Incidente(new Coordenada(210.89, 170.5), 6, "Incidente BD 6", "descripcion", null, null, null);
-        lista.add(i1);
-        lista.add(i2);
-        lista.add(i3);
-        lista.add(i4);
-        lista.add(i5);
-        lista.add(i6);
-        ID = 6;
-    }
-
 
     @Override
     public ArrayList<Incidente> getListItem() {
@@ -45,26 +32,27 @@ public class IncidenteDAOImpl implements IncidenteDAO {
         lista.add(item);
         ID++;
         item.setId(ID);
+        conex.Escribir(lista, File);
         return item;
     }
 
     @Override
-    public boolean remove(Incidente id) {
+    public boolean remove(Incidente item) {
+        for (int i = 0; i < lista.size(); i++) {
+            if(lista.get(i).getId()==item.getId()) {
+                lista.remove(i);
+                conex.Escribir(lista, File);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean update(Incidente item) {
-        return false;
-    }
-
-    @Override
-    public void eliminarBD() {
+    public void vaciarBD() {
         lista = new ArrayList<>();
+        ID = 0;
+        conex.Escribir(lista, File);
     }
 
-    @Override
-    public Incidente getItem(Integer id) {
-        return null;
-    }
 }

@@ -14,8 +14,6 @@ import project.pack.persistence.PersistenciaEstablecimiento;
 
 public class ManejoEstablecimiento {
 
-    private PersistenciaEstablecimiento Persistencia = new PersistenciaEstablecimiento();
-
     public ManejoEstablecimiento() {}
 
     public Establecimiento crearEstablecimiento(Coordenada coordenada, String nombre, Categoria categoria) {
@@ -25,7 +23,7 @@ public class ManejoEstablecimiento {
     }
 
     public Establecimiento guardarEstablecimiento(Establecimiento establecimiento) {
-        return Persistencia.addEstablecimiento(establecimiento);
+        return PersistenciaEstablecimiento.getInstance().addEstablecimiento(establecimiento);
     }
 
     public Establecimiento getEstablecimiento(int id) {
@@ -74,12 +72,12 @@ public class ManejoEstablecimiento {
      * @return Devuelve una lista de establecimientos.
      */
     public List<Establecimiento> getListaEstablecimientos() {
-        List<Establecimiento> Establecimiento = Persistencia.getListaEstablecimiento();
+        List<Establecimiento> Establecimiento = PersistenciaEstablecimiento.getInstance().getListaEstablecimiento();
         return Establecimiento;
     }
 
     public void eliminar() {
-        Persistencia.eliminarBD();
+        PersistenciaEstablecimiento.getInstance().vaciarBD();
     }
 
 }

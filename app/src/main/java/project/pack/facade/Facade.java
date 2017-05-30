@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import project.pack.controller.CacheSingleton;
+import project.pack.persistence.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
 import project.pack.utilities.ManejoProperties;

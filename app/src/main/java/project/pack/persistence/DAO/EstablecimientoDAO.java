@@ -9,16 +9,12 @@ import project.pack.domain.Establecimiento;
  */
     public interface EstablecimientoDAO {
 
-        public Establecimiento getItem(Integer id);
+        ArrayList<Establecimiento> getListItem();
 
-        public ArrayList<Establecimiento> getListItem();
+        Establecimiento add(Establecimiento item);
 
-        public Establecimiento add(Establecimiento item);
+        boolean remove(Establecimiento item);
 
-        public boolean remove(Establecimiento id);
-
-        public boolean update(Establecimiento item);
-
-        public void eliminarBD();
+        void vaciarBD();
 
     }

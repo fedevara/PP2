@@ -2,10 +2,7 @@ package project.pack.persistence.DAOImpl;
 
 import java.util.ArrayList;
 
-import project.pack.domain.Categoria;
-import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
-import project.pack.domain.Incidente;
 import project.pack.persistence.DAO.EstablecimientoDAO;
 
 /**
@@ -13,29 +10,17 @@ import project.pack.persistence.DAO.EstablecimientoDAO;
  */
 
 public class EstablecimientoDAOImpl implements EstablecimientoDAO {
-    private ArrayList<Establecimiento> lista = new ArrayList<>();
+
+    private ConectionFile conex = new ConectionFile();
+    private ArrayList<Establecimiento> lista;
     private Integer ID = 0;
+    private String File = "Establecimientos";
 
     public EstablecimientoDAOImpl(){
-       //init();
+        lista = (ArrayList<Establecimiento>) conex.Leer(File);
+        if(lista==null)
+            lista = new ArrayList<>();
     }
-
-    private void init(){
-        Establecimiento e1 = new Establecimiento(1, null, "Establecimiento BD 1", null);
-        Establecimiento e2 = new Establecimiento(2, null, "Establecimiento BD 2", null);
-        Establecimiento e3 = new Establecimiento(3, null, "Establecimiento BD 3", null);
-        Establecimiento e4 = new Establecimiento(4, null, "Establecimiento BD 4", null);
-        Establecimiento e5 = new Establecimiento(5, null, "Establecimiento BD 5", null);
-        Establecimiento e6 = new Establecimiento(6, null, "Establecimiento BD 6", null);
-        lista.add(e1);
-        lista.add(e2);
-        lista.add(e3);
-        lista.add(e4);
-        lista.add(e5);
-        lista.add(e6);
-        ID = 6;
-    }
-
 
     @Override
     public ArrayList<Establecimiento> getListItem() {
@@ -47,28 +32,27 @@ public class EstablecimientoDAOImpl implements EstablecimientoDAO {
         lista.add(item);
         ID++;
         item.setId(ID);
+        conex.Escribir(lista, File);
         return item;
     }
 
     @Override
-    public boolean remove(Establecimiento id) {
+    public boolean remove(Establecimiento item) {
+        for (int i = 0; i < lista.size(); i++) {
+            if(lista.get(i).getId()==item.getId()) {
+                lista.remove(i);
+                conex.Escribir(lista, File);
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean update(Establecimiento item) {
-        return false;
-    }
-
-    @Override
-    public void eliminarBD() {
+    public void vaciarBD() {
         lista = new ArrayList<>();
+        ID = 0;
+        conex.Escribir(lista, File);
     }
-
-    @Override
-    public Establecimiento getItem(Integer id) {
-        return null;
-    }
-
 
 }

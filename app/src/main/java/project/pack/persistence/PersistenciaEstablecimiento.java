@@ -2,7 +2,6 @@ package project.pack.persistence;
 
 import java.util.ArrayList;
 
-import project.pack.controller.CacheSingleton;
 import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 import project.pack.persistence.DAO.EstablecimientoDAO;
@@ -14,8 +13,18 @@ import project.pack.utilities.ConnectionUtilities;
  */
 
 public class PersistenciaEstablecimiento {
+
+    private static PersistenciaEstablecimiento INSTANCE;
+
+    private PersistenciaEstablecimiento() { }
+
+    public static PersistenciaEstablecimiento getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new PersistenciaEstablecimiento();
+        return INSTANCE;
+    }
+
     private EstablecimientoDAO persistenciaDAO = new EstablecimientoDAOImpl();
-    //private CacheSingleton cache = CacheSingleton.getInstance();
 
     public Establecimiento addEstablecimiento(Establecimiento item){
         // Comprueba si hay conexion a internet disponible
@@ -44,9 +53,12 @@ public class PersistenciaEstablecimiento {
         }
     }
 
+    public void removeEstablecimiento(Establecimiento item){
+        persistenciaDAO.remove(item);
+    }
 
-    public void eliminarBD(){
-        persistenciaDAO.eliminarBD();
+    public void vaciarBD(){
+        persistenciaDAO.vaciarBD();
     }
 
 }

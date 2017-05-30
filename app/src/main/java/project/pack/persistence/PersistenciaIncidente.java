@@ -2,7 +2,6 @@ package project.pack.persistence;
 
 import java.util.ArrayList;
 
-import project.pack.controller.CacheSingleton;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
 import project.pack.persistence.DAO.IncidenteDAO;
@@ -14,6 +13,17 @@ import project.pack.utilities.ConnectionUtilities;
  */
 
 public class PersistenciaIncidente {
+
+    private static PersistenciaIncidente INSTANCE;
+
+    private PersistenciaIncidente() { }
+
+    public static PersistenciaIncidente getInstance() {
+        if (INSTANCE == null)
+            INSTANCE = new PersistenciaIncidente();
+        return INSTANCE;
+    }
+
     private IncidenteDAO persistenciaDAO = new IncidenteDAOImpl();
 
     public Incidente addIncidente(Incidente item){
@@ -50,8 +60,12 @@ public class PersistenciaIncidente {
         }
     }
 
-
-    public void eliminarBDPersistencia(){
-        persistenciaDAO.eliminarBD();
+    public void removeIncidente(Incidente item){
+        persistenciaDAO.remove(item);
     }
+
+    public void vaciarBD(){
+        persistenciaDAO.vaciarBD();
+    }
+
 }

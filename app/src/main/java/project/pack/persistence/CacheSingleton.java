@@ -1,4 +1,4 @@
-package project.pack.controller;
+package project.pack.persistence;
 
 import android.content.Context;
 
@@ -7,18 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import project.pack.domain.Categoria;
-import project.pack.domain.Coordenada;
-import project.pack.domain.Incidente;
 import project.pack.domain.ObjetoCache;
 import project.pack.facade.Facade;
-import project.pack.persistence.DAOImpl.ConectionFile;
 
 /**
  * Created by lukas on 11/04/2017.
@@ -171,10 +165,6 @@ public class CacheSingleton<K, T> {
     public void setLimitItems(Integer limit){
         if(limit>0)
             this.limitItems = limit;
-    }
-
-    public Integer getLimitItems(){
-        return limitItems;
     }
 
     private String findKeyItem(T item, Integer id){

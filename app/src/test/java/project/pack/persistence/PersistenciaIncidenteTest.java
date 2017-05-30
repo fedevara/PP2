@@ -10,12 +10,22 @@ import static org.junit.Assert.*;
 public class PersistenciaIncidenteTest {
     @Test
     public void addIncidente() throws Exception {
-
+        assertTrue(true);
     }
 
     @Test
     public void getListaIncidente() throws Exception {
-
+        assertTrue(true);
     }
 
+    @Test
+    public void removeIncidente() throws Exception {
+        assertTrue(true);
+    }
+
+
+    @Test
+    public void vaciarBD() throws Exception {
+        assertTrue(true);
+    }
 }

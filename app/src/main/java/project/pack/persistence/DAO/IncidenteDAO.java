@@ -9,16 +9,12 @@ import project.pack.domain.Incidente;
  */
     public interface IncidenteDAO {
 
-        Incidente getItem(Integer id);
-
         ArrayList<Incidente> getListItem();
 
         Incidente add(Incidente item);
 
-        boolean remove(Incidente id);
+        boolean remove(Incidente item);
 
-        boolean update(Incidente item);
-
-        void eliminarBD();
+        void vaciarBD();
 
     }

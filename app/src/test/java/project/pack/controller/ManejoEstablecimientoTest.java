@@ -71,7 +71,7 @@ public class ManejoEstablecimientoTest {
 
     @Test
     public void guardarEstablecimiento() throws Exception {
-        // Guardar
+        // Escribir
 //        Establecimiento e1 = Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
 //        // obtengo el incidente guardado
 //        Establecimiento e2 = Facade.getInstance().obtenerEstablecimiento(e1.getId());
@@ -82,7 +82,7 @@ public class ManejoEstablecimientoTest {
     @Test
     public void getEstablecimiento() throws Exception {
 /*
-        // Guardar
+        // Escribir
         Establecimiento e1 = Facade.getInstance().crearEstablecimiento("Establecimiento Pepe", null, null);
 
         // obtengo el incidente guardado

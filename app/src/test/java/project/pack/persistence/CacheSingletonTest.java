@@ -1,6 +1,4 @@
-package project.pack.controller;
-
-import android.test.InstrumentationTestCase;
+package project.pack.persistence;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -8,14 +6,14 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
-import project.pack.utilities.ConnectionUtilities;
+import project.pack.persistence.CacheSingleton;
+
 import static org.junit.Assert.*;
 
 /**
@@ -93,7 +91,7 @@ public class CacheSingletonTest {
         // vaciar cache
         cache.limpiarCache();
 
-        // Guardar
+        // Escribir
         Incidente i1 = new Incidente(new Coordenada(), 1, "titulo1", "Robo de auto", new Date(), new Date(), new Categoria());
         Incidente i2 = new Incidente(new Coordenada(), 2, "titulo2", "Robo de auto", new Date(), new Date(), new Categoria());
 

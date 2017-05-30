@@ -12,6 +12,7 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
+import project.pack.persistence.CacheSingleton;
 
 import static org.junit.Assert.*;
 
@@ -45,7 +46,7 @@ public class ManejoIncidenteTest {
 
     @Test
     public void guardarIncidente() throws Exception {
-        // Guardar
+        // Escribir
         Incidente inGuardar = Facade.getInstance().crearIncidente("Robo", "Paso tal cosa", new Date(), null, new Coordenada(-30.0,-40.0));
 
         // obtengo el incidente guardado
@@ -68,7 +69,7 @@ public class ManejoIncidenteTest {
 
     @Test
     public void getListaIncidentes() throws Exception {
-        // Guardar
+        // Escribir
         Incidente inGuardar1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa 1", new Date(), null, new Coordenada(-31.0,-40.0));
         Incidente inGuardar2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa 2", new Date(), null, new Coordenada(-30.0,-40.0));
 

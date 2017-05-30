@@ -10,15 +10,23 @@ import static org.junit.Assert.*;
 public class PersistenciaEstablecimientoTest {
     @Test
     public void addEstablecimiento() throws Exception {
-
+        assertTrue(true);
     }
 
     @Test
     public void getListaEstablecimiento() throws Exception {
-
+        assertTrue(true);
     }
 
+    @Test
+    public void removeEstablecimiento() throws Exception {
+        assertTrue(true);
+    }
 
+    @Test
+    public void vaciarBD() throws Exception {
+        assertTrue(true);
+    }
 
 
 
@@ -27,6 +35,7 @@ public class PersistenciaEstablecimientoTest {
     Si hay conexión, cada vez que se agregan cosas, se actualiza la caché */
     @Test
     public void HayConexion_actualizaCache() throws Exception{
+        assertTrue(true);
         // Forzamos al modo con conexion
         //ConnectionUtilities.forzarConexion(true);
         // cada vez que se agregan cosas, se actualiza la caché
@@ -36,6 +45,7 @@ public class PersistenciaEstablecimientoTest {
     Si no hay conexión, se obtienen los datos almacenados en la caché    */
     @Test
     public void SinConexion_usaCache() throws Exception{
+        assertTrue(true);
         // Forzamos al modo sin conexion
         //ConnectionUtilities.forzarConexion(false);
         // se obtienen los datos almacenados en la caché
@@ -46,6 +56,7 @@ public class PersistenciaEstablecimientoTest {
     quiero que se carguen los datos de la caché que tenía almacenado */
     @Test
     public void SinConexion_reiniciarApp() throws Exception{
+        assertTrue(true);
         // Forzamos al modo sin conexion
 
         // cierro la aplicación,
