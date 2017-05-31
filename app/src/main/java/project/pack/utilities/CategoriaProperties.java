@@ -5,6 +5,7 @@ package project.pack.utilities;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import project.pack.domain.Categoria;
 
@@ -33,6 +34,16 @@ public class CategoriaProperties {
 
     /* LISTA DE TODOS LOS INCIDENTES */
     public static final ArrayList<Categoria> LISTA_CATEGORIAS = obtenerCategorias();
+
+    /* LISTAS DE TODOS LOS INCIDENTES DE CADA TIPO */
+
+    public static final String[] LISTA_CATEGORIAS_BAJAS= new String[]{"trafico", "recorrido", "muerte","transporte"};
+    public static final String[] LISTA_CATEGORIAS_MEDIAS= new String[]{"trafico", "recorrido", "muerte","transporte"};
+    public static final String[] LISTA_CATEGORIAS_ALTAS= new String[]{"trafico", "recorrido", "muerte","transporte"};
+
+    public static final ArrayList<String> CATEGORIAS_BAJAS = (ArrayList<String>) Arrays.asList(LISTA_CATEGORIAS_BAJAS);
+    public static final ArrayList<String> CATEGORIAS_MEDIAS = (ArrayList<String>) Arrays.asList(LISTA_CATEGORIAS_MEDIAS);
+    public static final ArrayList<String> CATEGORIAS_ALTAS = (ArrayList<String>) Arrays.asList(LISTA_CATEGORIAS_ALTAS);
 
 
     /* METODOS PRIVADOS */
