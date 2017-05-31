@@ -64,8 +64,6 @@ public class ManejoEstablecimientoTest {
     public void crearEstablecimiento() throws Exception {
         Establecimiento establecimiento = new Establecimiento(null,"Establecimiento",null);
 
-        establecimiento.setRiesgo("10");
-
         assertNotNull(establecimiento);
     }
 

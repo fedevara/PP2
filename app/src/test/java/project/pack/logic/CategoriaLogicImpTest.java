@@ -19,7 +19,7 @@ public class CategoriaLogicImpTest {
     public void searchCategoria() throws Exception {
 
         String[] palabrasClaves = {"robo","hurto"};
-        Categoria categoria = new Categoria(1, "Robo", "riesgo",palabrasClaves);
+        Categoria categoria = new Categoria(1, "Robo", palabrasClaves);
         Categoria categoriaReturn = null;
 
         //TEST 1

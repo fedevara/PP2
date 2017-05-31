@@ -4,16 +4,13 @@ package project.pack.domain;
  * Created by Federico Vara on 14/4/2017.
  */
 import project.pack.domain.interfaz.IUbicable;
-import project.pack.logic.IRiesgoStrategy;
-import project.pack.logic.RiesgoBuilder;
-import project.pack.logic.RiesgoUbicacionStrategy;
 
 public class Establecimiento implements IUbicable {
 
     private String nombre;
     private Categoria categoria;
     private Coordenada coordenada;
-    private String riesgo;
+    private int id;
 
     public Establecimiento(Coordenada coordenada, String nombre, Categoria categoria) {
         this.coordenada = coordenada;
@@ -22,9 +19,9 @@ public class Establecimiento implements IUbicable {
     }
 
     public Establecimiento(int id, Coordenada coordenada, String nombre, Categoria categoria) {
-        super(coordenada);
         this.id = id;
         this.nombre = nombre;
+        this.coordenada = coordenada;
         this.categoria = categoria;
     }
 
@@ -36,14 +33,6 @@ public class Establecimiento implements IUbicable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public Categoria getCategoria() {
         return categoria;
     }
@@ -52,15 +41,6 @@ public class Establecimiento implements IUbicable {
         this.categoria = categoria;
     }
 
-    public String getRiesgo() {return riesgo;}
-
-    public void setRiesgo(String riesgo) {this.riesgo = riesgo;}
-
-    public void generarRiesgo(){
-        IRiesgoStrategy riesgoStrategy = new RiesgoUbicacionStrategy();
-        RiesgoBuilder riesgoBuilder = new RiesgoBuilder(riesgoStrategy);
-        this.riesgo = riesgoBuilder.getRiesgo(this);
-    }
 
     @Override
     public Coordenada getCoordenada() {

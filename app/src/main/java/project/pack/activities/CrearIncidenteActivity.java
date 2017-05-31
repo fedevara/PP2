@@ -141,7 +141,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         } else if (categoria.getNombre().equals("Reclamo")) {
             subCategorias = categorias.get("Reclamo");
         } else {
-            subCategorias.add(new Categoria(0, "Error", "",null));
+            subCategorias.add(new Categoria(0, "Error", null));
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);

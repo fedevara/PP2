@@ -1,10 +1,13 @@
 package project.pack.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import project.pack.domain.Incidente;
 import project.pack.domain.interfaz.IUbicable;
 import project.pack.facade.Facade;
+import project.pack.utilities.CategoriaProperties;
 import project.pack.utilities.DateUtils;
 
 /**
@@ -13,7 +16,7 @@ import project.pack.utilities.DateUtils;
 
 public class ContadorDeIncidentes {
 
-    IUbicable ubicable;
+    private IUbicable ubicable;
     private Double incidentesRiesgoAlto = 0.0;
     private Double incidentesRiesgoMedio = 0.0;
     private Double incidentesRiesgoBajo = 0.0;
@@ -35,6 +38,10 @@ public class ContadorDeIncidentes {
         return incidentesRiesgoBajo;
     }
 
+    public Double getCantidadIncidentes(){
+        return incidentesRiesgoAlto + incidentesRiesgoBajo + incidentesRiesgoMedio;
+    }
+
     public void categorizarLista(IUbicable ubicable) {
 
         ArrayList<Incidente> incidentesCercanos = (ArrayList<Incidente>) Facade.getInstance().getListaIncidentesCercanos(ubicable.getCoordenada());
@@ -42,7 +49,7 @@ public class ContadorDeIncidentes {
         for (int i = 0; i < incidentesCercanos.size(); i++) {
             Incidente incidenteActual = incidentesCercanos.get(i);
 
-            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFecha()) <= 30) { //Acá los días se sacan del properties
+            if (DateUtils.getInstance().getDiferenciaPorDiaFechaActual(incidenteActual.getFecha()) <= CategoriaProperties.DiasMaximoDifIncidente) {
                 categorizar(incidenteActual);
             }
         }
@@ -50,16 +57,21 @@ public class ContadorDeIncidentes {
 
     public void categorizar(Incidente incidente) {
 
-        Double riesgoCategoria = Double.valueOf(incidente.getCategoria().getRiesgo()); //Hardcodeado momentaneamente
+        String entrada = incidente.getCategoria().getNombre();
 
-        if (riesgoCategoria > 0 && riesgoCategoria <= 3) {
-            this.incidentesRiesgoBajo += 1;
-        } else if (riesgoCategoria > 3 && riesgoCategoria <= 7) {
-            this.incidentesRiesgoMedio += 1;
-        } else {
-            this.incidentesRiesgoAlto += 1;
+        ArrayList<String> CATEGORIAS_BAJAS = CategoriaProperties.CATEGORIAS_BAJAS;
+        ArrayList<String> CATEGORIAS_MEDIAS = CategoriaProperties.CATEGORIAS_MEDIAS;
+        ArrayList<String> CATEGORIAS_ALTAS = CategoriaProperties.CATEGORIAS_ALTAS;
+
+        if(CATEGORIAS_BAJAS.indexOf(entrada) != -1){
+            incidentesRiesgoBajo++;
         }
-
+        else if(CATEGORIAS_MEDIAS.indexOf(entrada) != -1){
+            incidentesRiesgoMedio++;
+        }
+        else if(CATEGORIAS_ALTAS.indexOf(entrada) != -1){
+            incidentesRiesgoAlto++;
+        }
 
     }
 

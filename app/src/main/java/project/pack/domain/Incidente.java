@@ -35,9 +35,9 @@ public class Incidente implements IUbicable {
     }
 
     public Incidente(Coordenada coordenada, String titulo, String descripcion, Date fecha, Date fechaCreacion, Categoria categoria) {
-        super(coordenada);
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.coordenada = coordenada;
         this.fechaCreacion = fechaCreacion;
         this.categoria = categoria;
 
@@ -47,19 +47,13 @@ public class Incidente implements IUbicable {
             this.fecha = fecha;
         }
     }
-    
-    //todo sacar todo lo que está al pedo
-    
+
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
     }
 
     public void setTitulo(String titulo) {
@@ -72,14 +66,6 @@ public class Incidente implements IUbicable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
     }
 
     public Categoria getCategoria() {

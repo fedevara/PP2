@@ -6,6 +6,7 @@ import java.util.List;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
+import project.pack.logic.CalculadorDeRiesgo;
 import project.pack.persistence.PersistenciaEstablecimiento;
 
 /*
@@ -34,7 +35,6 @@ public class ManejoEstablecimiento {
             for (int i = 0; i < List.size(); i++){
                 establecimiento = List.get(i);
                 if(establecimiento.getId() == id){
-                    establecimiento.generarRiesgo();
                     return establecimiento;
                 }
             }
