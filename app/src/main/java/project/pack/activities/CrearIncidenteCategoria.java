@@ -54,8 +54,6 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
     boolean noEncontro=false;
 
-    CategoriaLogic categoriaLogic;
-
     Facade facade = Facade.getInstance();
 
     @Override
@@ -74,8 +72,8 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                  if(true) {
-                if(validarCampos()) {
+                  if(true) {
+//                if(validarCampos()) {
 
                     Categoria categoriaSeteada = setearCategoria();
 
@@ -127,15 +125,9 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
         if(noEncontro !=true){
 
-            categoriaLogic = new CategoriaLogicImp();
+            String descripcion = etDescripcion.getText().toString();
 
-            String texto = etDescripcion.getText().toString();
-
-            String[] arrayPalabrasDelTexto = categoriaLogic.getArray(texto);
-
-            ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-
-            Categoria categoria  = this.categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
+            Categoria categoria  = facade.getCagoriaPorDescripcion(descripcion);
 
             if(categoria.getId()!=null){
                 nuevaCategoria= categoria;
@@ -148,7 +140,6 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
         }else{
             nuevaCategoria = (Categoria) spnCategorias.getSelectedItem();
         }
-
         return nuevaCategoria;
     }
 
