@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         btnCrearIncidenteCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteCategoria.class);
+                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteConDetectorDeCategoria.class);
                 startActivity(layautCrearIncidenteCategoria);
             }
         });

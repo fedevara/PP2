@@ -27,7 +27,7 @@ public class Categoria implements Serializable {
         return id;
     }
 
-    private void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
         return nombre;
     }
 
-    private void setNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 

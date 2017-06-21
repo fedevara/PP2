@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,11 +21,8 @@ import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
-import project.pack.logic.CategoriaLogic;
-import project.pack.logicImp.CategoriaLogicImp;
-import project.pack.utilities.CategoriaProperties;
 
-public class CrearIncidenteCategoria extends AppCompatActivity {
+public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
 
     @Bind(R.id.txtLongitud)
     TextView txtLongitud;
@@ -54,14 +50,12 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
     boolean noEncontro=false;
 
-    CategoriaLogic categoriaLogic;
-
     Facade facade = Facade.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_incidente_categoria);
+        setContentView(R.layout.activity_crear_incidente_con_detector_de_categoria);
 
         ButterKnife.bind(this);
 
@@ -74,14 +68,14 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                  if(true) {
-                if(validarCampos()) {
+                if(true) {
+//                if(validarCampos()) {
 
                     Categoria categoriaSeteada = setearCategoria();
 
                     if(categoriaSeteada!=null){
 
-                        Intent mostrarIncidente = new Intent(CrearIncidenteCategoria.this, VerIncidenteActivity.class);
+                        Intent mostrarIncidente = new Intent(CrearIncidenteConDetectorDeCategoria.this, VerIncidenteActivity.class);
                         Facade facade = Facade.getInstance();
 
                         try {
@@ -102,7 +96,7 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent layautPaginaPrincipal = new Intent(CrearIncidenteCategoria.this, MainActivity.class);
+                Intent layautPaginaPrincipal = new Intent(CrearIncidenteConDetectorDeCategoria.this, MainActivity.class);
                 startActivity(layautPaginaPrincipal);
             }
         });
@@ -127,15 +121,9 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
 
         if(noEncontro !=true){
 
-            categoriaLogic = new CategoriaLogicImp();
+            String descripcion = etDescripcion.getText().toString();
 
-            String texto = etDescripcion.getText().toString();
-
-            String[] arrayPalabrasDelTexto = categoriaLogic.getArray(texto);
-
-            ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-
-            Categoria categoria  = this.categoriaLogic.searchWorld(arrayPalabrasDelTexto, categorias);
+            Categoria categoria  = facade.getCagoriaPorDescripcion(descripcion);
 
             if(categoria.getId()!=null){
                 nuevaCategoria= categoria;
@@ -148,7 +136,6 @@ public class CrearIncidenteCategoria extends AppCompatActivity {
         }else{
             nuevaCategoria = (Categoria) spnCategorias.getSelectedItem();
         }
-
         return nuevaCategoria;
     }
 

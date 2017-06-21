@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import project.pack.controller.ManejoCategoria;
 import project.pack.persistence.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
+import project.pack.utilities.CategoriaProperties;
 import project.pack.utilities.ManejoProperties;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
@@ -25,6 +27,7 @@ public class Facade {
     private ManejoIncidente manejoIncidente;
     private ManejoEstablecimiento manejoEstablecimiento;
     private ManejoProperties manejoProperties;
+    private ManejoCategoria manejoCategoria;
     private Context context;
 
     private static Facade INSTANCE;
@@ -39,6 +42,7 @@ public class Facade {
         manejoIncidente = new ManejoIncidente();
         manejoEstablecimiento = new ManejoEstablecimiento();
         manejoProperties = new ManejoProperties();
+        manejoCategoria = new ManejoCategoria();
     }
 
     /**
@@ -116,6 +120,16 @@ public class Facade {
 
     public Map<String, ArrayList<Categoria>> getSubCategorias() {
         return manejoProperties.getSubCategorias();
+    }
+
+
+    public Categoria getCagoriaPorDescripcion(String descripcion){
+
+        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
+        List<String> palabrasDelTexto  = manejoCategoria.getPalabrasDelTexto(descripcion);
+        Categoria categoria  = manejoCategoria.buscarCategoria(palabrasDelTexto,categorias);
+
+        return categoria;
     }
 
     public void setContext(Context context){

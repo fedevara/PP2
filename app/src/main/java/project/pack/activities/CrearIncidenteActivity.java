@@ -21,8 +21,6 @@ import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
-import project.pack.logic.CategoriaLogic;
-import project.pack.logicImp.CategoriaLogicImp;
 
 public class CrearIncidenteActivity extends AppCompatActivity {
 
