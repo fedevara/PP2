@@ -32,16 +32,10 @@ public class ManejoCategoriaTest {
     @Test
     public void buscarCategoria() throws Exception {
 
-        ManejoCategoria manejoCategoria = new ManejoCategoria();
+        String descripcion = "notifico un robo";
 
-        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
+        Categoria categoria = Facade.getInstance().getCagoriaPorDescripcion(descripcion);
 
-        List<String> palabrasDelTexto  = new ArrayList<>();
-        palabrasDelTexto.add("notifico");
-        palabrasDelTexto.add("un");
-        palabrasDelTexto.add("robo");
-
-        Categoria categoria = manejoCategoria.buscarCategoria(palabrasDelTexto,categorias);
         assertEquals(categoria.getNombre(),"Robo");
     }
 
