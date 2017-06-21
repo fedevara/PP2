@@ -39,22 +39,4 @@ public class Coordenada {
         return Math.hypot(coordenada.latitud - this.latitud, coordenada.longitud - this.longitud);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Coordenada that = (Coordenada) o;
-
-        if (this.latitud != null ? !this.latitud.equals(that.latitud) : that.latitud != null) return false;
-        return this.longitud != null ? this.longitud.equals(that.longitud) : that.longitud == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = latitud != null ? latitud.hashCode() : 0;
-        result = 31 * result + (longitud != null ? longitud.hashCode() : 0);
-        return result;
-    }
 }
