@@ -24,11 +24,13 @@ public class ManejoEstablecimientoTest {
     @Before
     public void setUp() throws Exception {
         Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarBDFacade();
     }
 
     @After
     public void tearDown() throws Exception {
         Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarBDFacade();
     }
 
 
@@ -94,7 +96,7 @@ public class ManejoEstablecimientoTest {
         Establecimiento e = Facade.getInstance().obtenerEstablecimiento(6);
         int establecimientos = Facade.getInstance().getListaEstablecimientosCercanos(e.getCoordenada()).size();
 
-        Assert.assertEquals(7, establecimientos);
+        Assert.assertEquals(3, establecimientos);
     }
 
 }

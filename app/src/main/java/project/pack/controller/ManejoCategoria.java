@@ -60,19 +60,6 @@ public class ManejoCategoria {
         }
         return categoria;
     }
-/*
-    public static void main (String [ ] args) {
-
-        ManejoCategoria manejo = new ManejoCategoria();
-
-        String descripcion = "notifico un rovo";
-
-        List<String> arrayPalabrasDelTexto = manejo.getPalabrasDelTexto(descripcion);
-
-        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-
-        Categoria categoria  = manejo.buscarCategoria(arrayPalabrasDelTexto,categorias);
-    }*/
 
 
 }
