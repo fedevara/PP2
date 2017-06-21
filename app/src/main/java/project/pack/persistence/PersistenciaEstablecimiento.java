@@ -27,13 +27,14 @@ public class PersistenciaEstablecimiento {
     private EstablecimientoDAO persistenciaDAO = new EstablecimientoDAOImpl();
 
     public Establecimiento addEstablecimiento(Establecimiento item){
+
         // Comprueba si hay conexion a internet disponible
         // Si hay conexion, puede interactuar con la persistencia
         if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
             // Guarda en la BD
             Establecimiento Est_guardado = persistenciaDAO.add(item);
             // Sincronizarlo en la cache
-            CacheSingleton.getInstance().put(item, item.getId());
+            MemoriaAlternativaSingleton.getInstance().put(item, item.getId());
 
             return Est_guardado;
         }
@@ -42,19 +43,30 @@ public class PersistenciaEstablecimiento {
     }
 
     public ArrayList<Establecimiento> getListaEstablecimiento(){
-        // Comprueba si hay conexion a internet disponible
-        // Si hay conexion, puede interactuar con la persistencia
+
+        ArrayList<Establecimiento> lista;
+
+        // Si hay conexion, consulta la bd
         if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
-            return persistenciaDAO.getListItem();
+            // Busca en la BD
+            lista = persistenciaDAO.getListItem();
+
+            // Si hay datos para sincronizar, se actualiza la cache.
+            if(lista==null || lista.size()==0) {
+
+                // Actualiza la cache
+                for (int i = 0; i < lista.size(); i++) {
+                    MemoriaAlternativaSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
+                }
+            }
         }
+
         // Si no hay conexion, tiene que interactuar con el cache
         else{
-            return CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
+            lista = MemoriaAlternativaSingleton.getInstance().obtenerLista(Establecimiento.class);
         }
-    }
 
-    public void removeEstablecimiento(Establecimiento item){
-        persistenciaDAO.remove(item);
+        return lista;
     }
 
     public void vaciarBD(){

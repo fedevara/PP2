@@ -10,7 +10,6 @@ import java.util.Date;
 
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
-import project.pack.domain.Establecimiento;
 import project.pack.domain.Punto;
 import project.pack.facade.Facade;
 
@@ -21,13 +20,13 @@ public class RiesgoTest {
 
     @Before
     public void setUp() throws Exception {
-        Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarMemoriaAlternativa();
         Facade.getInstance().eliminarBDFacade();
     }
 
     @After
     public void tearDown() throws Exception {
-        Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarMemoriaAlternativa();
         Facade.getInstance().eliminarBDFacade();
     }
 

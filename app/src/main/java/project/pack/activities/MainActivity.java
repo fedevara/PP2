@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Elimino la cache.
-                facade.eliminarCache();
-                Toast.makeText(getApplicationContext(), "La cache se elimino correctamente", Toast.LENGTH_LONG).show();
+                facade.eliminarMemoriaAlternativa();
+                Toast.makeText(getApplicationContext(), "La memoria alternativa se elimino correctamente", Toast.LENGTH_LONG).show();
             }
         });
 

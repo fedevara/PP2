@@ -1,15 +1,8 @@
 package project.pack.logic;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 
-import java.util.Calendar;
-
-import project.pack.domain.Categoria;
-import project.pack.domain.Coordenada;
-import project.pack.domain.Establecimiento;
 import project.pack.facade.Facade;
 
 /*
@@ -19,13 +12,13 @@ import project.pack.facade.Facade;
 public class RiesgoEstablecimientoStrategyTest {
     @Before
     public void setUp() throws Exception {
-        Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarMemoriaAlternativa();
         Facade.getInstance().eliminarBDFacade();
     }
 
     @After
     public void tearDown() throws Exception {
-        Facade.getInstance().eliminarCache();
+        Facade.getInstance().eliminarMemoriaAlternativa();
     }
 /*
     @Test

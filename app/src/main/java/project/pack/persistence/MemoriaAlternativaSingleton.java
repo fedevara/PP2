@@ -18,8 +18,8 @@ import project.pack.facade.Facade;
  * Created by lukas on 11/04/2017.
  */
 
-public class CacheSingleton<K, T> {
-    private static CacheSingleton<?, ?> INSTANCE;
+public class MemoriaAlternativaSingleton<K, T> {
+    private static MemoriaAlternativaSingleton<?, ?> INSTANCE;
 
     private Map<String, T> CacheMap = null;
     // Parametros
@@ -28,15 +28,15 @@ public class CacheSingleton<K, T> {
 
     // El constructor privado no permite que se genere un constructor por defecto.
     // (con mismo modificador de acceso que la definición de la clase)
-    private CacheSingleton() {
+    private MemoriaAlternativaSingleton() {
         CacheMap = Deserializar();
         if(CacheMap == null)
             CacheMap = new HashMap();
     }
 
-    public static CacheSingleton getInstance() {
+    public static MemoriaAlternativaSingleton getInstance() {
         if (INSTANCE == null)
-            INSTANCE = new CacheSingleton();
+            INSTANCE = new MemoriaAlternativaSingleton();
         return INSTANCE;
     }
 

@@ -13,8 +13,6 @@ import project.pack.domain.Incidente;
 
         Incidente add(Incidente item);
 
-        boolean remove(Incidente item);
-
         void vaciarBD();
 
     }

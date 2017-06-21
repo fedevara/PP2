@@ -12,15 +12,14 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
 import project.pack.domain.Incidente;
-import project.pack.persistence.CacheSingleton;
 
 import static org.junit.Assert.*;
 
 /**
  * Created by Federico Vara on 14/4/2017.
  */
-public class CacheSingletonTest {
-    private CacheSingleton cache;
+public class MemoriaAlternativaSingletonTest {
+    private MemoriaAlternativaSingleton cache;
 
     //AndroidTestCase()
 
@@ -28,7 +27,7 @@ public class CacheSingletonTest {
     @Before
     public void setUp() throws Exception {
         // Instancio y borro la cache.
-        cache = CacheSingleton.getInstance();
+        cache = MemoriaAlternativaSingleton.getInstance();
         cache.limpiarCache();
         cache.setLimitItems(256);
 
@@ -82,7 +81,7 @@ public class CacheSingletonTest {
 
     @Test
     public void getInstance() throws Exception {
-        assertTrue(CacheSingleton.getInstance().equals(cache));
+        assertTrue(MemoriaAlternativaSingleton.getInstance().equals(cache));
     }
 
     // No se deben perder datos al almacenar

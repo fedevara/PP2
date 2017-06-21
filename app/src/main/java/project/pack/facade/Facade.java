@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import project.pack.persistence.CacheSingleton;
+import project.pack.persistence.MemoriaAlternativaSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
 import project.pack.utilities.ManejoProperties;
@@ -102,8 +102,8 @@ public class Facade {
      * INICIO METODOS CORRESPONDIENTES A CACHE
      */
 
-    public void eliminarCache() {
-        CacheSingleton.getInstance().limpiarCache();
+    public void eliminarMemoriaAlternativa() {
+        MemoriaAlternativaSingleton.getInstance().limpiarCache();
     }
 
     /**

@@ -12,7 +12,7 @@ import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
-import project.pack.persistence.CacheSingleton;
+import project.pack.persistence.MemoriaAlternativaSingleton;
 
 import static org.junit.Assert.*;
 
@@ -22,13 +22,13 @@ public class ManejoIncidenteTest {
     @Before
     public void setUp() throws Exception {
         // borra la cache.
-        CacheSingleton.getInstance().limpiarCache();
+        MemoriaAlternativaSingleton.getInstance().limpiarCache();
     }
 
     @After
     public void tearDown() throws Exception {
         // borra la cache.
-        CacheSingleton.getInstance().limpiarCache();
+        MemoriaAlternativaSingleton.getInstance().limpiarCache();
     }
 
     @Test
@@ -50,7 +50,7 @@ public class ManejoIncidenteTest {
         Incidente inGuardar = Facade.getInstance().crearIncidente("Robo", "Paso tal cosa", new Date(), null, new Coordenada(-30.0,-40.0));
 
         // obtengo el incidente guardado
-        Incidente IncidenteGuardado = (Incidente) CacheSingleton.getInstance().get(inGuardar.getId(),Incidente.class);
+        Incidente IncidenteGuardado = (Incidente) MemoriaAlternativaSingleton.getInstance().get(inGuardar.getId(),Incidente.class);
 
         // compruebo que lo que se guardo sea lo mismo que mande a guardar
         assertTrue(inGuardar.equals(IncidenteGuardado));

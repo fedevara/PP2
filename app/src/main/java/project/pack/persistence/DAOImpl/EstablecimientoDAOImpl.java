@@ -37,18 +37,6 @@ public class EstablecimientoDAOImpl implements EstablecimientoDAO {
     }
 
     @Override
-    public boolean remove(Establecimiento item) {
-        for (int i = 0; i < lista.size(); i++) {
-            if(lista.get(i).getId()==item.getId()) {
-                lista.remove(i);
-                conex.Escribir(lista, File);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public void vaciarBD() {
         lista = new ArrayList<>();
         ID = 0;

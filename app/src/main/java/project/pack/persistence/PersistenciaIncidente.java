@@ -33,7 +33,7 @@ public class PersistenciaIncidente {
             // Guarda en la BD
             Incidente In_guardado = persistenciaDAO.add(item);
             // Sincronizarlo en la cache
-            CacheSingleton.getInstance().put(item, item.getId());
+            MemoriaAlternativaSingleton.getInstance().put(item, item.getId());
 
             return In_guardado;
         }
@@ -49,19 +49,15 @@ public class PersistenciaIncidente {
             if(lista!=null) {
                 // Actualizo el cache
                 for (int i = 0; i < lista.size(); i++) {
-                    CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
+                    MemoriaAlternativaSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
                 }
             }
             return lista;
         }
         // Si no hay conexion, tiene que interactuar con el cache
         else{
-            return CacheSingleton.getInstance().obtenerLista(Incidente.class);
+            return MemoriaAlternativaSingleton.getInstance().obtenerLista(Incidente.class);
         }
-    }
-
-    public void removeIncidente(Incidente item){
-        persistenciaDAO.remove(item);
     }
 
     public void vaciarBD(){

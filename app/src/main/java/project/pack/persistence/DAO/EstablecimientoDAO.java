@@ -13,8 +13,6 @@ import project.pack.domain.Establecimiento;
 
         Establecimiento add(Establecimiento item);
 
-        boolean remove(Establecimiento item);
-
         void vaciarBD();
 
     }
