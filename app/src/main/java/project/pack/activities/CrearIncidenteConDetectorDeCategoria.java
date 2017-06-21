@@ -55,7 +55,7 @@ public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_incidente_categoria);
+        setContentView(R.layout.activity_crear_incidente_con_detector_de_categoria);
 
         ButterKnife.bind(this);
 
