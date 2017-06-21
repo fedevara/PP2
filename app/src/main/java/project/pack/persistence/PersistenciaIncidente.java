@@ -60,10 +60,6 @@ public class PersistenciaIncidente {
         }
     }
 
-    public void removeIncidente(Incidente item){
-        persistenciaDAO.remove(item);
-    }
-
     public void vaciarBD(){
         persistenciaDAO.vaciarBD();
     }

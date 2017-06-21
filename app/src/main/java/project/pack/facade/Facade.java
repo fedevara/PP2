@@ -118,9 +118,9 @@ public class Facade {
         return manejoProperties.getCategorias();
     }
 
-    public Map<String, ArrayList<Categoria>> getSubCategorias() {
+    /*public Map<String, ArrayList<Categoria>> getSubCategorias() {
         return manejoProperties.getSubCategorias();
-    }
+    }*/
 
 
     public Categoria getCagoriaPorDescripcion(String descripcion){

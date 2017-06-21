@@ -109,7 +109,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
     }
 
     private void initSpinnerCategorias() {
-        ArrayList<Categoria> categorias = facade.getCategorias();
+        /*ArrayList<Categoria> categorias = facade.getCategorias();
         subCategorias = facade.getSubCategorias();
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categorias);
@@ -124,11 +124,11 @@ public class CrearIncidenteActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {
             }
-        });
+        });*/
     }
 
     private void loadOnClicSpinner(View view) {
-        Categoria categoria = (Categoria) spnCategorias.getSelectedItem();
+        /*Categoria categoria = (Categoria) spnCategorias.getSelectedItem();
         ArrayList<Categoria> subCategorias = new ArrayList<Categoria>();
         Map<String, ArrayList<Categoria>> categorias = facade.getSubCategorias();
 
@@ -143,7 +143,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
-        spnSubCategorias.setAdapter(spinner_adapter);
+        spnSubCategorias.setAdapter(spinner_adapter);*/
     }
 
     private boolean validarCampos() {

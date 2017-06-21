@@ -53,10 +53,6 @@ public class PersistenciaEstablecimiento {
         }
     }
 
-    public void removeEstablecimiento(Establecimiento item){
-        persistenciaDAO.remove(item);
-    }
-
     public void vaciarBD(){
         persistenciaDAO.vaciarBD();
     }
