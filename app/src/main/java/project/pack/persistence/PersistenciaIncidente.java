@@ -42,23 +42,28 @@ public class PersistenciaIncidente {
     }
 
     public ArrayList<Incidente> getListaIncidente(){
-        // Comprueba si hay conexion a internet disponible
-        // Si hay conexion, puede interactuar con la persistencia
-        if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
-            ArrayList<Incidente> lista = persistenciaDAO.getListItem();
-            if(lista!=null) {
-                // Actualizo el cache
-                for (int i = 0; i < lista.size(); i++) {
-                    CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
-                }
+
+        ArrayList<Incidente> lista;
+
+        // Primero intenta obtener los datos desde el IdentityMap (Cache)
+        lista = CacheSingleton.getInstance().obtenerLista(Incidente.class);
+
+        // Si no encuentra ahi (return null), entonces lo va a traer de la bd
+        if(lista==null || lista.size()==0){
+            lista = persistenciaDAO.getListItem();
+
+            // Actualiza la cache
+            for (int i = 0; i < lista.size(); i++) {
+                CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
             }
-            return lista;
+
         }
-        // Si no hay conexion, tiene que interactuar con el cache
-        else{
-            return CacheSingleton.getInstance().obtenerLista(Incidente.class);
-        }
+
+        return lista;
     }
+
+
+
 
     public void vaciarBD(){
         persistenciaDAO.vaciarBD();

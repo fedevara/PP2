@@ -41,17 +41,27 @@ public class PersistenciaEstablecimiento {
         return null;
     }
 
+
     public ArrayList<Establecimiento> getListaEstablecimiento(){
-        // Comprueba si hay conexion a internet disponible
-        // Si hay conexion, puede interactuar con la persistencia
-        if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
-            return persistenciaDAO.getListItem();
+
+        ArrayList<Establecimiento> lista;
+
+        // Primero intenta obtener los datos desde la caché (IdentityMap)
+        lista = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
+
+        // Si no encuentra ahi (return null), entonces lo va a traer de la bd
+        if(lista==null || lista.size()==0){
+            lista = persistenciaDAO.getListItem();
+
+            // Actualiza la cache
+            for (int i = 0; i < lista.size(); i++) {
+                CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
+            }
         }
-        // Si no hay conexion, tiene que interactuar con el cache
-        else{
-            return CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
-        }
+
+        return lista;
     }
+
 
     public void vaciarBD(){
         persistenciaDAO.vaciarBD();
