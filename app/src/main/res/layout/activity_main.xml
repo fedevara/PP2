@@ -49,4 +49,12 @@
         android:id="@+id/btnCrearIncidenteCategoria"
         android:text="Crear Incidente V2"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnCrearIncidenteCategoria"
+        android:id="@+id/btnComprobarConexion"
+        android:text="Comprobar conexion"/>
+
+
 </RelativeLayout>

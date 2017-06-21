@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -16,8 +15,8 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import project.pack.R;
-import project.pack.controller.CacheSingleton;
 import project.pack.domain.Incidente;
+import project.pack.facade.Facade;
 
 public class VerIncidenteActivity extends AppCompatActivity {
 
@@ -45,18 +44,17 @@ public class VerIncidenteActivity extends AppCompatActivity {
     }
 
     private void cargarListaIncidentes() {
-
-        List<Incidente> incidentes = CacheSingleton.getInstance().obtenerListaIncidentes();
-        ArrayList<Incidente> listaIncidentes = new ArrayList<Incidente>();
+        List<Incidente> incidentes = Facade.getInstance().obtenerListaIncidentes();
+        ArrayList<String> listaIncidentes = new ArrayList<String>();
 
         if (incidentes != null && incidentes.size() > 0) {
             for (int i = 0; i < incidentes.size(); i++) {
                 Incidente incidente = incidentes.get(i);
-                listaIncidentes.add(incidente);
+                listaIncidentes.add(incidente.getDescripcion()+" - " + incidente.getCategoria().getNombre());
             }
-            ArrayAdapter<Incidente> adaptador = new ArrayAdapter<Incidente>(this, android.R.layout.simple_list_item_1, listaIncidentes);
-            lvResultado.setAdapter(adaptador);
 
+            ArrayAdapter<String> adaptador = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listaIncidentes);
+            lvResultado.setAdapter(adaptador);
         } else {
             Toast.makeText(getApplicationContext(), "Usted no Cargó ningún Incidente.", Toast.LENGTH_LONG).show();
         }

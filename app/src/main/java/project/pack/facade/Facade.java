@@ -1,12 +1,14 @@
 package project.pack.facade;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import project.pack.controller.CacheSingleton;
 import project.pack.controller.ManejoCategoria;
+import project.pack.persistence.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
 import project.pack.utilities.CategoriaProperties;
@@ -26,6 +28,7 @@ public class Facade {
     private ManejoEstablecimiento manejoEstablecimiento;
     private ManejoProperties manejoProperties;
     private ManejoCategoria manejoCategoria;
+    private Context context;
 
     private static Facade INSTANCE;
 
@@ -42,12 +45,13 @@ public class Facade {
         manejoCategoria = new ManejoCategoria();
     }
 
-    /* INICIO METODOS CORRESPONDIENTES A INCIDENTES */
+    /**
+    * INICIO METODOS CORRESPONDIENTES A INCIDENTES
+    */
 
     /**
      * Crea un incidente y lo guarda en la memoria cache
      *
-     * @param id          Es el id con el que se va a guardar en la base de datos
      * @param titulo      Titulo del incidente
      * @param descripcion Descripcion del incidente
      * @param fecha       Fecha en la que sucesio el incidente, puede ser distinta a la actual
@@ -55,9 +59,9 @@ public class Facade {
      * @param coordenada       Lugar donde ocurrio el incidente
      * @return Devuelve el objeto creado y guardado en la base
      */
-    public Incidente crearIncidente(Integer id, String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
-        Incidente incidente = manejoIncidente.crearIncidente(coordenada,id, titulo, descripcion, fecha, categoria);
-        manejoIncidente.guardarIncidente(incidente);
+    public Incidente crearIncidente(String titulo, String descripcion, Date fecha, Categoria categoria, Coordenada coordenada) {
+        Incidente incidente = manejoIncidente.crearIncidente(coordenada, titulo, descripcion, fecha, categoria);
+        incidente = manejoIncidente.guardarIncidente(incidente);
         return incidente;
     }
 
@@ -77,9 +81,13 @@ public class Facade {
      * INICIO METODOS CORRESPONDIENTES A ESTABLECIMIENTOS
      */
 
-    public void crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+    public Establecimiento crearEstablecimiento(String nombre, Categoria categoria, Coordenada coordenada) {
+
         Establecimiento establecimiento = manejoEstablecimiento.crearEstablecimiento(coordenada, nombre, categoria);
-        manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        establecimiento = manejoEstablecimiento.guardarEstablecimiento(establecimiento);
+
+        return establecimiento;
     }
 
     public Establecimiento obtenerEstablecimiento(Integer id1) {
@@ -114,6 +122,7 @@ public class Facade {
         return manejoProperties.getSubCategorias();
     }
 
+
     public Categoria getCagoriaPorDescripcion(String descripcion){
 
         ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
@@ -121,5 +130,18 @@ public class Facade {
         Categoria categoria  = manejoCategoria.buscarCategoria(palabrasDelTexto,categorias);
 
         return categoria;
+    }
+
+    public void setContext(Context context){
+        this.context = context;
+    }
+
+    public Context getContext(){
+        return context;
+    }
+
+    public void eliminarBDFacade(){
+        manejoEstablecimiento.eliminar();
+        manejoIncidente.eliminarBD();
     }
 }

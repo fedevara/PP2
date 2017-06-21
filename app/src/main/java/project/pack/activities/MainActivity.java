@@ -1,5 +1,6 @@
 package project.pack.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import project.pack.R;
 import project.pack.facade.Facade;
+import project.pack.utilities.ConnectionUtilities;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,7 +31,12 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.btnCrearIncidenteCategoria)
     Button btnCrearIncidenteCategoria;
 
+    @Bind(R.id.btnComprobarConexion)
+    Button btnComprobarConexion;
+
+
     Facade facade = Facade.getInstance();
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+        context = this;
+
+        // Envio la referencia del contexto
+        facade.setContext(context);
 
         btnAgragarIncidente.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +77,17 @@ public class MainActivity extends AppCompatActivity {
         btnCrearIncidenteCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteCategoria.class);
+                Intent layautCrearIncidenteCategoria = new Intent(MainActivity.this, CrearIncidenteConDetectorDeCategoria.class);
                 startActivity(layautCrearIncidenteCategoria);
+            }
+        });
+
+        btnComprobarConexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean HayConex = ConnectionUtilities.estaConectado(context);
+                String HayConexion = (HayConex)? "Conectado!":"Desconectado!";
+                Toast.makeText(getApplicationContext(), "Estado de conexion: "+ HayConexion, Toast.LENGTH_LONG).show();
             }
         });
     }

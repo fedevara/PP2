@@ -11,17 +11,15 @@ public class Categoria implements Serializable {
 
     private Integer id;
     private String nombre;
-    private String riesgo;
     private String[] palabrasClaves;
 
     public Categoria(){
 
     }
 
-    public Categoria(Integer id, String nombre, String riesgo, String[] palabrasClaves) {
+    public Categoria(Integer id, String nombre, String[] palabrasClaves) {
         setId(id);
         setNombre(nombre);
-        setRiesgo(riesgo);
         setPalabrasClaves(palabrasClaves);
     }
 
@@ -29,7 +27,7 @@ public class Categoria implements Serializable {
         return id;
     }
 
-    private void setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,16 +35,8 @@ public class Categoria implements Serializable {
         return nombre;
     }
 
-    private void setNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    private void setRiesgo(String riesgo) {
-        this.riesgo = riesgo;
-    }
-
-    public String getRiesgo() {
-        return riesgo;
     }
 
     public String toString() {
@@ -56,7 +46,9 @@ public class Categoria implements Serializable {
     public String[] getPalabrasClaves() {
         return palabrasClaves;
     }
+
     public void setPalabrasClaves(String[] palabrasClaves) {
         this.palabrasClaves = palabrasClaves;
     }
+
 }

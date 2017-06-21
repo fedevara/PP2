@@ -21,8 +21,6 @@ import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.facade.Facade;
-import project.pack.logic.CategoriaLogic;
-import project.pack.logicImp.CategoriaLogicImp;
 
 public class CrearIncidenteActivity extends AppCompatActivity {
 
@@ -77,7 +75,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
                     Coordenada coordenada = obtenerCoordenadas();
                     try {
-                        facade.crearIncidente(1, titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
+                        facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
                         startActivity(mostrarIncidente);
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();
@@ -141,7 +139,7 @@ public class CrearIncidenteActivity extends AppCompatActivity {
         } else if (categoria.getNombre().equals("Reclamo")) {
             subCategorias = categorias.get("Reclamo");
         } else {
-            subCategorias.add(new Categoria(0, "Error", "",null));
+            subCategorias.add(new Categoria(0, "Error", null));
         }
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, subCategorias);
