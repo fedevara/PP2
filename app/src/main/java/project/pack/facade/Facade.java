@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import project.pack.controller.ManejoCategoria;
 import project.pack.persistence.CacheSingleton;
@@ -126,7 +127,7 @@ public class Facade {
     public Categoria getCagoriaPorDescripcion(String descripcion){
 
         ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-        List<String> palabrasDelTexto  = manejoCategoria.getPalabrasDelTexto(descripcion);
+        Set<String> palabrasDelTexto  = manejoCategoria.getPalabrasDelTexto(descripcion);
         Categoria categoria  = manejoCategoria.buscarCategoria(palabrasDelTexto,categorias);
 
         return categoria;

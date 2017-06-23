@@ -3,7 +3,9 @@ package project.pack.controller;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import project.pack.domain.Categoria;
 import project.pack.facade.Facade;
@@ -22,7 +24,7 @@ public class ManejoCategoriaTest {
 
         String descipcion = "notifico un robo";
 
-        List<String> palabrasDelTexto = new ArrayList<>();
+        Set<String> palabrasDelTexto = new HashSet<>();
 
         palabrasDelTexto = manejoCategoria.getPalabrasDelTexto(descipcion);
 
