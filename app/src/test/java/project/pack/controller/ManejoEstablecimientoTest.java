@@ -10,6 +10,8 @@ import java.util.Calendar;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
 import project.pack.domain.Establecimiento;
+import project.pack.domain.Incidente;
+import project.pack.domain.Punto;
 import project.pack.facade.Facade;
 import project.pack.logic.CalculadorDeRiesgo;
 
@@ -97,6 +99,31 @@ public class ManejoEstablecimientoTest {
         int establecimientos = Facade.getInstance().getListaEstablecimientosCercanos(e.getCoordenada()).size();
 
         Assert.assertEquals(3, establecimientos);
+    }
+
+    @Test
+    public void getPuntoCoordenada() throws Exception {
+
+        Punto punto = new Punto(new Coordenada(10.3,10.3));
+        Punto punto2 = new Punto(new Coordenada(10.3,10.3));
+
+        Double distancia = punto.getDistancia(punto2);
+
+        Assert.assertNotNull(distancia);
+    }
+
+    @Test
+    public void testcoordenadasIncidentes() throws Exception {
+
+        Categoria bajo = new Categoria(1, "Reclamo", null);
+        Categoria medio = new Categoria(2, "Transito", null);
+
+        Incidente incidente1 = new Incidente(new Coordenada(10.0, 10.0),"incidente1", "incidente1", Calendar.getInstance().getTime(),Calendar.getInstance().getTime(), bajo);
+        Incidente incidente2 = new Incidente(new Coordenada(10.0, 10.0),"incidente2", "incidente2", Calendar.getInstance().getTime(),Calendar.getInstance().getTime(), bajo);
+
+        Double distancia = incidente1.getDistancia(incidente2);
+
+        Assert.assertNotNull(distancia);
     }
 
 }

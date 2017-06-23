@@ -72,10 +72,6 @@ public class Incidente implements IUbicable {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -92,39 +88,8 @@ public class Incidente implements IUbicable {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Incidente)) return false;
-
-        Incidente incidente = (Incidente) o;
-
-        if (id != incidente.id)
-            return false;
-        if (titulo != null ? !titulo.equals(incidente.titulo) : incidente.titulo != null)
-            return false;
-        if (descripcion != null ? !descripcion.equals(incidente.descripcion) : incidente.descripcion != null)
-            return false;
-        if (fecha != null ? !fecha.equals(incidente.fecha) : incidente.fecha != null)
-            return false;
-        if (fechaCreacion != null ? !fechaCreacion.equals(incidente.fechaCreacion) : incidente.fechaCreacion != null)
-            return false;
-        return categoria != null ? categoria.equals(incidente.categoria) : incidente.categoria == null;
-
-    }
-
-    @Override
     public String toString(){
         return descripcion + " - " + getCategoria().getNombre();
     }
 
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (titulo != null ? titulo.hashCode() : 0);
-        result = 31 * result + (descripcion != null ? descripcion.hashCode() : 0);
-        result = 31 * result + (fecha != null ? fecha.hashCode() : 0);
-        result = 31 * result + (fechaCreacion != null ? fechaCreacion.hashCode() : 0);
-        result = 31 * result + (categoria != null ? categoria.hashCode() : 0);
-        return result;
-    }
 }
