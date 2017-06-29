@@ -1,7 +1,9 @@
 package project.pack.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import project.pack.domain.Categoria;
 import project.pack.utilities.CategoriaProperties;
@@ -13,13 +15,13 @@ import project.pack.utilities.CategoriaProperties;
 public class ManejoCategoria {
 
 
-    public List getPalabrasDelTexto(String descripcion) {
+    public Set getPalabrasDelTexto(String descripcion) {
 
         String textoEnMinusculas = descripcion.toLowerCase();
 
         String[] palabras = textoEnMinusculas.split(" ");
 
-        List<String> palabrasDelTexto = new ArrayList<>();
+        Set<String> palabrasDelTexto = new HashSet<>();
 
         for (String palabra: palabras){
             palabrasDelTexto.add(palabra);
@@ -28,7 +30,7 @@ public class ManejoCategoria {
         return palabrasDelTexto;
     }
 
-    public Categoria buscarCategoria(List<String> palabrasDelTexto, ArrayList<Categoria> categorias) {
+    public Categoria buscarCategoria(Set<String> palabrasDelTexto, ArrayList<Categoria> categorias) {
 
         Categoria nuevaCategoria = null;
 
@@ -60,19 +62,6 @@ public class ManejoCategoria {
         }
         return categoria;
     }
-/*
-    public static void main (String [ ] args) {
-
-        ManejoCategoria manejo = new ManejoCategoria();
-
-        String descripcion = "notifico un rovo";
-
-        List<String> arrayPalabrasDelTexto = manejo.getPalabrasDelTexto(descripcion);
-
-        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-
-        Categoria categoria  = manejo.buscarCategoria(arrayPalabrasDelTexto,categorias);
-    }*/
 
 
 }
