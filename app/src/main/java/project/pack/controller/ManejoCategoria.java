@@ -1,11 +1,14 @@
 package project.pack.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import project.pack.domain.Categoria;
+import project.pack.facade.Facade;
 import project.pack.utilities.CategoriaProperties;
 
 /**
@@ -14,6 +17,10 @@ import project.pack.utilities.CategoriaProperties;
 
 public class ManejoCategoria {
 
+    public ArrayList<Categoria> getCategorias(){
+        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
+        return categorias;
+    }
 
     public Set getPalabrasDelTexto(String descripcion) {
 
@@ -63,5 +70,15 @@ public class ManejoCategoria {
         return categoria;
     }
 
+    public Categoria buscarCategoriaMejorado(String descripcion) {
+
+        ArrayList<Categoria> categorias = getCategorias();
+
+        Set<String> palabrasDelTexto = getPalabrasDelTexto(descripcion);
+
+        Categoria categoria  = buscarCategoria(palabrasDelTexto,categorias);
+
+        return categoria;
+    }
 
 }

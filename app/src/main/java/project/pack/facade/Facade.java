@@ -126,11 +126,9 @@ public class Facade {
 
     public Categoria getCagoriaPorDescripcion(String descripcion){
 
-        ArrayList<Categoria> categorias = CategoriaProperties.LISTA_CATEGORIAS;
-        Set<String> palabrasDelTexto  = manejoCategoria.getPalabrasDelTexto(descripcion);
-        Categoria categoria  = manejoCategoria.buscarCategoria(palabrasDelTexto,categorias);
+        Categoria categoriaMejorada  = manejoCategoria.buscarCategoriaMejorado(descripcion);
 
-        return categoria;
+        return categoriaMejorada;
     }
 
     public void setContext(Context context){
