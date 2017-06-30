@@ -58,10 +58,8 @@ public class PersistenciaIncidente {
             }
 
         }
-
         return lista;
     }
-
 
     public void vaciarBD() {
         persistenciaDAO.vaciarBD();
