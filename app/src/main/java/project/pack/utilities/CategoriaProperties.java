@@ -18,15 +18,15 @@ public class CategoriaProperties {
 
     /* INCIDENTES DE TRANSITO */
     public static final String[] PALABRAS_CLAVES_TRANSITO= new String[]{"trafico", "recorrido", "muerte","transporte"};
-    public final static Categoria TRANSITO = new Categoria(0, "Transito", PALABRAS_CLAVES_TRANSITO);
+    public final static Categoria TRANSITO = new Categoria(1, "Transito", PALABRAS_CLAVES_TRANSITO);
 
     /* INCIDENTES DE INSEGURIDAD */
     public static final String[] PALABRAS_CLAVES_ROBO = new String[]{"robo","hurto","saqueo", "arrebatamiento"};
-    public final static Categoria ROBO = new Categoria(0, "Robo", PALABRAS_CLAVES_ROBO);
+    public final static Categoria ROBO = new Categoria(2, "Robo", PALABRAS_CLAVES_ROBO);
 
     /* INCIDENTES DE RECLAMOS */
     public static final String[] PALABRAS_CLAVES_RECLAMO = new String[]{"reclamo", "queja", "protesta"};
-    public final static Categoria RECLAMO = new Categoria(0, "Reclamo", PALABRAS_CLAVES_RECLAMO);
+    public final static Categoria RECLAMO = new Categoria(3, "Reclamo", PALABRAS_CLAVES_RECLAMO);
 
 
     /* LISTAS DE TODOS LOS INCIDENTES DE CADA TIPO */
