@@ -3,7 +3,9 @@ package project.pack.persistence.DAOImpl;
 import java.util.ArrayList;
 
 import project.pack.domain.Incidente;
+import project.pack.facade.Facade;
 import project.pack.persistence.DAO.IncidenteDAO;
+import project.pack.utilities.ConnectionUtilities;
 
 /**
  * Created by lukas on 14/05/2017.
@@ -24,16 +26,25 @@ public class IncidenteDAOImpl implements IncidenteDAO {
 
     @Override
     public ArrayList<Incidente> getListItem() {
-        return lista;
+
+        if( ConnectionUtilities.estaConectado(Facade.getInstance().getContext())) {
+            return lista;
+        }
+        return null;
     }
 
     @Override
     public Incidente add(Incidente item) {
-        lista.add(item);
-        ID++;
-        item.setId(ID);
-        conex.Escribir(lista, File);
-        return item;
+
+        if( ConnectionUtilities.estaConectado(Facade.getInstance().getContext())) {
+
+            lista.add(item);
+            ID++;
+            item.setId(ID);
+            conex.Escribir(lista, File);
+            return item;
+        }
+        return null;
     }
 
     @Override
