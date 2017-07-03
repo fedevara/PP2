@@ -124,7 +124,7 @@ public class Facade {
     }*/
 
 
-    public Categoria getCagoriaPorDescripcion(String descripcion){
+    public Categoria obtenerCagoriaPorDescripcion(String descripcion){
 
         Categoria categoriaMejorada  = manejoCategoria.buscarCategoriaMejorado(descripcion);
 

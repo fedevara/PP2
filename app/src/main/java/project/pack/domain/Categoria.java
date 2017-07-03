@@ -16,7 +16,10 @@ public class Categoria implements Serializable {
     public Categoria(){
 
     }
-
+    public Categoria(Integer id, String nombre) {
+        setId(id);
+        setNombre(nombre);
+    }
     public Categoria(Integer id, String nombre, String[] palabrasClaves) {
         setId(id);
         setNombre(nombre);
