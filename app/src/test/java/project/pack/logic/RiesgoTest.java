@@ -41,9 +41,9 @@ public class RiesgoTest {
 
         //Agregamos 3 incidentes de niveles de riesgos diferentes en el contexto
 
-        Categoria bajo = new Categoria(1, "Reclamo", null);
-        Categoria medio = new Categoria(2, "Transito", null);
-        Categoria alto = new Categoria(3, "Robo", null);
+        Categoria bajo = new Categoria(1, "Reclamo");
+        Categoria medio = new Categoria(2, "Transito");
+        Categoria alto = new Categoria(3, "Robo");
 
         Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidenteAlto", "incidenteAlto", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -71,9 +71,9 @@ public class RiesgoTest {
         //Agregamos 3 incidentes de niveles de riesgo diferentes en el contexto.
         //El incidente de riesgo alto no va a ser tenido en cuenta por la distancia en la que se encuentra
 
-        Categoria bajo = new Categoria(1, "Reclamo", null);
-        Categoria medio = new Categoria(2, "Transito", null);
-        Categoria alto = new Categoria(3, "Robo", null);
+        Categoria bajo = new Categoria(1, "Reclamo");
+        Categoria medio = new Categoria(2, "Transito");
+        Categoria alto = new Categoria(3, "Robo");
 
         Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -101,9 +101,9 @@ public class RiesgoTest {
 
         Date fechaCreacion = new Date("03/08/2017"); //fecha que supera los 30 días : 8 de Marzo de 2017
 
-        Categoria bajo = new Categoria(1, "Reclamo", null);
-        Categoria medio = new Categoria(2, "Transito", null);
-        Categoria alto = new Categoria(3, "Robo", null);
+        Categoria bajo = new Categoria(1, "Reclamo");
+        Categoria medio = new Categoria(2, "Transito");
+        Categoria alto = new Categoria(3, "Robo");
 
         Facade.getInstance().crearIncidente("incidenteBajo", "incidenteBajo", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidenteMedio", "incidenteMedio", Calendar.getInstance().getTime(), medio, new Coordenada(10.0, 10.0));
@@ -125,7 +125,7 @@ public class RiesgoTest {
     @Test
     public void calcularRiesgoMedioPorCantidadTest() throws Exception{
 
-        Categoria categoriaBaja = new Categoria(2, "Transito", null);
+        Categoria categoriaBaja = new Categoria(2, "Transito");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoriaBaja, new Coordenada(10.5, 10.5));
@@ -148,8 +148,8 @@ public class RiesgoTest {
 
     @Test
     public void calcularRiesgoBajoTest() throws Exception {
-        Categoria categoria = new Categoria(1, "Transito", null);
-        Categoria categoria2 = new Categoria(2, "Transito", null);
+        Categoria categoria = new Categoria(1, "Transito");
+        Categoria categoria2 = new Categoria(2, "Transito");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.1, 10.1));
         Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.2, 10.2));
@@ -166,8 +166,8 @@ public class RiesgoTest {
 
     @Test
     public void calcularRiesgoMuyBajoTest() throws Exception{
-        Categoria categoria = new Categoria(1, "Transito", null);
-        Categoria categoria2 = new Categoria(2, "Transito", null);
+        Categoria categoria = new Categoria(1, "Transito");
+        Categoria categoria2 = new Categoria(2, "Transito");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -183,7 +183,7 @@ public class RiesgoTest {
 
     @Test
     public void calcularRiesgoMedioTest() throws Exception{
-        Categoria categoria2 = new Categoria(2, "Transito", null);
+        Categoria categoria2 = new Categoria(2, "Transito");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria2, new Coordenada(10.5, 10.5));
@@ -204,7 +204,7 @@ public class RiesgoTest {
 
     @Test
     public void calcularRiesgoAltoTest() throws Exception{
-        Categoria categoria = new Categoria(1, "Robo", null);
+        Categoria categoria = new Categoria(1, "Robo");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
 
@@ -219,7 +219,7 @@ public class RiesgoTest {
 
     @Test
     public void calcularRiesgoMuyAltoTest() throws Exception{
-        Categoria categoria = new Categoria(1, "Robo", null);
+        Categoria categoria = new Categoria(1, "Robo");
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));
         Facade.getInstance().crearIncidente("incidente2", "incidente2", Calendar.getInstance().getTime(), categoria, new Coordenada(10.0, 10.0));

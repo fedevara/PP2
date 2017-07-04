@@ -97,7 +97,7 @@ public class ManejoIncidenteTest {
     public void getListaIncidentesConCoordenada() throws Exception {
 
         Facade.getInstance().eliminarBDFacade();
-        Categoria categoria = new Categoria(1,"Robo",null);
+        Categoria categoria = new Categoria(1,"Robo");
 
         Incidente in1 = Facade.getInstance().crearIncidente("Robo1", "Paso tal cosa ", new Date(), categoria, new Coordenada(10.1, 10.1));
         Incidente in2 = Facade.getInstance().crearIncidente("Robo2", "Paso tal cosa ", new Date(), categoria, new Coordenada(10.2, 10.2));

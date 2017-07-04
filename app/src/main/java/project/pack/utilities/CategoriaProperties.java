@@ -7,7 +7,9 @@ package project.pack.utilities;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import project.pack.domain.Categoria;
 
@@ -18,15 +20,15 @@ public class CategoriaProperties {
 
     /* INCIDENTES DE TRANSITO */
     public static final String[] PALABRAS_CLAVES_TRANSITO= new String[]{"trafico", "recorrido", "muerte","transporte"};
-    public final static Categoria TRANSITO = new Categoria(1, "Transito", PALABRAS_CLAVES_TRANSITO);
+    public final static Categoria TRANSITO = new Categoria(1, "Transito");
 
     /* INCIDENTES DE INSEGURIDAD */
     public static final String[] PALABRAS_CLAVES_ROBO = new String[]{"robo","hurto","saqueo", "arrebatamiento"};
-    public final static Categoria ROBO = new Categoria(2, "Robo", PALABRAS_CLAVES_ROBO);
+    public final static Categoria ROBO = new Categoria(2, "Robo");
 
     /* INCIDENTES DE RECLAMOS */
     public static final String[] PALABRAS_CLAVES_RECLAMO = new String[]{"reclamo", "queja", "protesta"};
-    public final static Categoria RECLAMO = new Categoria(3, "Reclamo", PALABRAS_CLAVES_RECLAMO);
+    public final static Categoria RECLAMO = new Categoria(3, "Reclamo");
 
 
     /* LISTAS DE TODOS LOS INCIDENTES DE CADA TIPO */
@@ -89,5 +91,40 @@ public class CategoriaProperties {
             return LISTA_RECLAMOS;
         }
         return new ArrayList<>();
+    }
+
+    public Map obtenerPalabrasClaves(){
+        Map<Categoria,Set<String>> palabrasClaves = new HashMap<>();
+
+        Categoria categoriaTransito= new Categoria(1, "Transito");
+        Set<String> palabrasTransito = new HashSet<>();
+
+        palabrasTransito.add("trafico");
+        palabrasTransito.add("recorrido");
+        palabrasTransito.add("muerte");
+        palabrasTransito.add("transporte");
+
+        palabrasClaves.put(categoriaTransito, palabrasTransito);
+
+        Categoria categoriaReclamo= new Categoria(2, "Reclamo");
+        Set<String> palabrasReclamo = new HashSet<>();
+
+        palabrasReclamo.add("reclamo");
+        palabrasReclamo.add("queja");
+        palabrasReclamo.add("protesta");
+
+        palabrasClaves.put(categoriaReclamo, palabrasReclamo);
+
+        Categoria categoriaRobo = new Categoria(3, "Robo");
+        Set<String> palabrasRobo = new HashSet<>();
+
+        palabrasRobo.add("robo");
+        palabrasRobo.add("hurto");
+        palabrasRobo.add("saqueo");
+        palabrasRobo.add("arrebatamiento");
+
+        palabrasClaves.put(categoriaRobo, palabrasRobo);
+
+        return palabrasClaves;
     }
 }

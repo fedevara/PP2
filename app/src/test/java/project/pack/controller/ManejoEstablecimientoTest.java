@@ -39,8 +39,8 @@ public class ManejoEstablecimientoTest {
 
     @Test
     public void calcularRiesgo() throws Exception {
-        Categoria bajo = new Categoria(1, "Reclamo", null);
-        Categoria medio = new Categoria(2, "Transito", null);
+        Categoria bajo = new Categoria(1, "Reclamo");
+        Categoria medio = new Categoria(2, "Transito");
 
 
         Facade.getInstance().crearIncidente("incidente1", "incidente1", Calendar.getInstance().getTime(), bajo, new Coordenada(10.0, 10.0));
@@ -115,8 +115,8 @@ public class ManejoEstablecimientoTest {
     @Test
     public void testcoordenadasIncidentes() throws Exception {
 
-        Categoria bajo = new Categoria(1, "Reclamo", null);
-        Categoria medio = new Categoria(2, "Transito", null);
+        Categoria bajo = new Categoria(1, "Reclamo");
+        Categoria medio = new Categoria(2, "Transito");
 
         Incidente incidente1 = new Incidente(new Coordenada(10.0, 10.0),"incidente1", "incidente1", Calendar.getInstance().getTime(),Calendar.getInstance().getTime(), bajo);
         Incidente incidente2 = new Incidente(new Coordenada(10.0, 10.0),"incidente2", "incidente2", Calendar.getInstance().getTime(),Calendar.getInstance().getTime(), bajo);

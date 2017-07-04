@@ -35,8 +35,8 @@ public class CacheSingletonTest {
         // guardo 2 elementos en la cache, la lista debe ser de longitud 2.
         Incidente i1 = new Incidente(new Coordenada(), 1, "titulo1", "Robo de auto", new Date(), new Date(), new Categoria());
         Incidente i2 = new Incidente(new Coordenada(), 2, "titulo2", "Robo de auto", new Date(), new Date(), new Categoria());
-        Categoria c1 = new Categoria(1, "categoria", null);
-        Categoria c2 = new Categoria(2, "categoria", null);
+        Categoria c1 = new Categoria(1, "categoria");
+        Categoria c2 = new Categoria(2, "categoria");
         Establecimiento e1 = new Establecimiento(1, new Coordenada(10.3,10.3), "establecimiento1", null);
         Establecimiento e2 = new Establecimiento(2, new Coordenada(10.3,10.3), "establecimiento1", null);
         Establecimiento e3 = new Establecimiento(3, new Coordenada(10.3,10.3), "establecimiento1", null);
@@ -68,7 +68,7 @@ public class CacheSingletonTest {
 
     private void agregarCategoria(Integer cant){
         for (int i = 1; i <= cant; i++) {
-            Categoria cat = new Categoria(i, "categoria "+i, null);
+            Categoria cat = new Categoria(i, "categoria "+i);
             cache.put(cat, cat.getId());
         }
     }
