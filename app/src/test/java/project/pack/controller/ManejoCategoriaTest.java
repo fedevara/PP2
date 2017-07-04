@@ -7,6 +7,7 @@ import java.util.Set;
 
 import project.pack.domain.Categoria;
 import project.pack.facade.Facade;
+import project.pack.logic.ManejoCategoria;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +24,7 @@ public class ManejoCategoriaTest {
 
         Set<String> palabrasDelTexto = new HashSet<>();
 
-        palabrasDelTexto = manejoCategoria.getPalabrasDelTexto(descipcion);
+        palabrasDelTexto = manejoCategoria.obtenerPalabrasDelTexto(descipcion);
 
         assertEquals(palabrasDelTexto.size(),3);
     }
@@ -41,12 +42,11 @@ public class ManejoCategoriaTest {
     @Test
     public void buscarCategoriaPorPalabraClave() throws Exception {
 
-        ManejoCategoria manejoCategoria = new ManejoCategoria();
+        ManejoCategoria  manejoCategoria= new ManejoCategoria();
         String[] palabrasClaves = {"robo","hurto"};
 
         Categoria categoriaRobo = new Categoria();
         categoriaRobo.setNombre("Robo");
-        categoriaRobo.setPalabrasClaves(palabrasClaves);
 
         Categoria categoriaNueva = manejoCategoria.buscarCategoriaPorPalabraClave("hurto");
 
