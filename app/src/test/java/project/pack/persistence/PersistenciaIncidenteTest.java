@@ -33,7 +33,8 @@ public class PersistenciaIncidenteTest {
 
     @Test
     public void addIncidente() throws Exception {
-        Incidente in1 = new Incidente(null, "titulo", "descripcion", null, null, null);
+        Categoria categoria = new Categoria();
+        Incidente in1 = new Incidente(null, "titulo", "descripcion", null, null, categoria);
         // no tiene ID
         Assert.assertEquals(in1.getId(),0);
         // Ahora que lo guardo, tiene ID
@@ -47,8 +48,9 @@ public class PersistenciaIncidenteTest {
         
         pIncidente.vaciarBD();
 
-        Incidente in1 = new Incidente(null, "titulo", "descripcion", null, null, null);
-        Incidente in2 = new Incidente(null, "titulo", "descripcion", null, null, null);
+        Categoria cat = new Categoria();
+        Incidente in1 = new Incidente(null, "titulo", "descripcion", null, null, cat);
+        Incidente in2 = new Incidente(null, "titulo", "descripcion", null, null, cat);
 
         pIncidente.addIncidente(in1);
         pIncidente.addIncidente(in2);

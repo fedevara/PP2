@@ -11,16 +11,12 @@ public class Categoria implements Serializable {
 
     private Integer id;
     private String nombre;
-    private String[] palabrasClaves;
 
-    public Categoria(){
+    public Categoria(){}
 
-    }
-
-    public Categoria(Integer id, String nombre, String[] palabrasClaves) {
+    public Categoria(Integer id, String nombre) {
         setId(id);
         setNombre(nombre);
-        setPalabrasClaves(palabrasClaves);
     }
 
     public Integer getId() {
@@ -42,13 +38,4 @@ public class Categoria implements Serializable {
     public String toString() {
         return nombre;
     }
-
-    public String[] getPalabrasClaves() {
-        return palabrasClaves;
-    }
-
-    public void setPalabrasClaves(String[] palabrasClaves) {
-        this.palabrasClaves = palabrasClaves;
-    }
-
 }

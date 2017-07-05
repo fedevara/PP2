@@ -5,14 +5,11 @@ import android.content.Context;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import project.pack.controller.ManejoCategoria;
+import project.pack.controller.CategoriaController;
 import project.pack.persistence.CacheSingleton;
 import project.pack.controller.ManejoEstablecimiento;
 import project.pack.controller.ManejoIncidente;
-import project.pack.utilities.CategoriaProperties;
 import project.pack.utilities.ManejoProperties;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
@@ -28,7 +25,7 @@ public class Facade {
     private ManejoIncidente manejoIncidente;
     private ManejoEstablecimiento manejoEstablecimiento;
     private ManejoProperties manejoProperties;
-    private ManejoCategoria manejoCategoria;
+    private CategoriaController categoriaController;
     private Context context;
 
     private static Facade INSTANCE;
@@ -43,7 +40,7 @@ public class Facade {
         manejoIncidente = new ManejoIncidente();
         manejoEstablecimiento = new ManejoEstablecimiento();
         manejoProperties = new ManejoProperties();
-        manejoCategoria = new ManejoCategoria();
+        categoriaController = new CategoriaController();
     }
 
     /**
@@ -124,9 +121,9 @@ public class Facade {
     }*/
 
 
-    public Categoria getCagoriaPorDescripcion(String descripcion){
+    public Categoria obtenerCagoriaPorDescripcion(String descripcion){
 
-        Categoria categoriaMejorada  = manejoCategoria.buscarCategoriaMejorado(descripcion);
+        Categoria categoriaMejorada  = categoriaController.buscarCategoriaPorDescripcion(descripcion);
 
         return categoriaMejorada;
     }

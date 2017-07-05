@@ -19,9 +19,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Con ButterKnife Reemplazas      (Button) findViewById ->por   @Bind
 
-    @Bind(R.id.btnAgragarIncidente)
-    Button btnAgragarIncidente;
-
     @Bind(R.id.btnVerListIncidentes)
     Button btnVerListIncidentes;
 
@@ -48,14 +45,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Envio la referencia del contexto
         facade.setContext(context);
-
-        btnAgragarIncidente.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent pantallaIncidente = new Intent(MainActivity.this, CrearIncidenteActivity.class);
-                startActivity(pantallaIncidente);
-            }
-        });
 
         btnEliminarCache.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,14 +79,5 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Estado de conexion: "+ HayConexion, Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    @OnClick(R.id.btnAgragarIncidente)
-    public void onClick(View v) {
-        if (btnAgragarIncidente.getVisibility() == View.VISIBLE) {
-            btnAgragarIncidente.setVisibility(View.GONE);
-        } else {
-            btnAgragarIncidente.setVisibility(View.VISIBLE);
-        }
     }
 }

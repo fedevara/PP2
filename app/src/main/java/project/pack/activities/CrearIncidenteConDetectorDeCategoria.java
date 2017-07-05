@@ -123,7 +123,7 @@ public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
 
             String descripcion = etDescripcion.getText().toString();
 
-            Categoria categoria  = facade.getCagoriaPorDescripcion(descripcion);
+            Categoria categoria  = facade.obtenerCagoriaPorDescripcion(descripcion);
 
             if(categoria.getId()!=null){
                 nuevaCategoria= categoria;
