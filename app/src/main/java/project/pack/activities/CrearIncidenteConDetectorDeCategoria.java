@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -48,9 +49,9 @@ public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
     @Bind(R.id.linearLayoutCategoria)
     LinearLayout linearLayoutCategoria;
 
-    boolean noEncontro=false;
-
     Facade facade = Facade.getInstance();
+
+    boolean mostrarSpinner=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +72,24 @@ public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
                 if(true) {
 //                if(validarCampos()) {
 
-                    Categoria categoriaSeteada = setearCategoria();
+                    Categoria categoria = obtenerCategoria();
 
-                    if(categoriaSeteada!=null){
-
-                        Intent mostrarIncidente = new Intent(CrearIncidenteConDetectorDeCategoria.this, VerIncidenteActivity.class);
-                        Facade facade = Facade.getInstance();
-
+                    if(!mostrarSpinner){
                         try {
                             Coordenada coordenada = obtenerCoordenadas();
-                            facade.crearIncidente("aa", etDescripcion.getText().toString(), Calendar.getInstance().getTime(), categoriaSeteada, coordenada);
+                            int categoriaId = categoria.getId();
+                            facade.crearIncidente("incidente creado", etDescripcion.getText().toString(), Calendar.getInstance().getTime(), categoria, coordenada);
+                            Intent mostrarIncidente = new Intent(CrearIncidenteConDetectorDeCategoria.this, VerIncidenteActivity.class);
                             startActivity(mostrarIncidente);
 
-                        } catch (Exception e) {
-                            Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();
+                        } catch (NullPointerException e) {
+                            Toast.makeText(getApplicationContext(), "No se encontró la categoria", Toast.LENGTH_LONG).show();
+                            mostrarSpinner = true;
+                            initSpinnerCategorias();
                         }
+                    }
+                    else{
+                        crearIncidentePorSpinner();
                     }
                 }else{
                     Toast.makeText(getApplicationContext(), "Faltan completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
@@ -102,43 +106,37 @@ public class CrearIncidenteConDetectorDeCategoria extends AppCompatActivity {
         });
     }
 
+    private void crearIncidentePorSpinner() {
+        Categoria categoria = obtenerCategoriaSpinner();
+        Coordenada coordenada = obtenerCoordenadas();
+        facade.crearIncidente("incidente creado", etDescripcion.getText().toString(), Calendar.getInstance().getTime(), categoria, coordenada);
+        Intent mostrarIncidente = new Intent(CrearIncidenteConDetectorDeCategoria.this, VerIncidenteActivity.class);
+        startActivity(mostrarIncidente);
+    }
+
 
     private void initSpinnerCategorias() {
-
         linearLayoutCategoria.setVisibility(View.VISIBLE);
         txtCategoria.setVisibility(View.VISIBLE);
         spnCategorias.setVisibility(View.VISIBLE);
 
-        ArrayList<Categoria> categorias = facade.getCategorias();
+        List<Categoria> categorias = facade.getCategorias();
 
         ArrayAdapter<Categoria> spinner_adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categorias);
         spnCategorias.setAdapter(spinner_adapter);
     }
 
-    private Categoria setearCategoria(){
-
-        Categoria nuevaCategoria = null;
-
-        if(noEncontro !=true){
-
-            String descripcion = etDescripcion.getText().toString();
-
-            Categoria categoria  = facade.obtenerCagoriaPorDescripcion(descripcion);
-
-            if(categoria.getId()!=null){
-                nuevaCategoria= categoria;
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "No se encontró la categoria", Toast.LENGTH_LONG).show();
-                initSpinnerCategorias();
-                noEncontro =true;
-            }
-        }else{
-            nuevaCategoria = (Categoria) spnCategorias.getSelectedItem();
-        }
-        return nuevaCategoria;
+    private Categoria obtenerCategoria(){
+        String descripcion = etDescripcion.getText().toString();
+        Categoria categoria  = facade.obtenerCagoriaPorDescripcion(descripcion);
+        return categoria;
     }
 
+    private Categoria obtenerCategoriaSpinner(){
+        Categoria nuevaCategoria = new Categoria();
+        nuevaCategoria = (Categoria) spnCategorias.getSelectedItem();
+        return nuevaCategoria;
+    }
 
     private Coordenada obtenerCoordenadas() {
         Coordenada coord = null;
