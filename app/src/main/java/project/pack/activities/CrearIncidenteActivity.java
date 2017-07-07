@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import project.pack.R;
 import project.pack.domain.Categoria;
 import project.pack.domain.Coordenada;
+import project.pack.domain.Incidente;
 import project.pack.facade.Facade;
 
 public class CrearIncidenteActivity extends AppCompatActivity {
@@ -74,12 +75,11 @@ public class CrearIncidenteActivity extends AppCompatActivity {
                     String nombreCategoria = spnCategorias.getSelectedItem().toString();
                     Categoria nombreSubCategoria = (Categoria) spnSubCategorias.getSelectedItem();
                     Coordenada coordenada = obtenerCoordenadas();
-                    try {
-                        facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
+
+                        Incidente inc = facade.crearIncidente(titulo.getText().toString(), descripcion.getText().toString(), Calendar.getInstance().getTime(), nombreSubCategoria, coordenada);
                         startActivity(mostrarIncidente);
-                    } catch (Exception e) {
-                        Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();
-                    }
+                        if(inc==null)
+                            Toast.makeText(getApplicationContext(), "Error. No se logró guardar", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getApplicationContext(), "Falta completar campos obligatorios(*)", Toast.LENGTH_LONG).show();
                 }

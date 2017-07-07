@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import project.pack.domain.Establecimiento;
 import project.pack.persistence.DAO.EstablecimientoDAO;
 
-/**
- * Created by lukas on 14/05/2017.
- */
-
 public class EstablecimientoDAOImpl implements EstablecimientoDAO {
 
     private ConectionFile conex = new ConectionFile();

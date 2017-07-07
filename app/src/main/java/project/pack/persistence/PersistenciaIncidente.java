@@ -15,6 +15,7 @@ import project.pack.utilities.ConnectionUtilities;
 public class PersistenciaIncidente {
 
     private static PersistenciaIncidente INSTANCE;
+    private IncidenteDAO persistenciaDAO = new IncidenteDAOImpl();
 
     private PersistenciaIncidente() {
     }
@@ -25,12 +26,8 @@ public class PersistenciaIncidente {
         return INSTANCE;
     }
 
-    private IncidenteDAO persistenciaDAO = new IncidenteDAOImpl();
-
     public Incidente addIncidente(Incidente item) {
-        // Comprueba si hay conexion a internet disponible
-        // Si hay conexion, puede interactuar con la persistencia
-        // Guarda en la BD
+        // Intenta guardar en la bd, si lo hace, encontces sincroniza la cache, sino devuelve null
         Incidente In_guardado = persistenciaDAO.add(item);
         if (In_guardado != null) {
             // Sincronizarlo en la cache

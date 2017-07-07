@@ -15,6 +15,7 @@ import project.pack.utilities.ConnectionUtilities;
 public class PersistenciaEstablecimiento {
 
     private static PersistenciaEstablecimiento INSTANCE;
+    private EstablecimientoDAO persistenciaDAO = new EstablecimientoDAOImpl();
 
     private PersistenciaEstablecimiento() { }
 
@@ -24,23 +25,15 @@ public class PersistenciaEstablecimiento {
         return INSTANCE;
     }
 
-    private EstablecimientoDAO persistenciaDAO = new EstablecimientoDAOImpl();
-
     public Establecimiento addEstablecimiento(Establecimiento item){
-        // Comprueba si hay conexion a internet disponible
-        // Si hay conexion, puede interactuar con la persistencia
-        if(ConnectionUtilities.estaConectado(Facade.getInstance().getContext())){
-            // Guarda en la BD
-            Establecimiento Est_guardado = persistenciaDAO.add(item);
+        // Intenta guardar en la bd, si lo hace, encontces sincroniza la cache, sino devuelve null
+        Establecimiento Est_guardado = persistenciaDAO.add(item);
+        if (Est_guardado != null) {
             // Sincronizarlo en la cache
-            CacheSingleton.getInstance().put(item, item.getId());
-
-            return Est_guardado;
+            CacheSingleton.getInstance().put(Est_guardado, Est_guardado.getId());
         }
-        // Si hay o no hay conexion, no se puede agregar
-        return null;
+        return Est_guardado;
     }
-
 
     public ArrayList<Establecimiento> getListaEstablecimiento(){
 
@@ -50,18 +43,19 @@ public class PersistenciaEstablecimiento {
         lista = CacheSingleton.getInstance().obtenerLista(Establecimiento.class);
 
         // Si no encuentra ahi (return null), entonces lo va a traer de la bd
-        if(lista==null || lista.size()==0){
+        if (lista == null || lista.size() == 0) {
             lista = persistenciaDAO.getListItem();
 
-            // Actualiza la cache
-            for (int i = 0; i < lista.size(); i++) {
-                CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
+            if (lista != null) {
+                // Actualiza la cache
+                for (int i = 0; i < lista.size(); i++) {
+                    CacheSingleton.getInstance().put(lista.get(i), lista.get(i).getId());
+                }
             }
-        }
 
+        }
         return lista;
     }
-
 
     public void vaciarBD(){
         persistenciaDAO.vaciarBD();
